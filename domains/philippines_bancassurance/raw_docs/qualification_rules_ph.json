@@ -1,0 +1,29 @@
+{
+  "market": "philippines",
+  "domain": "bancassurance_life_insurance",
+  "currency": "PHP",
+  "rules": {
+    "min_age": 18,
+    "max_age": 60,
+    "residency_required": "Philippines",
+    "accepted_payment_modes": ["annual", "semi-annual", "quarterly", "monthly_auto_debit"],
+    "grace_period_days": 31,
+    "reinstatement_period_years": 2,
+    "simplified_issue_limit_php": 1500000
+  },
+  "cultural_markers": {
+    "respect_honorifics": ["po", "opo", "ho", "oho"],
+    "address_forms": ["Ma'am", "Sir"],
+    "common_finance_loanwords": [
+      "policy", "premium", "beneficiary", "rider", "lapse", 
+      "coverage", "grace period", "auto-debit", "hulog", "bank referral"
+    ]
+  },
+  "escalation_protocol": {
+    "trigger_phrases": [
+      "kausap na tao", "human agent", "transfer mo ako", "supervisor", 
+      "licensed specialist", "taong kausap", "branch manager"
+    ],
+    "polite_escalation_message": "Opo, naiintindihan ko po. I-co-connect ko po kayo agad sa isa sa ating licensed bancassurance specialists para matulungan po kayo nang personal. Sandali lang po, Ma'am/Sir."
+  }
+}

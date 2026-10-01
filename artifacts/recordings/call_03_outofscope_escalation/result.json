@@ -1,0 +1,25 @@
+{
+  "call_id": "call_03_outofscope_escalation",
+  "scenario_type": "outofscope_escalation",
+  "outcome": "escalated",
+  "final_state": "escalation",
+  "qualification_profile": {
+    "name": "Sarah Jenkins",
+    "age": 29,
+    "has_pre_existing": false,
+    "coverage_interest": "I'm interested in individual comprehensive coverage",
+    "phone": null,
+    "consent_given": true,
+    "eligible": null,
+    "ineligibility_reason": null,
+    "flags": [],
+    "conflicts_detected": []
+  },
+  "conflicts_detected": [],
+  "flags": [],
+  "audio_file": "audio.mp3",
+  "audio_bytes": 684432,
+  "transcript_file": "transcript.json",
+  "turns_count": 13,
+  "verification_status": "VERIFIED_PASS"
+}

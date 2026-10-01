@@ -1,0 +1,81 @@
+{
+  "session_id": "b58936da",
+  "started_at": "2026-10-01T16:02:26.081928+00:00",
+  "ended_at": "2026-10-01T16:02:30.248232+00:00",
+  "outcome": "disconnected",
+  "qualification_state": {
+    "name": "Alex Vance",
+    "age": 32,
+    "has_pre_existing": null,
+    "coverage_interest": null,
+    "phone": null,
+    "consent_given": true,
+    "eligible": null,
+    "ineligibility_reason": null,
+    "flags": [],
+    "conflicts_detected": []
+  },
+  "turns": [
+    {
+      "ts": "2026-10-01T16:02:26.081965+00:00",
+      "speaker": "agent",
+      "text": "Hello! Thank you for calling HealthShield. My name is Aria, your HealthShield AI assistant. This call may be recorded for quality assurance. I'm here to help you explore our health insurance plans. May I ask your name, please?"
+    },
+    {
+      "ts": "2026-10-01T16:02:27.374433+00:00",
+      "speaker": "customer",
+      "text": "Hi, my name is Alex Vance."
+    },
+    {
+      "ts": "2026-10-01T16:02:27.374679+00:00",
+      "speaker": "agent",
+      "text": "Lovely to meet you, Alex Vance! To help find the right HealthShield plan for you, could I ask how old you are?",
+      "metadata": {
+        "state": "lead_qualification",
+        "turn": 1,
+        "qualification_profile": {
+          "name": "Alex Vance",
+          "age": null,
+          "has_pre_existing": null,
+          "coverage_interest": null,
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [],
+          "conflicts_detected": []
+        },
+        "ended": false,
+        "escalated": false
+      }
+    },
+    {
+      "ts": "2026-10-01T16:02:28.424640+00:00",
+      "speaker": "customer",
+      "text": "I am 32 years old, no pre-existing conditions."
+    },
+    {
+      "ts": "2026-10-01T16:02:28.425441+00:00",
+      "speaker": "agent",
+      "text": "Perfect, thank you! At 32, you're eligible for all our main plan tiers. Do you currently have any pre-existing medical conditions, such as diabetes, hypertension, or heart disease?",
+      "metadata": {
+        "state": "lead_qualification",
+        "turn": 2,
+        "qualification_profile": {
+          "name": "Alex Vance",
+          "age": 32,
+          "has_pre_existing": null,
+          "coverage_interest": null,
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [],
+          "conflicts_detected": []
+        },
+        "ended": false,
+        "escalated": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "call_id": "call_01_cooperative",
+  "scenario_type": "cooperative",
+  "outcome": "completed",
+  "final_state": "qualification_done",
+  "qualification_profile": {
+    "name": "Maria Santos",
+    "age": 35,
+    "has_pre_existing": false,
+    "coverage_interest": "I'm interested in comprehensive hospitalization coverage",
+    "phone": null,
+    "consent_given": true,
+    "eligible": true,
+    "ineligibility_reason": null,
+    "flags": [],
+    "conflicts_detected": []
+  },
+  "conflicts_detected": [],
+  "flags": [],
+  "audio_file": "audio.mp3",
+  "audio_bytes": 690336,
+  "transcript_file": "transcript.json",
+  "turns_count": 15,
+  "verification_status": "VERIFIED_PASS"
+}

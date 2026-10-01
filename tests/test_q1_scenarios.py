@@ -28,10 +28,21 @@ All three scenarios verify:
   - Qualification profile is correctly populated
 """
 
+import sys
 import json
 import logging
 import pytest
 from pathlib import Path
+
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from src.voice.agent import VoiceAgent, DialogueState
 from src.voice.conversation_logger import ConversationLogger
 from src.config import settings
@@ -213,24 +224,146 @@ def test_scenario_hesitant_objector():
     logger.info("✅ Scenario 2: PASSED")
 
 
-# ─── Scenario 3: Immediate Escalation Request ────────────────────────────────
+# ─── Scenario 3: Incomplete / Conflicting Details ────────────────────────────
 
-def test_scenario_escalation_request():
+def test_scenario_incomplete_conflicting_details():
     """
-    Scenario 3: Customer immediately asks to speak with a human.
-    Agent must detect the escalation signal and gracefully hand off.
+    Scenario 3: Incomplete or conflicting customer details.
+    Customer initially denies pre-existing conditions during qualification,
+    but later reveals a regular prescription (daily insulin for diabetes).
+    Agent must detect the conflict, avoid inventing an eligibility decision,
+    enter clarification state, record the conflict in conflicts_detected,
+    and guide customer accurately.
     """
     logger.info("\n" + "="*60)
-    logger.info("SCENARIO 3: ESCALATION REQUEST")
+    logger.info("SCENARIO 3: INCOMPLETE / CONFLICTING DETAILS")
     logger.info("="*60)
 
     turns = [
-        "I want to speak to a human agent please",            # escalation trigger
+        "Hi, my name is David",                               # greeting
+        "I am 45 years old",                                  # age
+        "No, I don't have any pre-existing conditions",       # pre-existing → initial negative declaration
+        "I'm looking for hospitalization and chronic care",   # coverage interest
+        "Well, just my daily insulin for diabetes, that doesn't count right?",  # conflicting detail
+        "Yes, let's explore those plan options",              # clarification acceptance
+        "What does the Gold plan cover for waiting periods?", # product info
+        "Thank you, that answers my question",                # conclude
     ]
 
-    result = run_scenario("test-escalation-03", turns)
+    result = run_scenario("test-conflict-03", turns)
+    profile = result["profile"]
 
     logger.info(f"\n✅ SCENARIO 3 RESULT:")
+    logger.info(f"   Final state       : {result['final_state']}")
+    logger.info(f"   Pre-existing      : {profile.get('has_pre_existing')}")
+    logger.info(f"   Conflicts detected: {profile.get('conflicts_detected')}")
+    logger.info(f"   Flags             : {profile.get('flags')}")
+
+    # Assertions:
+    # 1. Conflict was detected and logged
+    assert len(profile.get("conflicts_detected", [])) > 0, "No conflict was detected in profile"
+    assert any("insulin" in c.lower() or "pre-existing" in c.lower() for c in profile.get("conflicts_detected", []))
+
+    # 2. Pre-existing condition was updated to True
+    assert profile.get("has_pre_existing") is True, "Expected pre-existing to be updated to True"
+    assert "pre_existing_conditions" in (profile.get("flags") or [])
+
+    # 3. State machine transitioned through clarification
+    states_visited = [r["state"] for r in result["responses"]]
+    assert "clarification" in states_visited, f"Clarification state not visited: {states_visited}"
+
+    # 4. Agent response in clarification turn explicitly addressed the medication/underwriting guideline
+    clarification_responses = [r["agent"] for r in result["responses"] if r["state"] == "clarification"]
+    assert len(clarification_responses) > 0
+    assert any("underwriting" in r.lower() or "pre-existing" in r.lower() or "insulin" in r.lower() for r in clarification_responses)
+
+    # 5. Transcript saved
+    assert Path(result["transcript_path"]).exists()
+    logger.info("✅ Scenario 3: PASSED")
+
+
+# ─── Scenario 4: Out-of-Scope Question (Multi-Turn) ──────────────────────────
+
+def test_scenario_out_of_scope():
+    """
+    Scenario 4: Out-of-scope question in a complete multi-turn conversation.
+    Customer qualifies initially, asks an out-of-scope query (pet insurance vaccination schedule),
+    agent explicitly states verified info is unavailable, avoids hallucination,
+    offers specialist assistance or return to health plans,
+    and customer safely returns to health insurance qualification.
+    """
+    logger.info("\n" + "="*60)
+    logger.info("SCENARIO 4: OUT-OF-SCOPE QUESTION (MULTI-TURN)")
+    logger.info("="*60)
+
+    turns = [
+        "Hello, my name is Sarah Jenkins",                    # greeting
+        "I am 29 years old",                                  # age
+        "No, I have no pre-existing conditions",              # pre-existing
+        "I'm interested in individual comprehensive coverage",# coverage interest
+        "What is the pet insurance vaccination schedule for Golden Retrievers?", # out-of-scope
+        "Okay, let's return to your health plans. What does the Silver plan cover?", # safe return
+        "That sounds good, thank you very much",              # wrap-up
+    ]
+
+    result = run_scenario("test-outofscope-04", turns)
+    profile = result["profile"]
+
+    logger.info(f"\n✅ SCENARIO 4 RESULT:")
+    logger.info(f"   Final state : {result['final_state']}")
+    logger.info(f"   Name        : {profile.get('name')}")
+    logger.info(f"   Eligible    : {profile.get('eligible')}")
+
+    # Find response to the out-of-scope question
+    oos_response = None
+    for turn in result["responses"]:
+        if "pet insurance" in turn["customer"].lower():
+            oos_response = turn["agent"]
+            break
+
+    assert oos_response is not None, "Out-of-scope turn response not found"
+    logger.info(f"   Out-of-scope response: {oos_response[:150]}…")
+
+    # Anti-hallucination verification:
+    assert any(phrase in oos_response.lower() for phrase in [
+        "don't have verified information",
+        "not available in our policy records",
+        "unavailable",
+        "inaccurate details",
+    ]), f"Agent did not state information is unavailable: {oos_response}"
+
+    assert "vaccine schedule" not in oos_response.lower()
+    assert "golden retriever" not in oos_response.lower()
+
+    # Agent safely returned to qualification / product info for subsequent turn
+    silver_turn = [t for t in result["responses"] if "silver" in t["customer"].lower()]
+    assert len(silver_turn) > 0, "Agent did not process subsequent health plan question"
+    assert len(silver_turn[0]["agent"]) > 20
+
+    assert Path(result["transcript_path"]).exists()
+    logger.info("✅ Scenario 4: PASSED")
+
+
+# ─── Scenario 5: Human Assistance Request ───────────────────────────────────
+
+def test_scenario_human_assistance():
+    """
+    Scenario 5: Human assistance request.
+    Customer explicitly requests to speak with a human agent / supervisor.
+    Agent detects escalation signal across turns, executes handoff protocol,
+    and sets state to ESCALATION.
+    """
+    logger.info("\n" + "="*60)
+    logger.info("SCENARIO 5: HUMAN ASSISTANCE REQUEST")
+    logger.info("="*60)
+
+    turns = [
+        "I need to speak to a licensed human specialist right away, please transfer me",
+    ]
+
+    result = run_scenario("test-escalation-05", turns)
+
+    logger.info(f"\n✅ SCENARIO 5 RESULT:")
     logger.info(f"   Final state : {result['final_state']}")
     logger.info(f"   Escalated   : {result.get('final_state') == 'escalation'}")
     logger.info(f"   Transcript  : {result['transcript_path']}")
@@ -252,7 +385,7 @@ def test_scenario_escalation_request():
     transcript_data = json.loads(Path(result["transcript_path"]).read_text())
     assert transcript_data["outcome"] in ("escalated", "completed")
 
-    logger.info("✅ Scenario 3: PASSED")
+    logger.info("✅ Scenario 5: PASSED")
 
 
 # ─── Additional: KB Grounding Verification ───────────────────────────────────
@@ -278,12 +411,7 @@ def test_kb_grounding_never_invents():
 
     logger.info(f"[Grounding Test] Agent response: {response[:200]}")
 
-    # Agent must NOT invent a health-policy answer for a crypto question
-    # Expected: either INFORMATION_UNAVAILABLE path or a product-info response
-    # that does not claim to have policy info about crypto
     response_lower = response.lower()
-
-    # The response should not fabricate crypto-related health policy content
     bad_hallucination_indicators = [
         "bitcoin coverage",
         "cryptocurrency plan",
@@ -294,59 +422,59 @@ def test_kb_grounding_never_invents():
             f"Agent hallucinated crypto health policy: {response}"
         )
 
-    logger.info("✅ KB Grounding Test: PASSED — agent did not hallucinate crypto health policy")
+    logger.info("[PASS] KB Grounding Test: agent did not hallucinate crypto health policy")
 
 
 # ─── Entry point ─────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    print("\n🎯 Running Q1 Voice Agent Test Scenarios\n")
+    if sys.platform == "win32":
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
+
+    print("\n[TEST] Running Q1 Voice Agent Test Scenarios (All 5 Required)\n")
     print("=" * 60)
 
     results = {
-        "scenario_1": None,
-        "scenario_2": None,
-        "scenario_3": None,
+        "scenario_1_cooperative": None,
+        "scenario_2_objection": None,
+        "scenario_3_incomplete_conflicting": None,
+        "scenario_4_out_of_scope": None,
+        "scenario_5_human_assistance": None,
         "kb_grounding": None,
     }
 
-    try:
-        test_scenario_cooperative_customer()
-        results["scenario_1"] = "PASSED"
-    except AssertionError as e:
-        results["scenario_1"] = f"FAILED: {e}"
-        print(f"❌ Scenario 1 FAILED: {e}")
+    scenarios = [
+        ("scenario_1_cooperative", test_scenario_cooperative_customer),
+        ("scenario_2_objection", test_scenario_hesitant_objector),
+        ("scenario_3_incomplete_conflicting", test_scenario_incomplete_conflicting_details),
+        ("scenario_4_out_of_scope", test_scenario_out_of_scope),
+        ("scenario_5_human_assistance", test_scenario_human_assistance),
+        ("kb_grounding", test_kb_grounding_never_invents),
+    ]
 
-    try:
-        test_scenario_hesitant_objector()
-        results["scenario_2"] = "PASSED"
-    except AssertionError as e:
-        results["scenario_2"] = f"FAILED: {e}"
-        print(f"❌ Scenario 2 FAILED: {e}")
-
-    try:
-        test_scenario_escalation_request()
-        results["scenario_3"] = "PASSED"
-    except AssertionError as e:
-        results["scenario_3"] = f"FAILED: {e}"
-        print(f"❌ Scenario 3 FAILED: {e}")
-
-    try:
-        test_kb_grounding_never_invents()
-        results["kb_grounding"] = "PASSED"
-    except AssertionError as e:
-        results["kb_grounding"] = f"FAILED: {e}"
-        print(f"❌ KB Grounding FAILED: {e}")
+    for name, func in scenarios:
+        try:
+            func()
+            results[name] = "PASSED"
+        except AssertionError as e:
+            results[name] = f"FAILED: {e}"
+            print(f"[FAIL] {name} FAILED: {e}")
+        except Exception as e:
+            results[name] = f"ERROR: {e}"
+            print(f"[ERROR] {name} ERROR: {e}")
 
     print("\n" + "=" * 60)
-    print("📊 Q1 TEST SCENARIO RESULTS")
+    print("Q1 TEST SCENARIO RESULTS (ALL 5 SCENARIOS VERIFIED)")
     print("=" * 60)
     for k, v in results.items():
-        icon = "✅" if v == "PASSED" else "❌"
+        icon = "[PASS]" if v == "PASSED" else "[FAIL]"
         print(f"  {icon} {k}: {v}")
 
     all_passed = all(v == "PASSED" for v in results.values())
-    print("\n" + ("✅ ALL TESTS PASSED" if all_passed else "❌ SOME TESTS FAILED"))
+    print("\n" + ("[SUCCESS] ALL 5 SCENARIOS PASSED" if all_passed else "[FAILURE] SOME TESTS FAILED"))
 
     # Save results artifact
     report_dir = settings.KB_STORE_DIR
@@ -354,4 +482,4 @@ if __name__ == "__main__":
     report_path = report_dir / "q1_scenario_results.json"
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
-    print(f"\n📄 Results saved to: {report_path}")
+    print(f"\n[REPORT] Results saved to: {report_path}")

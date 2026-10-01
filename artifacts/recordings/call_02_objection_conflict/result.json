@@ -1,0 +1,35 @@
+{
+  "call_id": "call_02_objection_conflict",
+  "scenario_type": "objection_conflict",
+  "outcome": "completed",
+  "final_state": "qualification_done",
+  "qualification_profile": {
+    "name": "John Martinez",
+    "age": 42,
+    "has_pre_existing": true,
+    "coverage_interest": "I'm looking for hospitalization and surgery coverage",
+    "phone": null,
+    "consent_given": true,
+    "eligible": true,
+    "ineligibility_reason": null,
+    "flags": [
+      "pre_existing_conditions",
+      "conflict_detected"
+    ],
+    "conflicts_detected": [
+      "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+    ]
+  },
+  "conflicts_detected": [
+    "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+  ],
+  "flags": [
+    "pre_existing_conditions",
+    "conflict_detected"
+  ],
+  "audio_file": "audio.mp3",
+  "audio_bytes": 1128384,
+  "transcript_file": "transcript.json",
+  "turns_count": 19,
+  "verification_status": "VERIFIED_PASS"
+}

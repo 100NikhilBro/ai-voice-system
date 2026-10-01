@@ -165,9 +165,26 @@ def _has_no(text: str) -> bool:
 
 def _wants_escalation(text: str) -> bool:
     return bool(re.search(
-        r"\b(human|agent|representative|person|talk to someone|speak with|manager|specialist)\b",
+        r"\b(human|agent|representative|person|talk to someone|speak with|manager|specialist|supervisor|transfer me)\b",
         text, re.IGNORECASE
     ))
+
+
+def _detect_medical_disclosure(text: str) -> Optional[str]:
+    """Detect mention of medical conditions or prescriptions in customer speech."""
+    patterns = [
+        (r"\b(insulin|diabetes|diabetic)\b", "insulin / diabetes"),
+        (r"\b(hypertension|high blood pressure|blood pressure)\b", "hypertension"),
+        (r"\b(heart condition|heart disease|cardiac|angioplasty|bypass|stroke)\b", "cardiac condition"),
+        (r"\b(asthma|inhaler|respiratory condition)\b", "respiratory / asthma"),
+        (r"\b(cancer|chemo|oncology|tumor)\b", "oncology"),
+        (r"\b(kidney|renal|dialysis)\b", "renal condition"),
+        (r"\b(daily prescription|regular prescription|daily medication|take pills? daily)\b", "daily prescription"),
+    ]
+    for pat, label in patterns:
+        if re.search(pat, text, re.IGNORECASE):
+            return label
+    return None
 
 
 def _is_objection(text: str) -> bool:
@@ -191,20 +208,12 @@ def _format_kb_answer(query: str, profile: QualificationProfile) -> str:
     """Return a voice-ready answer grounded in the KB."""
     ctx = _kb_lookup(query)
 
-    if ctx.startswith("STATUS: INFORMATION_UNAVAILABLE"):
+    if ctx.startswith("STATUS: INFORMATION_UNAVAILABLE") or not ctx.startswith("STATUS: GROUNDED_INFO_FOUND"):
         return (
             "I'm sorry, I don't have verified information on that specific topic "
             "in our policy records. I wouldn't want to give you inaccurate details. "
             "Would you like me to connect you with one of our licensed specialists "
-            "who can look that up for you?"
-        )
-
-    if not ctx.startswith("STATUS: GROUNDED_INFO_FOUND"):
-        return (
-            "I'm sorry, I don't have verified information on that specific topic "
-            "in our policy records. I wouldn't want to give you inaccurate details. "
-            "Would you like me to connect you with one of our licensed specialists "
-            "who can look that up for you?"
+            "who can look that up for you, or shall we return to our health plans?"
         )
 
     # Parse grounded context blocks into a concise voice-friendly summary
@@ -282,6 +291,42 @@ class VoiceAgent:
         ):
             return self._escalate("Customer requested human agent.")
 
+        # Conflict detection: customer previously denied pre-existing condition, but later discloses one
+        if self.profile.has_pre_existing is False and self.state in (
+            DialogueState.LEAD_QUALIFICATION,
+            DialogueState.PRODUCT_INFO,
+            DialogueState.OBJECTION_HANDLING,
+            DialogueState.CLARIFICATION,
+        ):
+            condition = _detect_medical_disclosure(utterance)
+            if condition:
+                self.state = DialogueState.CLARIFICATION
+                self.profile.conflicts_detected.append(
+                    f"Conflicting disclosure: previously denied pre-existing conditions, but later disclosed {condition} in '{utterance[:80]}'"
+                )
+                self.profile.has_pre_existing = True
+                if "pre_existing_conditions" not in self.profile.flags:
+                    self.profile.flags.append("pre_existing_conditions")
+                if "conflict_detected" not in self.profile.flags:
+                    self.profile.flags.append("conflict_detected")
+                self.profile.eligible = None  # Underwriting review needed; do not invent decision
+                response = (
+                    "Actually, daily insulin or ongoing medication indicates a pre-existing condition "
+                    "under our underwriting guidelines. I've noted that accurately so we can guide you to "
+                    "the right plan without claim issues later. Since this requires standard underwriter review, "
+                    "we can still proceed with plans that accommodate pre-existing conditions after the waiting period. "
+                    "Would you like to explore those plan options, or speak with a specialist?"
+                )
+                meta = {
+                    "state": self.state.value,
+                    "turn": self.turn_count,
+                    "qualification_profile": self.profile.to_dict(),
+                    "ended": False,
+                    "escalated": False,
+                    "conflict_detected": True,
+                }
+                return response, meta
+
         # Route to state handler
         if self.state == DialogueState.GREETING:
             response = self._handle_greeting(utterance)
@@ -289,6 +334,8 @@ class VoiceAgent:
             response = self._handle_qualification(utterance)
         elif self.state in (DialogueState.PRODUCT_INFO, DialogueState.OBJECTION_HANDLING):
             response = self._handle_product_info(utterance)
+        elif self.state == DialogueState.CLARIFICATION:
+            response = self._handle_clarification(utterance)
         elif self.state == DialogueState.QUALIFICATION_DONE:
             response = self._handle_post_qualification(utterance)
         elif self.state == DialogueState.ESCALATION:
@@ -340,6 +387,13 @@ class VoiceAgent:
         )
 
     def _handle_qualification(self, utterance: str) -> str:
+        # Check early objection during qualification
+        if _is_objection(utterance):
+            ans = self._handle_objection(utterance)
+            if self._awaiting == "age" and self.profile.age is None:
+                return f"{ans} To help find the right plan for you, could you also share how old you are?"
+            return ans
+
         # Collect age
         if self._awaiting == "age":
             age = _extract_age(utterance)
@@ -456,15 +510,47 @@ class VoiceAgent:
             self.state = DialogueState.PRODUCT_INFO
 
         # Wants to end / say no more questions
-        if _has_no(utterance) and any(w in utterance.lower() for w in ["question", "thanks", "thank", "done", "fine"]):
+        wrap_phrases = ["no more question", "no question", "that answers", "sounds good", "that's all", "that is all", "done for now"]
+        is_closing = (
+            (_has_no(utterance) and any(w in utterance.lower() for w in ["question", "thanks", "thank", "done", "fine"]))
+            or any(p in utterance.lower() for p in wrap_phrases)
+        )
+        if is_closing and not any(q in utterance.lower() for q in ["what", "how", "why", "when", "where", "can you", "could you", "tell me"]):
             return self._conclude_qualification()
 
         # General product/policy question → KB lookup
         answer = _format_kb_answer(utterance, self.profile)
+        if "I don't have verified information" in answer:
+            return answer
         return (
             f"{answer} "
             "Is there anything else you'd like to know about our plans?"
         )
+
+    def _handle_clarification(self, utterance: str) -> str:
+        """Handle conversation after a conflict or incomplete detail has been raised."""
+        if _wants_escalation(utterance):
+            return self._escalate("Customer requested human agent during clarification.")[0]
+
+        # Customer agrees to continue or asks about plans
+        if _has_yes(utterance) or any(w in utterance.lower() for w in ["explore", "plan", "gold", "platinum", "silver", "continue", "okay", "sure", "tell me"]):
+            self.state = DialogueState.PRODUCT_INFO
+            if any(p in utterance.lower() for p in ["gold", "platinum", "silver", "waiting period", "benefit", "cost", "coverage"]):
+                return self._handle_product_info(utterance)
+            return (
+                "Understood! Both our Gold and Platinum plans provide coverage for pre-existing conditions "
+                "following the statutory waiting period, along with immediate coverage for accidents and emergencies. "
+                "Would you like to know more about the Gold plan benefits, or do you have specific questions about waiting periods?"
+            )
+
+        if _has_no(utterance):
+            return (
+                "No problem at all. If you'd like to consult a licensed specialist directly "
+                "who can assist with custom underwriting for your situation, I can connect you now. "
+                "Would that be helpful?"
+            )
+
+        return self._handle_product_info(utterance)
 
     def _handle_objection(self, utterance: str) -> str:
         """Handle objections using grounded KB answers. State stays as OBJECTION_HANDLING."""

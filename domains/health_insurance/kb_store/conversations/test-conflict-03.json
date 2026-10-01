@@ -1,0 +1,295 @@
+{
+  "session_id": "test-conflict-03",
+  "started_at": "2026-10-01T16:40:57.661271+00:00",
+  "ended_at": "2026-10-01T16:40:58.096469+00:00",
+  "outcome": "completed",
+  "qualification_state": {
+    "name": "David",
+    "age": 45,
+    "has_pre_existing": true,
+    "coverage_interest": "I'm looking for hospitalization and chronic care",
+    "phone": null,
+    "consent_given": true,
+    "eligible": true,
+    "ineligibility_reason": null,
+    "flags": [
+      "pre_existing_conditions",
+      "conflict_detected"
+    ],
+    "conflicts_detected": [
+      "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+    ]
+  },
+  "turns": [
+    {
+      "ts": "2026-10-01T16:40:57.661308+00:00",
+      "speaker": "agent",
+      "text": "Hello! Thank you for calling HealthShield. My name is Aria, your HealthShield AI assistant. This call may be recorded for quality assurance. I'm here to help you explore our health insurance plans. May I ask your name, please?"
+    },
+    {
+      "ts": "2026-10-01T16:40:57.661322+00:00",
+      "speaker": "customer",
+      "text": "Hi, my name is David"
+    },
+    {
+      "ts": "2026-10-01T16:40:57.661386+00:00",
+      "speaker": "agent",
+      "text": "Lovely to meet you, David! To help find the right HealthShield plan for you, could I ask how old you are?",
+      "metadata": {
+        "state": "lead_qualification",
+        "turn": 1,
+        "qualification_profile": {
+          "name": "David",
+          "age": null,
+          "has_pre_existing": null,
+          "coverage_interest": null,
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [
+            "pre_existing_conditions",
+            "conflict_detected"
+          ],
+          "conflicts_detected": [
+            "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+          ]
+        },
+        "ended": false,
+        "escalated": false
+      }
+    },
+    {
+      "ts": "2026-10-01T16:40:57.661401+00:00",
+      "speaker": "customer",
+      "text": "I am 45 years old"
+    },
+    {
+      "ts": "2026-10-01T16:40:57.661445+00:00",
+      "speaker": "agent",
+      "text": "Perfect, thank you! At 45, you're eligible for all our main plan tiers. Do you currently have any pre-existing medical conditions, such as diabetes, hypertension, or heart disease?",
+      "metadata": {
+        "state": "lead_qualification",
+        "turn": 2,
+        "qualification_profile": {
+          "name": "David",
+          "age": 45,
+          "has_pre_existing": null,
+          "coverage_interest": null,
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [
+            "pre_existing_conditions",
+            "conflict_detected"
+          ],
+          "conflicts_detected": [
+            "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+          ]
+        },
+        "ended": false,
+        "escalated": false
+      }
+    },
+    {
+      "ts": "2026-10-01T16:40:57.661458+00:00",
+      "speaker": "customer",
+      "text": "No, I don't have any pre-existing conditions"
+    },
+    {
+      "ts": "2026-10-01T16:40:57.661513+00:00",
+      "speaker": "agent",
+      "text": "Got it, thank you for sharing that. What kind of coverage are you most interested in? For example, hospitalization, outpatient care, maternity, or a comprehensive plan?",
+      "metadata": {
+        "state": "lead_qualification",
+        "turn": 3,
+        "qualification_profile": {
+          "name": "David",
+          "age": 45,
+          "has_pre_existing": false,
+          "coverage_interest": null,
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [
+            "pre_existing_conditions",
+            "conflict_detected"
+          ],
+          "conflicts_detected": [
+            "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+          ]
+        },
+        "ended": false,
+        "escalated": false
+      }
+    },
+    {
+      "ts": "2026-10-01T16:40:57.661524+00:00",
+      "speaker": "customer",
+      "text": "I'm looking for hospitalization and chronic care"
+    },
+    {
+      "ts": "2026-10-01T16:40:57.909561+00:00",
+      "speaker": "agent",
+      "text": "Excellent! Based on what you've told me, here's what I found in our verified policy records: #### Objection 1: \"Why is the waiting period for pre-existing conditions so long (2 to 3 years)? Other cheap policies advertise immediate coverage!\" Would you like to know more about a specific plan, or do you have any questions?",
+      "metadata": {
+        "state": "product_info",
+        "turn": 4,
+        "qualification_profile": {
+          "name": "David",
+          "age": 45,
+          "has_pre_existing": false,
+          "coverage_interest": "I'm looking for hospitalization and chronic care",
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [
+            "pre_existing_conditions",
+            "conflict_detected"
+          ],
+          "conflicts_detected": [
+            "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+          ]
+        },
+        "ended": false,
+        "escalated": false
+      }
+    },
+    {
+      "ts": "2026-10-01T16:40:57.909603+00:00",
+      "speaker": "customer",
+      "text": "Well, just my daily insulin for diabetes, that doesn't count right?"
+    },
+    {
+      "ts": "2026-10-01T16:40:57.909656+00:00",
+      "speaker": "agent",
+      "text": "Actually, daily insulin or ongoing medication indicates a pre-existing condition under our underwriting guidelines. I've noted that accurately so we can guide you to the right plan without claim issues later. Since this requires standard underwriter review, we can still proceed with plans that accommodate pre-existing conditions after the waiting period. Would you like to explore those plan options, or speak with a specialist?",
+      "metadata": {
+        "state": "clarification",
+        "turn": 5,
+        "qualification_profile": {
+          "name": "David",
+          "age": 45,
+          "has_pre_existing": true,
+          "coverage_interest": "I'm looking for hospitalization and chronic care",
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [
+            "pre_existing_conditions",
+            "conflict_detected"
+          ],
+          "conflicts_detected": [
+            "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+          ]
+        },
+        "ended": false,
+        "escalated": false,
+        "conflict_detected": true
+      }
+    },
+    {
+      "ts": "2026-10-01T16:40:57.909666+00:00",
+      "speaker": "customer",
+      "text": "Yes, let's explore those plan options"
+    },
+    {
+      "ts": "2026-10-01T16:40:57.909742+00:00",
+      "speaker": "agent",
+      "text": "Understood! Both our Gold and Platinum plans provide coverage for pre-existing conditions following the statutory waiting period, along with immediate coverage for accidents and emergencies. Would you like to know more about the Gold plan benefits, or do you have specific questions about waiting periods?",
+      "metadata": {
+        "state": "product_info",
+        "turn": 6,
+        "qualification_profile": {
+          "name": "David",
+          "age": 45,
+          "has_pre_existing": true,
+          "coverage_interest": "I'm looking for hospitalization and chronic care",
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [
+            "pre_existing_conditions",
+            "conflict_detected"
+          ],
+          "conflicts_detected": [
+            "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+          ]
+        },
+        "ended": false,
+        "escalated": false
+      }
+    },
+    {
+      "ts": "2026-10-01T16:40:57.909755+00:00",
+      "speaker": "customer",
+      "text": "What does the Gold plan cover for waiting periods?"
+    },
+    {
+      "ts": "2026-10-01T16:40:58.095539+00:00",
+      "speaker": "agent",
+      "text": "1. GENERAL INCEPTION WAITING PERIODS Is there anything else you'd like to know about our plans?",
+      "metadata": {
+        "state": "product_info",
+        "turn": 7,
+        "qualification_profile": {
+          "name": "David",
+          "age": 45,
+          "has_pre_existing": true,
+          "coverage_interest": "I'm looking for hospitalization and chronic care",
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [
+            "pre_existing_conditions",
+            "conflict_detected"
+          ],
+          "conflicts_detected": [
+            "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+          ]
+        },
+        "ended": false,
+        "escalated": false
+      }
+    },
+    {
+      "ts": "2026-10-01T16:40:58.095560+00:00",
+      "speaker": "customer",
+      "text": "Thank you, that answers my question"
+    },
+    {
+      "ts": "2026-10-01T16:40:58.095598+00:00",
+      "speaker": "agent",
+      "text": "Wonderful, David! Based on our conversation, you appear to qualify for our HealthShield plans. A licensed advisor will reach out to provide a personalized quote and next steps. Is there anything else before we wrap up?",
+      "metadata": {
+        "state": "qualification_done",
+        "turn": 8,
+        "qualification_profile": {
+          "name": "David",
+          "age": 45,
+          "has_pre_existing": true,
+          "coverage_interest": "I'm looking for hospitalization and chronic care",
+          "phone": null,
+          "consent_given": true,
+          "eligible": true,
+          "ineligibility_reason": null,
+          "flags": [
+            "pre_existing_conditions",
+            "conflict_detected"
+          ],
+          "conflicts_detected": [
+            "Conflicting disclosure: previously denied pre-existing conditions, but later disclosed insulin / diabetes in 'Well, just my daily insulin for diabetes, that doesn't count right?'"
+          ]
+        },
+        "ended": false,
+        "escalated": false
+      }
+    }
+  ]
+}

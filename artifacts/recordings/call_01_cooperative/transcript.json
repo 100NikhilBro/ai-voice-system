@@ -1,0 +1,132 @@
+{
+  "call_id": "call_01_cooperative",
+  "title": "Call 01: Cooperative Customer (Happy Path Qualification)",
+  "scenario_type": "cooperative",
+  "description": "Customer Maria Santos provides demographic and health info willingly, asks grounded questions about the Gold plan, and qualifies smoothly.",
+  "customer_voice": "en-US-AvaNeural",
+  "agent_voice": "en-US-AriaNeural",
+  "generated_at": "2026-10-01T16:39:07.849504+00:00",
+  "total_turns": 15,
+  "outcome": "completed",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Hello! Thank you for calling HealthShield. My name is Aria, your HealthShield AI assistant. This call may be recorded for quality assurance. I'm here to help you explore our health insurance plans. May I ask your name, please?",
+      "state": "greeting",
+      "timestamp": "2026-10-01T16:38:46.183953+00:00"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "My name is Maria Santos",
+      "state": "greeting",
+      "timestamp": "2026-10-01T16:38:47.497453+00:00"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "Lovely to meet you, Maria Santos! To help find the right HealthShield plan for you, could I ask how old you are?",
+      "state": "lead_qualification",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:38:48.985962+00:00"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "I am 35 years old",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T16:38:50.039732+00:00"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "Perfect, thank you! At 35, you're eligible for all our main plan tiers. Do you currently have any pre-existing medical conditions, such as diabetes, hypertension, or heart disease?",
+      "state": "lead_qualification",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:38:51.221492+00:00"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "No, I don't have any pre-existing conditions",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T16:38:52.416543+00:00"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "Got it, thank you for sharing that. What kind of coverage are you most interested in? For example, hospitalization, outpatient care, maternity, or a comprehensive plan?",
+      "state": "lead_qualification",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:38:54.323387+00:00"
+    },
+    {
+      "turn": 8,
+      "speaker": "customer",
+      "text": "I'm interested in comprehensive hospitalization coverage",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T16:38:55.430895+00:00"
+    },
+    {
+      "turn": 9,
+      "speaker": "agent",
+      "text": "Excellent! Based on what you've told me, here's what I found in our verified policy records: HealthShield Plan Tiers & Coverage Benefits Would you like to know more about a specific plan, or do you have any questions?",
+      "state": "product_info",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:38:58.793497+00:00"
+    },
+    {
+      "turn": 10,
+      "speaker": "customer",
+      "text": "What are the benefits of the Gold plan?",
+      "state": "product_info",
+      "timestamp": "2026-10-01T16:38:59.879165+00:00"
+    },
+    {
+      "turn": 11,
+      "speaker": "agent",
+      "text": "HealthShield Plan Tiers & Coverage Benefits Is there anything else you'd like to know about our plans?",
+      "state": "product_info",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:39:01.217427+00:00"
+    },
+    {
+      "turn": 12,
+      "speaker": "customer",
+      "text": "How much is the room rent limit for the Gold plan?",
+      "state": "product_info",
+      "timestamp": "2026-10-01T16:39:02.786751+00:00"
+    },
+    {
+      "turn": 13,
+      "speaker": "agent",
+      "text": "HealthShield Plan Tiers & Coverage Benefits Is there anything else you'd like to know about our plans?",
+      "state": "product_info",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:39:04.396356+00:00"
+    },
+    {
+      "turn": 14,
+      "speaker": "customer",
+      "text": "That sounds great, thank you very much! No more questions.",
+      "state": "product_info",
+      "timestamp": "2026-10-01T16:39:05.404803+00:00"
+    },
+    {
+      "turn": 15,
+      "speaker": "agent",
+      "text": "Wonderful, Maria Santos! Based on our conversation, you appear to qualify for our HealthShield plans. A licensed advisor will reach out to provide a personalized quote and next steps. Is there anything else before we wrap up?",
+      "state": "qualification_done",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:39:06.728835+00:00"
+    }
+  ]
+}

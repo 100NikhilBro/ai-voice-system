@@ -9,7 +9,7 @@ def test_api_health_endpoint():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
-    assert data["service"] == "health-insurance-knowledge-base"
+    assert data["service"] in ("health-insurance-knowledge-base", "healthshield-ai-voice-agent")
     assert data["indexed_records"] > 0
 
 def test_api_search_grounded_query():

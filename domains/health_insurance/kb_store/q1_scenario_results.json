@@ -1,0 +1,8 @@
+{
+  "scenario_1_cooperative": "PASSED",
+  "scenario_2_objection": "PASSED",
+  "scenario_3_incomplete_conflicting": "PASSED",
+  "scenario_4_out_of_scope": "PASSED",
+  "scenario_5_human_assistance": "PASSED",
+  "kb_grounding": "PASSED"
+}

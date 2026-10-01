@@ -1,13 +1,13 @@
 {
-  "session_id": "test-cooperative-01",
-  "started_at": "2026-10-01T16:40:56.437094+00:00",
-  "ended_at": "2026-10-01T16:40:56.973028+00:00",
+  "session_id": "test-outofscope-04",
+  "started_at": "2026-10-01T16:40:58.102065+00:00",
+  "ended_at": "2026-10-01T16:40:58.691315+00:00",
   "outcome": "completed",
   "qualification_state": {
-    "name": "Maria Santos",
-    "age": 35,
+    "name": "Sarah Jenkins",
+    "age": 29,
     "has_pre_existing": false,
-    "coverage_interest": "I'm interested in comprehensive hospitalization coverage",
+    "coverage_interest": "I'm interested in individual comprehensive coverage",
     "phone": null,
     "consent_given": true,
     "eligible": true,
@@ -17,24 +17,24 @@
   },
   "turns": [
     {
-      "ts": "2026-10-01T16:40:56.437118+00:00",
+      "ts": "2026-10-01T16:40:58.102106+00:00",
       "speaker": "agent",
       "text": "Hello! Thank you for calling HealthShield. My name is Aria, your HealthShield AI assistant. This call may be recorded for quality assurance. I'm here to help you explore our health insurance plans. May I ask your name, please?"
     },
     {
-      "ts": "2026-10-01T16:40:56.437125+00:00",
+      "ts": "2026-10-01T16:40:58.102121+00:00",
       "speaker": "customer",
-      "text": "My name is Maria Santos"
+      "text": "Hello, my name is Sarah Jenkins"
     },
     {
-      "ts": "2026-10-01T16:40:56.438194+00:00",
+      "ts": "2026-10-01T16:40:58.102192+00:00",
       "speaker": "agent",
-      "text": "Lovely to meet you, Maria Santos! To help find the right HealthShield plan for you, could I ask how old you are?",
+      "text": "Lovely to meet you, Sarah Jenkins! To help find the right HealthShield plan for you, could I ask how old you are?",
       "metadata": {
         "state": "lead_qualification",
         "turn": 1,
         "qualification_profile": {
-          "name": "Maria Santos",
+          "name": "Sarah Jenkins",
           "age": null,
           "has_pre_existing": null,
           "coverage_interest": null,
@@ -50,20 +50,20 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:56.438216+00:00",
+      "ts": "2026-10-01T16:40:58.102208+00:00",
       "speaker": "customer",
-      "text": "I am 35 years old"
+      "text": "I am 29 years old"
     },
     {
-      "ts": "2026-10-01T16:40:56.438646+00:00",
+      "ts": "2026-10-01T16:40:58.102254+00:00",
       "speaker": "agent",
-      "text": "Perfect, thank you! At 35, you're eligible for all our main plan tiers. Do you currently have any pre-existing medical conditions, such as diabetes, hypertension, or heart disease?",
+      "text": "Perfect, thank you! At 29, you're eligible for all our main plan tiers. Do you currently have any pre-existing medical conditions, such as diabetes, hypertension, or heart disease?",
       "metadata": {
         "state": "lead_qualification",
         "turn": 2,
         "qualification_profile": {
-          "name": "Maria Santos",
-          "age": 35,
+          "name": "Sarah Jenkins",
+          "age": 29,
           "has_pre_existing": null,
           "coverage_interest": null,
           "phone": null,
@@ -78,20 +78,20 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:56.438657+00:00",
+      "ts": "2026-10-01T16:40:58.102267+00:00",
       "speaker": "customer",
-      "text": "No, I don't have any pre-existing conditions"
+      "text": "No, I have no pre-existing conditions"
     },
     {
-      "ts": "2026-10-01T16:40:56.438880+00:00",
+      "ts": "2026-10-01T16:40:58.102313+00:00",
       "speaker": "agent",
       "text": "Got it, thank you for sharing that. What kind of coverage are you most interested in? For example, hospitalization, outpatient care, maternity, or a comprehensive plan?",
       "metadata": {
         "state": "lead_qualification",
         "turn": 3,
         "qualification_profile": {
-          "name": "Maria Santos",
-          "age": 35,
+          "name": "Sarah Jenkins",
+          "age": 29,
           "has_pre_existing": false,
           "coverage_interest": null,
           "phone": null,
@@ -106,22 +106,22 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:56.438888+00:00",
+      "ts": "2026-10-01T16:40:58.102325+00:00",
       "speaker": "customer",
-      "text": "I'm interested in comprehensive hospitalization coverage"
+      "text": "I'm interested in individual comprehensive coverage"
     },
     {
-      "ts": "2026-10-01T16:40:56.704747+00:00",
+      "ts": "2026-10-01T16:40:58.415821+00:00",
       "speaker": "agent",
       "text": "Excellent! Based on what you've told me, here's what I found in our verified policy records: HealthShield Plan Tiers & Coverage Benefits Would you like to know more about a specific plan, or do you have any questions?",
       "metadata": {
         "state": "product_info",
         "turn": 4,
         "qualification_profile": {
-          "name": "Maria Santos",
-          "age": 35,
+          "name": "Sarah Jenkins",
+          "age": 29,
           "has_pre_existing": false,
-          "coverage_interest": "I'm interested in comprehensive hospitalization coverage",
+          "coverage_interest": "I'm interested in individual comprehensive coverage",
           "phone": null,
           "consent_given": true,
           "eligible": null,
@@ -134,50 +134,22 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:56.704801+00:00",
+      "ts": "2026-10-01T16:40:58.415841+00:00",
       "speaker": "customer",
-      "text": "What are the benefits of the Gold plan?"
+      "text": "What is the pet insurance vaccination schedule for Golden Retrievers?"
     },
     {
-      "ts": "2026-10-01T16:40:56.809290+00:00",
-      "speaker": "agent",
-      "text": "HealthShield Plan Tiers & Coverage Benefits Is there anything else you'd like to know about our plans?",
-      "metadata": {
-        "state": "product_info",
-        "turn": 5,
-        "qualification_profile": {
-          "name": "Maria Santos",
-          "age": 35,
-          "has_pre_existing": false,
-          "coverage_interest": "I'm interested in comprehensive hospitalization coverage",
-          "phone": null,
-          "consent_given": true,
-          "eligible": null,
-          "ineligibility_reason": null,
-          "flags": [],
-          "conflicts_detected": []
-        },
-        "ended": false,
-        "escalated": false
-      }
-    },
-    {
-      "ts": "2026-10-01T16:40:56.809322+00:00",
-      "speaker": "customer",
-      "text": "How much is the room rent limit?"
-    },
-    {
-      "ts": "2026-10-01T16:40:56.972612+00:00",
+      "ts": "2026-10-01T16:40:58.553497+00:00",
       "speaker": "agent",
       "text": "I'm sorry, I don't have verified information on that specific topic in our policy records. I wouldn't want to give you inaccurate details. Would you like me to connect you with one of our licensed specialists who can look that up for you, or shall we return to our health plans?",
       "metadata": {
         "state": "product_info",
-        "turn": 6,
+        "turn": 5,
         "qualification_profile": {
-          "name": "Maria Santos",
-          "age": 35,
+          "name": "Sarah Jenkins",
+          "age": 29,
           "has_pre_existing": false,
-          "coverage_interest": "I'm interested in comprehensive hospitalization coverage",
+          "coverage_interest": "I'm interested in individual comprehensive coverage",
           "phone": null,
           "consent_given": true,
           "eligible": null,
@@ -190,22 +162,50 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:56.972632+00:00",
+      "ts": "2026-10-01T16:40:58.553526+00:00",
       "speaker": "customer",
-      "text": "No more questions, thank you"
+      "text": "Okay, let's return to your health plans. What does the Silver plan cover?"
     },
     {
-      "ts": "2026-10-01T16:40:56.972682+00:00",
+      "ts": "2026-10-01T16:40:58.690839+00:00",
       "speaker": "agent",
-      "text": "Wonderful, Maria Santos! Based on our conversation, you appear to qualify for our HealthShield plans. A licensed advisor will reach out to provide a personalized quote and next steps. Is there anything else before we wrap up?",
+      "text": "HealthShield Plan Tiers & Coverage Benefits Is there anything else you'd like to know about our plans?",
+      "metadata": {
+        "state": "product_info",
+        "turn": 6,
+        "qualification_profile": {
+          "name": "Sarah Jenkins",
+          "age": 29,
+          "has_pre_existing": false,
+          "coverage_interest": "I'm interested in individual comprehensive coverage",
+          "phone": null,
+          "consent_given": true,
+          "eligible": null,
+          "ineligibility_reason": null,
+          "flags": [],
+          "conflicts_detected": []
+        },
+        "ended": false,
+        "escalated": false
+      }
+    },
+    {
+      "ts": "2026-10-01T16:40:58.690860+00:00",
+      "speaker": "customer",
+      "text": "That sounds good, thank you very much"
+    },
+    {
+      "ts": "2026-10-01T16:40:58.690921+00:00",
+      "speaker": "agent",
+      "text": "Wonderful, Sarah Jenkins! Based on our conversation, you appear to qualify for our HealthShield plans. A licensed advisor will reach out to provide a personalized quote and next steps. Is there anything else before we wrap up?",
       "metadata": {
         "state": "qualification_done",
         "turn": 7,
         "qualification_profile": {
-          "name": "Maria Santos",
-          "age": 35,
+          "name": "Sarah Jenkins",
+          "age": 29,
           "has_pre_existing": false,
-          "coverage_interest": "I'm interested in comprehensive hospitalization coverage",
+          "coverage_interest": "I'm interested in individual comprehensive coverage",
           "phone": null,
           "consent_given": true,
           "eligible": true,

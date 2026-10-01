@@ -1,0 +1,116 @@
+{
+  "call_id": "call_03_outofscope_escalation",
+  "title": "Call 03: Out-of-Scope Query & Human Specialist Escalation",
+  "scenario_type": "outofscope_escalation",
+  "description": "Customer Sarah asks an out-of-scope query regarding pet insurance vaccination schedules. Agent delivers safe anti-hallucination fallback. Customer requests immediate human specialist transfer.",
+  "customer_voice": "en-US-EmmaNeural",
+  "agent_voice": "en-US-AriaNeural",
+  "generated_at": "2026-10-01T16:40:21.163615+00:00",
+  "total_turns": 13,
+  "outcome": "escalated",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Hello! Thank you for calling HealthShield. My name is Aria, your HealthShield AI assistant. This call may be recorded for quality assurance. I'm here to help you explore our health insurance plans. May I ask your name, please?",
+      "state": "greeting",
+      "timestamp": "2026-10-01T16:39:59.390876+00:00"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "Hello, my name is Sarah Jenkins",
+      "state": "greeting",
+      "timestamp": "2026-10-01T16:40:00.447868+00:00"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "Lovely to meet you, Sarah Jenkins! To help find the right HealthShield plan for you, could I ask how old you are?",
+      "state": "lead_qualification",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:40:02.559549+00:00"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "I am 29 years old",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T16:40:03.816606+00:00"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "Perfect, thank you! At 29, you're eligible for all our main plan tiers. Do you currently have any pre-existing medical conditions, such as diabetes, hypertension, or heart disease?",
+      "state": "lead_qualification",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:40:05.803286+00:00"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "No, I have no pre-existing conditions",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T16:40:07.422659+00:00"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "Got it, thank you for sharing that. What kind of coverage are you most interested in? For example, hospitalization, outpatient care, maternity, or a comprehensive plan?",
+      "state": "lead_qualification",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:40:08.957337+00:00"
+    },
+    {
+      "turn": 8,
+      "speaker": "customer",
+      "text": "I'm interested in individual comprehensive coverage",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T16:40:10.046370+00:00"
+    },
+    {
+      "turn": 9,
+      "speaker": "agent",
+      "text": "Excellent! Based on what you've told me, here's what I found in our verified policy records: HealthShield Plan Tiers & Coverage Benefits Would you like to know more about a specific plan, or do you have any questions?",
+      "state": "product_info",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:40:12.649438+00:00"
+    },
+    {
+      "turn": 10,
+      "speaker": "customer",
+      "text": "What is the pet insurance vaccination schedule for Golden Retrievers?",
+      "state": "product_info",
+      "timestamp": "2026-10-01T16:40:13.820510+00:00"
+    },
+    {
+      "turn": 11,
+      "speaker": "agent",
+      "text": "I'm sorry, I don't have verified information on that specific topic in our policy records. I wouldn't want to give you inaccurate details. Would you like me to connect you with one of our licensed specialists who can look that up for you, or shall we return to our health plans?",
+      "state": "product_info",
+      "conflict_detected": false,
+      "escalated": false,
+      "timestamp": "2026-10-01T16:40:15.893300+00:00"
+    },
+    {
+      "turn": 12,
+      "speaker": "customer",
+      "text": "I need to speak to a licensed human specialist right away, please transfer me to your supervisor.",
+      "state": "product_info",
+      "timestamp": "2026-10-01T16:40:17.487872+00:00"
+    },
+    {
+      "turn": 13,
+      "speaker": "agent",
+      "text": "Of course! Let me connect you with one of our licensed human specialists right away. They'll be able to assist you fully. Please hold on briefly.",
+      "state": "escalation",
+      "conflict_detected": false,
+      "escalated": true,
+      "timestamp": "2026-10-01T16:40:19.808001+00:00"
+    }
+  ]
+}
