@@ -1,0 +1,81 @@
+{
+  "call_id": "call_id_02_javanese_hardship",
+  "market": "indonesia",
+  "title": "Call ID 02: Regional Javanese Hardship & Restructuring Request",
+  "scenario_type": "multifinance_regional_hardship",
+  "description": "Customer Mas Joko uses regional Javanese speech markers (nggih, lho, mas), explaining hardship. Agent delivers grounded denda waiver and tenor extension, and escalates to credit analyst.",
+  "customer_voice": "jv-ID-DimasNeural",
+  "agent_voice": "id-ID-GadisNeural",
+  "generated_at": "2026-10-01T18:44:08.449037+00:00",
+  "total_turns": 9,
+  "outcome": "escalated",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Selamat pagi Bapak/Ibu, salam dari HealthShield Multifinance. Saya Gadis, asisten layanan pelanggan resmi Anda. Panggilan ini terhubung untuk konfirmasi jadwal angsuran pembiayaan motor Anda. Boleh dibantu konfirmasi atas nama siapa saya berbicara saat ini?",
+      "state": "greeting",
+      "timestamp": "2026-10-01T18:43:34.376640+00:00"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "Halo mbak, saya Mas Joko dari Solo",
+      "state": "greeting",
+      "timestamp": "2026-10-01T18:43:35.659548+00:00"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "Terima kasih atas konfirmasinya Pak/Bu Mas Joko. Kami ingin menginformasikan bahwa angsuran sepeda motor Anda sebesar Rp 850.000 akan jatuh tempo dalam 2 hari ke depan pada tanggal 15. Apakah pembayaran rencana akan dilakukan melalui Mobile Banking atau kasir Indomaret/Alfamart?",
+      "state": "installment_reminder",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:43:36.982690+00:00"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "Nggih mas, angsuran bulan ini berat banget lho. Usaha lagi sepi, apa bisa denda keterlambatan dihapus atau tenornya diperpanjang?",
+      "state": "installment_reminder",
+      "timestamp": "2026-10-01T18:43:42.338704+00:00"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "Nggih Mas/Pak, kami sangat mengerti dan berempati dengan kendala yang dihadapi saat ini. Khusus untuk nasabah setia, kami memiliki solusi restrukturisasi perpanjangan tenor hingga 12 bulan ke depan agar nilai cicilan per bulannya bisa jauh lebih enteng, serta program keringanan denda keterlambatan. Apakah berkenan kami bantu ajukan program perpanjangan tenor ini untuk cicilan Anda?",
+      "state": "restructuring_proposal",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:43:45.884901+00:00"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "Nggih mas, kulo setuju kalau bisa dibantu perpanjangan tenornya.",
+      "state": "restructuring_proposal",
+      "timestamp": "2026-10-01T18:43:52.242786+00:00"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "Baik nggih Mas/Pak. Saya sudah catatkan pengajuan perpanjangan tenor pembiayaan Anda. Tim analis kredit kami akan menghubungi Anda kembali dalam 1x24 jam untuk simulasi angsuran yang lebih ringan. Apakah ada pertanyaan lain sebelum kami akhiri panggilan ini?",
+      "state": "confirmation",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:43:54.199715+00:00"
+    },
+    {
+      "turn": 8,
+      "speaker": "customer",
+      "text": "Boleh tolong sambungkan dengan supervisor atau analis kredit sekarang?",
+      "state": "confirmation",
+      "timestamp": "2026-10-01T18:43:59.597465+00:00"
+    },
+    {
+      "turn": 9,
+      "speaker": "agent",
+      "text": "Baik, saya sangat memahami kebutuhan Bapak/Ibu. Segera saya sambungkan dengan analis kredit dan supervisor resmi kami untuk membantu solusi pembiayaan Anda secara tuntas. Mohon ditunggu sebentar nggih Pak/Bu.",
+      "state": "escalation",
+      "escalated": true,
+      "timestamp": "2026-10-01T18:44:01.476893+00:00"
+    }
+  ]
+}

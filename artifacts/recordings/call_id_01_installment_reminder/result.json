@@ -1,0 +1,27 @@
+{
+  "call_id": "call_id_01_installment_reminder",
+  "market": "indonesia",
+  "scenario_type": "multifinance_reminder_cooperative",
+  "outcome": "completed",
+  "final_state": "ended",
+  "customer_profile": {
+    "name": "Budi Santoso",
+    "contract_number": null,
+    "installment_amount_idr": 850000,
+    "due_date_day": 15,
+    "hardship_reason": null,
+    "restructuring_requested": false,
+    "payment_commitment_date": "tanggal 15 via m-banking",
+    "flags": [],
+    "regional_dialect_markers": [
+      "address_mbak",
+      "javanese_affirmative_nggih"
+    ]
+  },
+  "audio_file": "audio.mp3",
+  "audio_bytes": 554688,
+  "transcript_file": "transcript.json",
+  "turns_count": 7,
+  "tts_provider_disclosure": "Microsoft Edge-TTS (External/free cloud neural speech synthesis service; NOT local/open-source inference)",
+  "verification_status": "VERIFIED_PASS"
+}

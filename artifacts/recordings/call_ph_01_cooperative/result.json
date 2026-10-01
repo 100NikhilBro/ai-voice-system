@@ -1,0 +1,24 @@
+{
+  "call_id": "call_ph_01_cooperative",
+  "market": "philippines",
+  "scenario_type": "bancassurance_cooperative",
+  "outcome": "completed",
+  "final_state": "qualification_done",
+  "customer_profile": {
+    "name": "Maria Santos",
+    "age": 35,
+    "referral_bank": null,
+    "beneficiary_relation": "Gusto ko pong ilagay ang aking spouse at dalawang anak",
+    "coverage_interest": "Interesado po ako sa guaranteed life protection plan",
+    "preferred_payment": null,
+    "eligible": true,
+    "flags": [],
+    "conflicts_detected": []
+  },
+  "audio_file": "audio.mp3",
+  "audio_bytes": 856800,
+  "transcript_file": "transcript.json",
+  "turns_count": 13,
+  "tts_provider_disclosure": "Microsoft Edge-TTS (External/free cloud neural speech synthesis service; NOT local/open-source inference)",
+  "verification_status": "VERIFIED_PASS"
+}

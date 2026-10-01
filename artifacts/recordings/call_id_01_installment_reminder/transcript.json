@@ -1,0 +1,66 @@
+{
+  "call_id": "call_id_01_installment_reminder",
+  "market": "indonesia",
+  "title": "Call ID 01: Cooperative Multifinance Installment Reminder (Colloquial ID)",
+  "scenario_type": "multifinance_reminder_cooperative",
+  "description": "Customer Budi receives installment reminder for motorcycle loan and confirms payment commitment via Mobile Banking BCA before due date.",
+  "customer_voice": "id-ID-ArdiNeural",
+  "agent_voice": "id-ID-GadisNeural",
+  "generated_at": "2026-10-01T18:43:34.360694+00:00",
+  "total_turns": 7,
+  "outcome": "completed",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Selamat pagi Bapak/Ibu, salam dari HealthShield Multifinance. Saya Gadis, asisten layanan pelanggan resmi Anda. Panggilan ini terhubung untuk konfirmasi jadwal angsuran pembiayaan motor Anda. Boleh dibantu konfirmasi atas nama siapa saya berbicara saat ini?",
+      "state": "greeting",
+      "timestamp": "2026-10-01T18:42:58.518739+00:00"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "Selamat pagi mbak, nama saya Budi Santoso",
+      "state": "greeting",
+      "timestamp": "2026-10-01T18:43:04.412019+00:00"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "Terima kasih atas konfirmasinya Pak/Bu Budi Santoso. Kami ingin menginformasikan bahwa angsuran sepeda motor Anda sebesar Rp 850.000 akan jatuh tempo dalam 2 hari ke depan pada tanggal 15. Apakah pembayaran rencana akan dilakukan melalui Mobile Banking atau kasir Indomaret/Alfamart?",
+      "state": "installment_reminder",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:43:06.146282+00:00"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "Iya mbak, saya bayar angsuran motor via m-banking BCA sebelum tanggal 15 nggih.",
+      "state": "installment_reminder",
+      "timestamp": "2026-10-01T18:43:18.659407+00:00"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "Baik, luar biasa sekali. Pembayaran via transfer Virtual Account m-banking akan otomatis terverifikasi secara real-time tanpa potongan biaya admin tambahan. Apakah ada yang perlu kami bantu kembali terkait nomor kontrak atau rincian angsuran Anda?",
+      "state": "confirmation",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:43:22.570888+00:00"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "Sudah cukup jelas mbak, terima kasih banyak atas infonya.",
+      "state": "confirmation",
+      "timestamp": "2026-10-01T18:43:27.249860+00:00"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "Terima kasih banyak atas waktu dan komitmennya nggih Bapak/Ibu. Informasi telah tercatat lengkap dalam sistem kami. Selamat pagi/siang dan semoga sehat selalu bersama keluarga!",
+      "state": "ended",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:43:30.477354+00:00"
+    }
+  ]
+}

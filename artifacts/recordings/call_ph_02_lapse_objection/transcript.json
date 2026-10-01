@@ -1,0 +1,81 @@
+{
+  "call_id": "call_ph_02_lapse_objection",
+  "market": "philippines",
+  "title": "Call PH 02: Policy Lapse Objection & Grace Period Escalation",
+  "scenario_type": "bancassurance_objection_escalation",
+  "description": "Customer Juan raises a policy lapse objection. Agent explains 31-day grace period and monthly auto-debit. Customer requests human specialist transfer; agent escalates in polite Taglish.",
+  "customer_voice": "fil-PH-AngeloNeural",
+  "agent_voice": "fil-PH-BlessicaNeural",
+  "generated_at": "2026-10-01T18:42:58.511547+00:00",
+  "total_turns": 9,
+  "outcome": "escalated",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Magandang araw po! Ako po si Blessica mula sa HealthShield Bancassurance. Nakatanggap po kami ng inyong referral mula sa inyong bank branch para sa ating life protection and savings plans. May I have your name po muna para ma-address ko kayo nang maayos?",
+      "state": "greeting",
+      "timestamp": "2026-10-01T18:42:41.286055+00:00"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "Magandang araw, ako po si Juan dela Cruz",
+      "state": "greeting",
+      "timestamp": "2026-10-01T18:42:42.537329+00:00"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "Salamat po, Juan Dela Cruz! Para po masuri natin ang angkop na coverage para sa inyo, ilang taon na po kayo ngayon?",
+      "state": "lead_qualification",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:42:44.206284+00:00"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "40 years old po ako",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T18:42:45.827401+00:00"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "Ayan, pasok po kayo sa standard issue tier para sa edad 40! Para po sa inyong life policy, sino po ang balak ninyong italaga bilang primary beneficiary? Halimbawa po, ang inyong spouse, mga anak, o magulang?",
+      "state": "lead_qualification",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:42:46.982216+00:00"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "Baka mag-lapse lang po ang policy ko kapag nagka-problema sa pera, sayang lang ang binayad ko.",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T18:42:49.151018+00:00"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "Naiintindihan ko po ang inyong pag-aalala, Ma'am/Sir. Una po, may 31-day grace period po tayo sa bawat due date kaya hindi agad mag-la-lapse ang policy. Pangalawa po, may flexible auto-debit options tayo kung saan pwedeng gawing monthly ang hulog na nagsisimula lang sa ₱1,650 para hindi mabigat sa bulsa. Makatutulong po ba sa inyo ang ganitong monthly arrangement?",
+      "state": "objection_handling",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:42:50.461692+00:00"
+    },
+    {
+      "turn": 8,
+      "speaker": "customer",
+      "text": "Gusto ko po sana ng kausap na tao, paki-transfer po ako sa licensed specialist ninyo.",
+      "state": "objection_handling",
+      "timestamp": "2026-10-01T18:42:54.135434+00:00"
+    },
+    {
+      "turn": 9,
+      "speaker": "agent",
+      "text": "Opo, naiintindihan ko po. I-co-connect ko po kayo agad sa isa sa ating licensed bancassurance specialists para matulungan po kayo nang personal. Sandali lang po, Ma'am/Sir.",
+      "state": "escalation",
+      "escalated": true,
+      "timestamp": "2026-10-01T18:42:56.166473+00:00"
+    }
+  ]
+}

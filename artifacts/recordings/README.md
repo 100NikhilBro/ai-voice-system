@@ -1,55 +1,79 @@
-# Q1 Voice Agent Call Recordings & Verification
+# Voice Agent Call Recordings & Empirical Evidence Repository
 
-This directory contains three reproducible, end-to-end voice call recordings demonstrating all required Question 1 dialogue scenarios.
-
-## Call Summary Table
-
-| Call ID | Scenario Coverage | Final State | Outcome | Audio Size | Turns | Status |
-|:---|:---|:---|:---|:---|:---|:---|
-| **call_01_cooperative** | Cooperative Customer (Happy Path) | `qualification_done` | Completed (Eligible) | 690,336 B | 15 | VERIFIED |
-| **call_02_objection_conflict** | Objection Handling + Conflicting Details | `qualification_done` | Completed (Underwriting Review) | 1,128,384 B | 19 | VERIFIED |
-| **call_03_outofscope_escalation** | Out-of-Scope Query + Human Specialist Transfer | `escalation` | Escalated to Specialist | 684,432 B | 13 | VERIFIED |
+This directory contains reproducible, end-to-end voice call recordings and transcripts across Question 1 (Health Insurance Lead Qualification) and Question 3 (Localized Native-Language Financial Bots for the Philippines and Indonesia).
 
 ---
 
-## Detailed Scenario Breakdown
+## 1. Master Call Summary Table
 
-### 1. `call_01_cooperative`
-- **Scenarios Covered**: Cooperative customer, standard qualification flow, grounded product information lookup.
-- **Narrative**: Customer Maria Santos (age 35) provides demographic and health info willingly, confirms no pre-existing conditions, inquires about the Gold plan benefits and room rent limit ($500/day per KB), and completes qualification.
-- **Artifacts**:
-  - [`audio.mp3`](./call_01_cooperative/audio.mp3) (Synthesized two-way dialogue)
-  - [`transcript.json`](./call_01_cooperative/transcript.json) (Turn-by-turn timestamps & states)
-  - [`result.json`](./call_01_cooperative/result.json) (Qualification profile & outcome)
-
-### 2. `call_02_objection_conflict`
-- **Scenarios Covered**: Customer objection handling, incomplete/conflicting details detection, clarification state machine.
-- **Narrative**: Customer John Martinez (age 42) initially denies pre-existing conditions and raises an objection regarding the 2-year waiting period. The agent answers using grounded KB objection rationale (risk pooling, Day 1 emergency cover, fine-print copay warnings). Later, the customer discloses daily insulin for diabetes. The agent detects the conflict, avoids inventing an eligibility decision, enters `CLARIFICATION`, logs the conflict in `conflicts_detected`, and explains underwriting guidelines. The customer agrees to explore suitable plans and completes qualification flagged for review.
-- **Artifacts**:
-  - [`audio.mp3`](./call_02_objection_conflict/audio.mp3)
-  - [`transcript.json`](./call_02_objection_conflict/transcript.json)
-  - [`result.json`](./call_02_objection_conflict/result.json)
-
-### 3. `call_03_outofscope_escalation`
-- **Scenarios Covered**: Out-of-scope query safe fallback (anti-hallucination), human assistance request & supervisor escalation protocol.
-- **Narrative**: Customer Sarah Jenkins (age 29) asks about pet insurance vaccination schedules for Golden Retrievers. The retrieval service identifies zero relevant policy records; the agent explicitly states that verified information is unavailable rather than fabricating policy facts. The customer then requests immediate transfer to a licensed specialist/supervisor. The agent executes graceful escalation to human specialist.
-- **Artifacts**:
-  - [`audio.mp3`](./call_03_outofscope_escalation/audio.mp3)
-  - [`transcript.json`](./call_03_outofscope_escalation/transcript.json)
-  - [`result.json`](./call_03_outofscope_escalation/result.json)
+| Question | Call ID | Market & Flow | Final State | Outcome | Audio Size | Turns | Status |
+|:---:|:---|:---|:---|:---|:---:|:---:|:---:|
+| **Q1** | **`call_01_cooperative`** | US Health: Cooperative Lead Qualification | `qualification_done` | Completed (Eligible) | 690,336 B | 15 | **VERIFIED** |
+| **Q1** | **`call_02_objection_conflict`** | US Health: Objection + Conflicting Details | `qualification_done` | Completed (Review) | 1,128,384 B | 19 | **VERIFIED** |
+| **Q1** | **`call_03_outofscope_escalation`** | US Health: Out-of-Scope Fallback + Escalation | `escalation` | Escalated to Specialist | 684,432 B | 13 | **VERIFIED** |
+| **Q3** | **`call_ph_01_cooperative`** | PH Bancassurance: Taglish Lead Qualification | `qualification_done` | Completed (Eligible) | 856,800 B | 13 | **VERIFIED** |
+| **Q3** | **`call_ph_02_lapse_objection`** | PH Bancassurance: Lapse Objection & Taglish Escalation | `escalation` | Escalated to Specialist | 579,024 B | 9 | **VERIFIED** |
+| **Q3** | **`call_id_01_installment_reminder`** | ID Multifinance: Cooperative Angsuran Reminder | `ended` | Completed (Committed) | 554,688 B | 7 | **VERIFIED** |
+| **Q3** | **`call_id_02_javanese_hardship`** | ID Multifinance: Regional Speech Restructuring | `escalation` | Escalated to Analyst | 808,560 B | 9 | **VERIFIED** |
 
 ---
 
-## How to Reproduce
+## 2. Question 1 Calls (HealthShield Health Insurance)
 
-To regenerate all 3 recordings and transcripts from scratch:
+### `call_01_cooperative`
+- **Scenarios**: Cooperative customer happy-path qualification, grounded Gold plan limits.
+- **Narrative**: Maria Santos (35) provides all details willingly, asks about room rent limit ($500/day per KB), completes qualification.
+- **Files**: [`audio.mp3`](./call_01_cooperative/audio.mp3), [`transcript.json`](./call_01_cooperative/transcript.json), [`result.json`](./call_01_cooperative/result.json).
 
+### `call_02_objection_conflict`
+- **Scenarios**: Waiting period objection + conflicting disclosure (denies pre-existing, then mentions daily insulin).
+- **Narrative**: John Martinez (42) objects to waiting period; agent responds with grounded pooling rationale. John mentions daily insulin; agent detects conflict, sets `CLARIFICATION`, avoids premature eligibility invention, and guides to suitable plans.
+- **Files**: [`audio.mp3`](./call_02_objection_conflict/audio.mp3), [`transcript.json`](./call_02_objection_conflict/transcript.json), [`result.json`](./call_02_objection_conflict/result.json).
+
+### `call_03_outofscope_escalation`
+- **Scenarios**: Out-of-scope query safe fallback + human supervisor escalation.
+- **Narrative**: Sarah Jenkins (29) asks about pet insurance vaccination schedule. Agent states information unavailable (anti-hallucination). Customer demands supervisor; agent executes graceful escalation.
+- **Files**: [`audio.mp3`](./call_03_outofscope_escalation/audio.mp3), [`transcript.json`](./call_03_outofscope_escalation/transcript.json), [`result.json`](./call_03_outofscope_escalation/result.json).
+
+---
+
+## 3. Question 3 Calls (Philippines & Indonesia Localized Bots)
+
+### `call_ph_01_cooperative` (Philippines Bancassurance)
+- **Scenarios**: Taglish bancassurance lead qualification, respect honorifics (*po/opo*), accidental death rider inquiry.
+- **Narrative**: Maria Santos inquires via bank branch referral, names spouse and children as primary beneficiaries, confirms Accidental Death & Dismemberment rider.
+- **Files**: [`audio.mp3`](./call_ph_01_cooperative/audio.mp3), [`transcript.json`](./call_ph_01_cooperative/transcript.json), [`result.json`](./call_ph_01_cooperative/result.json).
+
+### `call_ph_02_lapse_objection` (Philippines Bancassurance)
+- **Scenarios**: Policy lapse objection, 31-day grace period, respectful Taglish escalation.
+- **Narrative**: Juan raises budget fears of policy lapse. Agent explains 31-day grace period and monthly auto-debit. Juan requests human specialist; agent executes in-register Taglish transfer (*"Opo, naiintindihan ko po. I-co-connect ko po kayo..."*).
+- **Files**: [`audio.mp3`](./call_ph_02_lapse_objection/audio.mp3), [`transcript.json`](./call_ph_02_lapse_objection/transcript.json), [`result.json`](./call_ph_02_lapse_objection/result.json).
+
+### `call_id_01_installment_reminder` (Indonesia Multifinance)
+- **Scenarios**: Cooperative installment reminder (*angsuran jatuh tempo*), m-banking payment confirmation.
+- **Narrative**: Budi Santoso receives friendly reminder for motorcycle installment due date, confirms payment via Mobile Banking Virtual Account before the 15th.
+- **Files**: [`audio.mp3`](./call_id_01_installment_reminder/audio.mp3), [`transcript.json`](./call_id_01_installment_reminder/transcript.json), [`result.json`](./call_id_01_installment_reminder/result.json).
+
+### `call_id_02_javanese_hardship` (Indonesia Multifinance)
+- **Scenarios**: Regional Javanese speech (*nggih, monggo, lho, mas*), hardship objection, denda waiver, tenor extension, supervisor escalation.
+- **Narrative**: Mas Joko explains hardship (*usaha sepi*). Agent acknowledges in empathetic regional register, offers 100% late fee waiver on prompt principal payment and up to 12 months tenor extension, then escalates to credit analyst.
+- **Files**: [`audio.mp3`](./call_id_02_javanese_hardship/audio.mp3), [`transcript.json`](./call_id_02_javanese_hardship/transcript.json), [`result.json`](./call_id_02_javanese_hardship/result.json).
+
+---
+
+## 4. How to Reproduce All Recordings
+
+Regenerate all Question 1 call recordings:
 ```powershell
 python scripts/generate_q1_recordings.py
 ```
 
-To run all automated verification tests:
-
+Regenerate all Question 3 regional call recordings:
 ```powershell
-python -m pytest tests/test_q1_scenarios.py -v
+python scripts/generate_q3_recordings.py
+```
+
+Run complete verification test suite:
+```powershell
+python -m pytest -v
 ```

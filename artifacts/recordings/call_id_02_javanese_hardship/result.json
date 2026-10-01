@@ -1,0 +1,31 @@
+{
+  "call_id": "call_id_02_javanese_hardship",
+  "market": "indonesia",
+  "scenario_type": "multifinance_regional_hardship",
+  "outcome": "escalated",
+  "final_state": "escalation",
+  "customer_profile": {
+    "name": "Mas Joko",
+    "contract_number": null,
+    "installment_amount_idr": 850000,
+    "due_date_day": 15,
+    "hardship_reason": "Nggih mas, angsuran bulan ini berat banget lho. Usaha lagi sepi, apa bisa denda ",
+    "restructuring_requested": true,
+    "payment_commitment_date": null,
+    "flags": [
+      "restructuring_lead_created"
+    ],
+    "regional_dialect_markers": [
+      "address_mas",
+      "address_mbak",
+      "javanese_affirmative_nggih",
+      "javanese_emphasis_lho"
+    ]
+  },
+  "audio_file": "audio.mp3",
+  "audio_bytes": 808560,
+  "transcript_file": "transcript.json",
+  "turns_count": 9,
+  "tts_provider_disclosure": "Microsoft Edge-TTS (External/free cloud neural speech synthesis service; NOT local/open-source inference)",
+  "verification_status": "VERIFIED_PASS"
+}

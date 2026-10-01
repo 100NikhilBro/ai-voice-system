@@ -1,0 +1,32 @@
+{
+  "market": "indonesia",
+  "domain": "multifinance_consumer_credit",
+  "currency": "IDR",
+  "rules": {
+    "min_age": 21,
+    "max_age": 60,
+    "citizenship": "Warga Negara Indonesia (WNI)",
+    "tenor_options_months": [11, 17, 23, 29, 35],
+    "min_dp_percent": 10,
+    "standard_dp_percent": 20,
+    "late_fee_percent_per_day": 0.5,
+    "grace_period_days": 3,
+    "restructuring_max_tenor_extension_months": 12
+  },
+  "financial_loanwords": [
+    "cicilan", "tenor", "denda", "DP", "jatuh tempo", 
+    "angsuran", "pembiayaan", "restrukturisasi", "virtual account"
+  ],
+  "regional_linguistic_markers": {
+    "affirmative_particles": ["nggih", "inggih", "ya", "iya", "bisa", "siap"],
+    "honorifics_and_address": ["Pak", "Bu", "Mas", "Mbak"],
+    "discourse_particles": ["monggo", "lho", "toh", "dong", "kan", "kok"]
+  },
+  "escalation_protocol": {
+    "trigger_phrases": [
+      "bicara dengan supervisor", "petugas manusia", "sambungkan ke manusia", 
+      "analis kredit", "kepala cabang", "mau bicara dengan orang"
+    ],
+    "polite_escalation_message": "Baik, saya sangat memahami kebutuhan Bapak/Ibu. Segera saya sambungkan dengan analis kredit dan supervisor resmi kami untuk membantu solusi pembiayaan Anda. Mohon ditunggu sebentar nggih Pak/Bu."
+  }
+}

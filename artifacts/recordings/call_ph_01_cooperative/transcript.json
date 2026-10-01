@@ -1,0 +1,111 @@
+{
+  "call_id": "call_ph_01_cooperative",
+  "market": "philippines",
+  "title": "Call PH 01: Cooperative Bancassurance Lead Qualification (Taglish)",
+  "scenario_type": "bancassurance_cooperative",
+  "description": "Customer Maria Santos provides personal and beneficiary details willingly, inquires about accidental death rider in natural Taglish, and finishes qualification.",
+  "customer_voice": "en-PH-RosaNeural",
+  "agent_voice": "fil-PH-BlessicaNeural",
+  "generated_at": "2026-10-01T18:42:41.258075+00:00",
+  "total_turns": 13,
+  "outcome": "completed",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Magandang araw po! Ako po si Blessica mula sa HealthShield Bancassurance. Nakatanggap po kami ng inyong referral mula sa inyong bank branch para sa ating life protection and savings plans. May I have your name po muna para ma-address ko kayo nang maayos?",
+      "state": "greeting",
+      "timestamp": "2026-10-01T18:42:11.361195+00:00"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "Ako po si Maria Santos",
+      "state": "greeting",
+      "timestamp": "2026-10-01T18:42:14.207597+00:00"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "Salamat po, Maria Santos! Para po masuri natin ang angkop na coverage para sa inyo, ilang taon na po kayo ngayon?",
+      "state": "lead_qualification",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:42:15.239846+00:00"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "Ako po ay 35 years old",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T18:42:16.668541+00:00"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "Ayan, pasok po kayo sa standard issue tier para sa edad 35! Para po sa inyong life policy, sino po ang balak ninyong italaga bilang primary beneficiary? Halimbawa po, ang inyong spouse, mga anak, o magulang?",
+      "state": "lead_qualification",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:42:18.190045+00:00"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "Gusto ko pong ilagay ang aking spouse at dalawang anak",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T18:42:21.301570+00:00"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "Noted po! Napakagandang desisyon na protektahan ang kanilang kinabukasan. Anong uri po ng proteksyon ang mas gusto ninyo — guaranteed life protection na may ₱1,000,000 benefit, o 'yung may kasamang savings at endowment payouts?",
+      "state": "lead_qualification",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:42:22.583063+00:00"
+    },
+    {
+      "turn": 8,
+      "speaker": "customer",
+      "text": "Interesado po ako sa guaranteed life protection plan",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-01T18:42:24.971861+00:00"
+    },
+    {
+      "turn": 9,
+      "speaker": "agent",
+      "text": "Napakaganda po niyan! Ang aming Bancassurance Secure Life plan ay may guaranteed ₱1,000,000 death benefit kasama ang ₱500,000 Accidental Death & Dismemberment rider. Nagsisimula lang po ito sa around ₱1,650 kada buwan via auto-debit sa inyong bank account. May mga katanungan po ba kayo tungkol sa benefits o sa inyong premium payment?",
+      "state": "product_info",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:42:26.510355+00:00"
+    },
+    {
+      "turn": 10,
+      "speaker": "customer",
+      "text": "Kasama na po ba dito ang accidental death rider?",
+      "state": "product_info",
+      "timestamp": "2026-10-01T18:42:30.856114+00:00"
+    },
+    {
+      "turn": 11,
+      "speaker": "agent",
+      "text": "Opo, kasama na po sa ating Secure Life tier ang Accidental Death and Dismemberment (AD&D) rider na nagbibigay ng karagdagang ₱500,000 cash coverage kung sakaling magkaroon ng aksidente. Nais niyo po bang malaman ang payment options?",
+      "state": "product_info",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:42:32.761420+00:00"
+    },
+    {
+      "turn": 12,
+      "speaker": "customer",
+      "text": "Maraming salamat po, napakalinaw po ng inyong paliwanag.",
+      "state": "product_info",
+      "timestamp": "2026-10-01T18:42:36.198482+00:00"
+    },
+    {
+      "turn": 13,
+      "speaker": "agent",
+      "text": "Napakagaling po, Maria Santos! Kuwalipikado po kayo para sa ating HealthShield Bancassurance Secure Life plan. I-fo-forward ko po ang inyong impormasyon sa inyong partner bank branch para maasikaso ang inyong welcome kit at policy papers. May pahabol pa po ba kayong tanong?",
+      "state": "qualification_done",
+      "escalated": false,
+      "timestamp": "2026-10-01T18:42:37.749750+00:00"
+    }
+  ]
+}

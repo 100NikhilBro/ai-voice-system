@@ -1,0 +1,24 @@
+{
+  "call_id": "call_ph_02_lapse_objection",
+  "market": "philippines",
+  "scenario_type": "bancassurance_objection_escalation",
+  "outcome": "escalated",
+  "final_state": "escalation",
+  "customer_profile": {
+    "name": "Juan Dela Cruz",
+    "age": 40,
+    "referral_bank": null,
+    "beneficiary_relation": null,
+    "coverage_interest": null,
+    "preferred_payment": null,
+    "eligible": true,
+    "flags": [],
+    "conflicts_detected": []
+  },
+  "audio_file": "audio.mp3",
+  "audio_bytes": 579024,
+  "transcript_file": "transcript.json",
+  "turns_count": 9,
+  "tts_provider_disclosure": "Microsoft Edge-TTS (External/free cloud neural speech synthesis service; NOT local/open-source inference)",
+  "verification_status": "VERIFIED_PASS"
+}

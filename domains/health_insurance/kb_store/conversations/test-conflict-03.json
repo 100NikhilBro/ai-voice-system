@@ -1,7 +1,7 @@
 {
   "session_id": "test-conflict-03",
-  "started_at": "2026-10-01T16:40:57.661271+00:00",
-  "ended_at": "2026-10-01T16:40:58.096469+00:00",
+  "started_at": "2026-10-01T18:50:08.245490+00:00",
+  "ended_at": "2026-10-01T18:50:08.667248+00:00",
   "outcome": "completed",
   "qualification_state": {
     "name": "David",
@@ -22,17 +22,17 @@
   },
   "turns": [
     {
-      "ts": "2026-10-01T16:40:57.661308+00:00",
+      "ts": "2026-10-01T18:50:08.245519+00:00",
       "speaker": "agent",
       "text": "Hello! Thank you for calling HealthShield. My name is Aria, your HealthShield AI assistant. This call may be recorded for quality assurance. I'm here to help you explore our health insurance plans. May I ask your name, please?"
     },
     {
-      "ts": "2026-10-01T16:40:57.661322+00:00",
+      "ts": "2026-10-01T18:50:08.245529+00:00",
       "speaker": "customer",
       "text": "Hi, my name is David"
     },
     {
-      "ts": "2026-10-01T16:40:57.661386+00:00",
+      "ts": "2026-10-01T18:50:08.245574+00:00",
       "speaker": "agent",
       "text": "Lovely to meet you, David! To help find the right HealthShield plan for you, could I ask how old you are?",
       "metadata": {
@@ -60,12 +60,12 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:57.661401+00:00",
+      "ts": "2026-10-01T18:50:08.245585+00:00",
       "speaker": "customer",
       "text": "I am 45 years old"
     },
     {
-      "ts": "2026-10-01T16:40:57.661445+00:00",
+      "ts": "2026-10-01T18:50:08.245616+00:00",
       "speaker": "agent",
       "text": "Perfect, thank you! At 45, you're eligible for all our main plan tiers. Do you currently have any pre-existing medical conditions, such as diabetes, hypertension, or heart disease?",
       "metadata": {
@@ -93,12 +93,12 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:57.661458+00:00",
+      "ts": "2026-10-01T18:50:08.245624+00:00",
       "speaker": "customer",
       "text": "No, I don't have any pre-existing conditions"
     },
     {
-      "ts": "2026-10-01T16:40:57.661513+00:00",
+      "ts": "2026-10-01T18:50:08.245660+00:00",
       "speaker": "agent",
       "text": "Got it, thank you for sharing that. What kind of coverage are you most interested in? For example, hospitalization, outpatient care, maternity, or a comprehensive plan?",
       "metadata": {
@@ -126,12 +126,12 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:57.661524+00:00",
+      "ts": "2026-10-01T18:50:08.245667+00:00",
       "speaker": "customer",
       "text": "I'm looking for hospitalization and chronic care"
     },
     {
-      "ts": "2026-10-01T16:40:57.909561+00:00",
+      "ts": "2026-10-01T18:50:08.541003+00:00",
       "speaker": "agent",
       "text": "Excellent! Based on what you've told me, here's what I found in our verified policy records: #### Objection 1: \"Why is the waiting period for pre-existing conditions so long (2 to 3 years)? Other cheap policies advertise immediate coverage!\" Would you like to know more about a specific plan, or do you have any questions?",
       "metadata": {
@@ -159,12 +159,12 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:57.909603+00:00",
+      "ts": "2026-10-01T18:50:08.541022+00:00",
       "speaker": "customer",
       "text": "Well, just my daily insulin for diabetes, that doesn't count right?"
     },
     {
-      "ts": "2026-10-01T16:40:57.909656+00:00",
+      "ts": "2026-10-01T18:50:08.541052+00:00",
       "speaker": "agent",
       "text": "Actually, daily insulin or ongoing medication indicates a pre-existing condition under our underwriting guidelines. I've noted that accurately so we can guide you to the right plan without claim issues later. Since this requires standard underwriter review, we can still proceed with plans that accommodate pre-existing conditions after the waiting period. Would you like to explore those plan options, or speak with a specialist?",
       "metadata": {
@@ -193,12 +193,12 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:57.909666+00:00",
+      "ts": "2026-10-01T18:50:08.541057+00:00",
       "speaker": "customer",
       "text": "Yes, let's explore those plan options"
     },
     {
-      "ts": "2026-10-01T16:40:57.909742+00:00",
+      "ts": "2026-10-01T18:50:08.541080+00:00",
       "speaker": "agent",
       "text": "Understood! Both our Gold and Platinum plans provide coverage for pre-existing conditions following the statutory waiting period, along with immediate coverage for accidents and emergencies. Would you like to know more about the Gold plan benefits, or do you have specific questions about waiting periods?",
       "metadata": {
@@ -226,12 +226,12 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:57.909755+00:00",
+      "ts": "2026-10-01T18:50:08.541084+00:00",
       "speaker": "customer",
       "text": "What does the Gold plan cover for waiting periods?"
     },
     {
-      "ts": "2026-10-01T16:40:58.095539+00:00",
+      "ts": "2026-10-01T18:50:08.666827+00:00",
       "speaker": "agent",
       "text": "1. GENERAL INCEPTION WAITING PERIODS Is there anything else you'd like to know about our plans?",
       "metadata": {
@@ -259,12 +259,12 @@
       }
     },
     {
-      "ts": "2026-10-01T16:40:58.095560+00:00",
+      "ts": "2026-10-01T18:50:08.666849+00:00",
       "speaker": "customer",
       "text": "Thank you, that answers my question"
     },
     {
-      "ts": "2026-10-01T16:40:58.095598+00:00",
+      "ts": "2026-10-01T18:50:08.666887+00:00",
       "speaker": "agent",
       "text": "Wonderful, David! Based on our conversation, you appear to qualify for our HealthShield plans. A licensed advisor will reach out to provide a personalized quote and next steps. Is there anything else before we wrap up?",
       "metadata": {
