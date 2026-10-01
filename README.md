@@ -4,6 +4,14 @@ An AI system for financial and insurance conversations, combining a knowledge-gr
 
 ---
 
+## Assignment Context
+
+This project was originally built as part of a company AI Engineer assessment.
+
+The initial implementation was created for the assessment submission. As I continue studying voice-agent engineering and related systems, I improve the project whenever I get time, using those studies to refine and extend the implementation incrementally.
+
+The project is an evolving engineering and learning project built from an assessment baseline, rather than a claim of production readiness.
+
 ## Video Walkthrough
 
 > https://github.com/user-attachments/assets/3e985527-6d07-4444-8023-aeaf99f320e9
@@ -447,7 +455,6 @@ Potential next steps include dedicated streaming ASR infrastructure, native loca
 - `docs/Q3_LOCALIZATION_REPORT.md`
 - `docs/Q4_INSIGHTS_REPORT.md`
 
-
 ---
 
-Still building, testing, and refining the system as I explore practical patterns in voice AI, retrieval, multilingual systems, and real-time AI engineering.
+This project started as a company AI Engineer assessment and continues to evolve as I study voice AI, retrieval, multilingual systems, and real-time AI engineering.
