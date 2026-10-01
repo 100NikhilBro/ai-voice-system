@@ -3,313 +3,673 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="HealthShield AI Voice Agent — Knowledge-grounded health insurance lead qualification powered by local AI." />
+  <meta name="description" content="HealthShield AI — Premium Knowledge-Grounded Voice Calling Interface for Health Insurance Lead Qualification." />
   <title>HealthShield AI — Voice Agent</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── CSS Reset & Variables ─────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ─── CSS Variables & Design Tokens (Dark Charcoal + Warm Amber/Orange) ─── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
-      --bg-deep:       #0a0d14;
-      --bg-card:       #111827;
-      --bg-glass:      rgba(255,255,255,0.04);
-      --bg-glass-hover:rgba(255,255,255,0.08);
-      --border:        rgba(255,255,255,0.08);
-      --border-active: rgba(99,179,237,0.5);
+      --bg-base:        #08080a;
+      --bg-surface-1:   #111114;
+      --bg-surface-2:   #17171d;
+      --bg-surface-3:   #1f1f26;
+      --bg-glass:       rgba(23, 23, 29, 0.75);
+      --bg-glass-card:  rgba(255, 255, 255, 0.03);
+      --bg-glass-hover: rgba(255, 255, 255, 0.06);
 
-      --accent-blue:   #4f9cf9;
-      --accent-teal:   #38d9a9;
-      --accent-purple: #a78bfa;
-      --accent-red:    #f87171;
-      --accent-amber:  #fbbf24;
-      --accent-green:  #4ade80;
+      --border-subtle:  rgba(255, 255, 255, 0.07);
+      --border-medium:  rgba(255, 255, 255, 0.12);
+      --border-accent:  rgba(245, 158, 11, 0.35);
 
-      --text-primary:  #f0f4ff;
-      --text-secondary:#94a3b8;
-      --text-muted:    #475569;
+      /* Warm Orange & Golden Amber Accents */
+      --accent-amber:   #f59e0b;
+      --accent-orange:  #ea580c;
+      --accent-gold:    #fbbf24;
+      --accent-warm-rgb: 245, 158, 11;
 
-      --glow-blue:     0 0 20px rgba(79,156,249,0.3);
-      --glow-teal:     0 0 20px rgba(56,217,169,0.3);
-      --glow-red:      0 0 20px rgba(248,113,113,0.3);
+      --accent-danger:  #ef4444;
+      --accent-success: #10b981;
+      --accent-info:    #38bdf8;
 
-      --radius-lg:     16px;
-      --radius-md:     10px;
-      --radius-sm:     6px;
+      --text-main:      #f4f4f6;
+      --text-muted:     #a1a1aa;
+      --text-dim:       #52525b;
 
-      --transition:    0.2s cubic-bezier(0.4,0,0.2,1);
+      --glow-warm:      0 0 28px rgba(245, 158, 11, 0.22);
+      --glow-warm-lg:   0 0 50px rgba(245, 158, 11, 0.32);
+      --glow-danger:    0 0 28px rgba(239, 68, 68, 0.28);
+
+      --radius-xl:      20px;
+      --radius-lg:      14px;
+      --radius-md:      10px;
+      --radius-sm:      6px;
+
+      --font-sans:      'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono:      'JetBrains Mono', monospace;
+
+      --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-norm: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     html, body {
       height: 100%;
-      background: var(--bg-deep);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 14.5px;
+      line-height: 1.55;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Subtle background ambient warm glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 750px;
+      height: 450px;
+      background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.08) 0%, rgba(234, 88, 12, 0.03) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── Main App Shell ────────────────────────────────────────────────── */
+    #app {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      max-height: 100vh;
       overflow: hidden;
     }
 
-    /* ─── Layout ────────────────────────────────────────────────────────── */
-    #app {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      grid-template-columns: 1fr 340px;
-      grid-template-areas:
-        "header  header"
-        "main    sidebar"
-        "footer  sidebar";
-      height: 100vh;
-      gap: 0;
-    }
-
-    /* ─── Header ────────────────────────────────────────────────────────── */
+    /* ─── Top Navigation Bar ────────────────────────────────────────────── */
     header {
-      grid-area: header;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 24px;
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-      z-index: 10;
+      height: 64px;
+      padding: 0 28px;
+      background: var(--bg-surface-1);
+      border-bottom: 1px solid var(--border-subtle);
+      backdrop-filter: blur(16px);
+      flex-shrink: 0;
+      z-index: 20;
     }
 
-    .brand {
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 14px rgba(245, 158, 11, 0.35);
+      flex-shrink: 0;
+    }
+
+    .brand-badge svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    .brand-info h1 {
+      font-size: 15.5px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .brand-info .tagline {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* Call status pill in header center */
+    .header-center {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--transition-norm);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      transition: background var(--transition-norm);
+    }
+
+    .status-badge.idle {
+      color: var(--text-muted);
+    }
+
+    .status-badge.active {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: var(--accent-gold);
+    }
+
+    .status-badge.active .status-dot {
+      background: var(--accent-amber);
+      box-shadow: 0 0 10px var(--accent-amber);
+      animation: warm-pulse 1.6s infinite ease-in-out;
+    }
+
+    .status-badge.error {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--accent-danger);
+    }
+
+    .status-badge.error .status-dot {
+      background: var(--accent-danger);
+      box-shadow: 0 0 10px var(--accent-danger);
+    }
+
+    @keyframes warm-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.25); opacity: 0.7; }
+    }
+
+    .call-timer {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* State pill in header */
+    .state-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--transition-norm);
+    }
+
+    .header-actions {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .brand-logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-teal) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      box-shadow: var(--glow-blue);
-      flex-shrink: 0;
+    /* Language selector */
+    .lang-wrapper {
+      position: relative;
     }
 
-    .brand-text h1 {
-      font-size: 16px;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .brand-text p {
-      font-size: 11px;
+    #lang-select {
+      appearance: none;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
       color: var(--text-muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .status-badge {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 12px;
-      border-radius: 20px;
+      font-family: var(--font-sans);
       font-size: 12px;
       font-weight: 500;
-      border: 1px solid transparent;
-      transition: all var(--transition);
+      padding: 6px 28px 6px 12px;
+      cursor: pointer;
+      outline: none;
+      transition: all var(--transition-fast);
     }
 
-    .status-dot {
-      width: 7px;
-      height: 7px;
+    #lang-select:hover {
+      border-color: var(--border-medium);
+      color: var(--text-main);
+    }
+
+    .lang-wrapper::after {
+      content: '▾';
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Secondary Qualification Drawer Toggle */
+    .btn-qual-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-qual-toggle:hover {
+      border-color: var(--border-accent);
+      color: var(--accent-gold);
+    }
+
+    .btn-qual-toggle.active {
+      background: rgba(245, 158, 11, 0.09);
+      border-color: var(--border-accent);
+      color: var(--accent-gold);
+    }
+
+    .btn-qual-toggle .qual-indicator {
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: var(--text-muted);
-      transition: background var(--transition);
+      background: var(--text-dim);
     }
 
-    .status-badge.idle   { border-color: var(--border); color: var(--text-muted); }
-    .status-badge.active { border-color: var(--accent-teal); color: var(--accent-teal); background: rgba(56,217,169,0.08); }
-    .status-badge.active .status-dot { background: var(--accent-teal); box-shadow: 0 0 8px var(--accent-teal); animation: pulse 1.4s infinite; }
-    .status-badge.error  { border-color: var(--accent-red); color: var(--accent-red); }
-    .status-badge.error  .status-dot { background: var(--accent-red); }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.6; transform: scale(0.8); }
+    .btn-qual-toggle .qual-indicator.eligible {
+      background: var(--accent-success);
+      box-shadow: 0 0 6px var(--accent-success);
     }
 
-    /* ─── Main call area ────────────────────────────────────────────────── */
-    main {
-      grid-area: main;
+    /* ─── Main Content Split Layout ─────────────────────────────────────── */
+    .workspace {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ─── Primary Calling & Conversation Area ───────────────────────────── */
+    .call-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      background: radial-gradient(circle at 50% 15%, rgba(24, 24, 30, 0.6) 0%, rgba(8, 8, 10, 0.95) 75%);
+    }
+
+    /* Top Prominent Voice Waveform & Hero Visualizer */
+    .voice-hero-card {
+      padding: 24px 32px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 32px;
-      gap: 28px;
-      overflow: hidden;
-    }
-
-    /* ─── Avatar waveform ───────────────────────────────────────────────── */
-    .avatar-container {
+      border-bottom: 1px solid var(--border-subtle);
+      background: linear-gradient(180deg, rgba(23, 23, 29, 0.4) 0%, rgba(13, 13, 16, 0.1) 100%);
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-shrink: 0;
     }
 
-    .avatar-rings {
-      position: absolute;
-      width: 160px;
-      height: 160px;
-    }
-
-    .ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-    }
-
-    .ring-1 { width: 100%; height: 100%; border-color: rgba(79,156,249,0.2); }
-    .ring-2 { width: 130%; height: 130%; border-color: rgba(79,156,249,0.12); }
-    .ring-3 { width: 160%; height: 160%; border-color: rgba(79,156,249,0.06); }
-
-    .speaking .ring-1 { animation: ring-pulse 1.8s 0.0s infinite; }
-    .speaking .ring-2 { animation: ring-pulse 1.8s 0.3s infinite; }
-    .speaking .ring-3 { animation: ring-pulse 1.8s 0.6s infinite; }
-
-    @keyframes ring-pulse {
-      0%   { opacity: 0; transform: translate(-50%,-50%) scale(1); }
-      50%  { opacity: 1; }
-      100% { opacity: 0; transform: translate(-50%,-50%) scale(1.15); }
-    }
-
-    .avatar {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1a2744 0%, #1e3a5f 100%);
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 44px;
+    .visualizer-wrapper {
       position: relative;
-      z-index: 1;
-      transition: border-color var(--transition), box-shadow var(--transition);
-    }
-
-    .avatar-container.speaking .avatar {
-      border-color: var(--accent-blue);
-      box-shadow: var(--glow-blue), 0 0 40px rgba(79,156,249,0.2);
-    }
-
-    .avatar-container.listening .avatar {
-      border-color: var(--accent-red);
-      box-shadow: var(--glow-red), 0 0 40px rgba(248,113,113,0.2);
-    }
-
-    /* ─── Waveform bars ─────────────────────────────────────────────────── */
-    .waveform {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      height: 36px;
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
-
-    .waveform.active { opacity: 1; }
-
-    .waveform .bar {
-      width: 3px;
-      background: linear-gradient(180deg, var(--accent-blue), var(--accent-teal));
-      border-radius: 2px;
-      height: 4px;
-      transition: height 0.1s ease;
-    }
-
-    .waveform.speaking .bar { animation: bar-wave 0.8s ease-in-out infinite alternate; }
-    .waveform.listening .bar { background: linear-gradient(180deg, var(--accent-red), var(--accent-amber)); animation: bar-wave 0.5s ease-in-out infinite alternate; }
-
-    @keyframes bar-wave {
-      from { height: 4px; }
-      to   { height: 28px; }
-    }
-
-    .waveform .bar:nth-child(1)  { animation-delay: 0.0s; }
-    .waveform .bar:nth-child(2)  { animation-delay: 0.1s; }
-    .waveform .bar:nth-child(3)  { animation-delay: 0.2s; }
-    .waveform .bar:nth-child(4)  { animation-delay: 0.3s; }
-    .waveform .bar:nth-child(5)  { animation-delay: 0.15s; }
-    .waveform .bar:nth-child(6)  { animation-delay: 0.25s; }
-    .waveform .bar:nth-child(7)  { animation-delay: 0.35s; }
-    .waveform .bar:nth-child(8)  { animation-delay: 0.05s; }
-    .waveform .bar:nth-child(9)  { animation-delay: 0.2s; }
-    .waveform .bar:nth-child(10) { animation-delay: 0.1s; }
-
-    /* ─── Agent speech bubble ───────────────────────────────────────────── */
-    .speech-bubble {
-      max-width: 580px;
       width: 100%;
-      background: var(--bg-glass);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 18px 22px;
-      font-size: 14.5px;
-      color: var(--text-primary);
-      min-height: 60px;
-      position: relative;
-      transition: border-color var(--transition);
+      max-width: 720px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    #voice-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Hidden/Backwards-compatible legacy avatar & waveform nodes */
+    .avatar-container {
+      display: none;
+    }
+    .avatar {
+      display: none;
+    }
+    .waveform {
+      display: none;
+    }
+
+    /* Live Speech Subtitle / Current Utterance Banner */
+    .speech-bubble {
+      width: 100%;
+      max-width: 680px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all var(--transition-norm);
       backdrop-filter: blur(8px);
     }
 
     .speech-bubble.active {
-      border-color: rgba(79,156,249,0.3);
-      background: rgba(79,156,249,0.05);
+      border-color: rgba(245, 158, 11, 0.35);
+      background: rgba(245, 158, 11, 0.035);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.06);
+    }
+
+    .speech-bubble .bubble-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .speech-bubble .bubble-body {
+      flex: 1;
+      min-width: 0;
     }
 
     .speech-bubble .label {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--accent-blue);
-      margin-bottom: 6px;
+      color: var(--accent-gold);
+      margin-bottom: 2px;
     }
 
     .speech-bubble .text {
-      color: var(--text-primary);
-      line-height: 1.65;
+      font-size: 13.5px;
+      color: var(--text-main);
+      line-height: 1.5;
+      word-break: break-word;
     }
 
-    /* ─── State indicator ───────────────────────────────────────────────── */
-    .state-pill {
-      padding: 4px 12px;
-      border-radius: 20px;
+    /* ─── Large Conversation / Transcript Viewport (Primary Focus) ───────── */
+    .transcript-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      scroll-behavior: smooth;
+    }
+
+    .transcript-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .transcript-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .transcript-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+    .transcript-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .transcript-inner {
+      width: 100%;
+      max-width: 740px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .transcript-header-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 4px;
+    }
+
+    .transcript-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .turn-count {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    .transcript-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Empty state card */
+    .empty-transcript-state {
+      text-align: center;
+      padding: 48px 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px dashed var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .empty-state-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .empty-state-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .empty-state-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      max-width: 400px;
+      line-height: 1.5;
+    }
+
+    /* Turn Styling */
+    .turn {
+      display: flex;
+      gap: 12px;
+      animation: turn-appear 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes turn-appear {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .turn.agent {
+      flex-direction: row;
+      align-self: flex-start;
+      max-width: 88%;
+    }
+
+    .turn.customer {
+      flex-direction: row-reverse;
+      align-self: flex-end;
+      max-width: 88%;
+    }
+
+    .turn-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .turn.agent .turn-avatar {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(234, 88, 12, 0.2) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: var(--accent-gold);
+    }
+
+    .turn.customer .turn-avatar {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-medium);
+      color: #ffffff;
+    }
+
+    .turn-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .turn-speaker {
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: all var(--transition);
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    /* ─── Control bar ───────────────────────────────────────────────────── */
-    .controls {
+    .turn.agent .turn-speaker {
+      color: var(--accent-gold);
+    }
+
+    .turn.customer .turn-speaker {
+      color: var(--text-muted);
+      justify-content: flex-end;
+    }
+
+    .turn-text {
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      word-break: break-word;
+      position: relative;
+    }
+
+    .turn.agent .turn-text {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      border-left: 2px solid var(--accent-amber);
+      color: var(--text-main);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .turn.customer .turn-text {
+      background: rgba(245, 158, 11, 0.07);
+      border: 1px solid rgba(245, 158, 11, 0.22);
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ─── Bottom Floating Call Dock & Controls ───────────────────────────── */
+    .call-controls-wrapper {
+      padding: 16px 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(180deg, transparent 0%, rgba(8, 8, 10, 0.95) 40%, var(--bg-base) 100%);
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .controls-dock {
       display: flex;
       align-items: center;
       gap: 16px;
+      padding: 8px 16px;
+      border-radius: 40px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-medium);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
     }
 
     .btn {
@@ -317,277 +677,360 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 24px;
-      border-radius: var(--radius-md);
       border: 1px solid transparent;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
       font-weight: 600;
       cursor: pointer;
-      transition: all var(--transition);
-      white-space: nowrap;
+      transition: all var(--transition-fast);
+      user-select: none;
+      outline: none;
     }
 
-    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
+    /* Main Start Call Button */
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent-blue), #3a7bd5);
-      color: white;
-      box-shadow: 0 4px 14px rgba(79,156,249,0.35);
+      background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+      color: #ffffff;
+      padding: 10px 22px;
+      border-radius: 28px;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
     }
+
     .btn-primary:hover:not(:disabled) {
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(79,156,249,0.5);
+      box-shadow: 0 6px 24px rgba(245, 158, 11, 0.45);
     }
 
-    .btn-danger {
-      background: rgba(248,113,113,0.12);
-      border-color: rgba(248,113,113,0.3);
-      color: var(--accent-red);
-    }
-    .btn-danger:hover:not(:disabled) {
-      background: rgba(248,113,113,0.2);
-      box-shadow: var(--glow-red);
+    .btn-primary:active:not(:disabled) {
+      transform: translateY(0);
     }
 
-    .btn-ghost {
-      background: var(--bg-glass);
-      border-color: var(--border);
-      color: var(--text-secondary);
-    }
-    .btn-ghost:hover:not(:disabled) {
-      background: var(--bg-glass-hover);
-      color: var(--text-primary);
-    }
-
-    /* Mic button */
+    /* Circular Mic Button */
     .btn-mic {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       padding: 0;
       border-radius: 50%;
-      font-size: 22px;
+      background: var(--bg-surface-3);
+      border: 1px solid var(--border-medium);
+      color: var(--text-main);
+      font-size: 18px;
       position: relative;
-      overflow: hidden;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-mic:hover:not(:disabled) {
+      background: var(--bg-glass-hover);
+      border-color: var(--border-accent);
+      color: var(--accent-gold);
     }
 
     .btn-mic.recording {
-      background: rgba(248,113,113,0.15);
-      border-color: var(--accent-red);
-      color: var(--accent-red);
-      box-shadow: var(--glow-red);
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--accent-amber);
+      color: var(--accent-gold);
+      box-shadow: var(--glow-warm);
     }
 
-    .btn-mic.recording::after {
+    .btn-mic.recording::before {
       content: '';
       position: absolute;
-      inset: -2px;
+      inset: -3px;
       border-radius: 50%;
-      border: 2px solid var(--accent-red);
-      animation: mic-pulse 1s infinite;
+      border: 2px solid var(--accent-amber);
+      animation: mic-ripple 1.4s infinite cubic-bezier(0, 0.2, 0.8, 1);
     }
 
-    @keyframes mic-pulse {
+    @keyframes mic-ripple {
       0%   { transform: scale(1); opacity: 1; }
-      100% { transform: scale(1.5); opacity: 0; }
+      100% { transform: scale(1.4); opacity: 0; }
     }
 
-    /* ─── Transcript sidebar ────────────────────────────────────────────── */
-    aside {
-      grid-area: sidebar;
-      background: var(--bg-card);
-      border-left: 1px solid var(--border);
+    /* Circular End Call Button */
+    .btn-danger {
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: var(--accent-danger);
+      font-size: 18px;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: var(--accent-danger);
+      color: #ffffff;
+      box-shadow: var(--glow-danger);
+      transform: translateY(-1px);
+    }
+
+    /* ─── Text Input Fallback Bar ───────────────────────────────────────── */
+    .fallback-input-bar {
+      width: 100%;
+      max-width: 640px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 28px;
+      padding: 4px 6px 4px 16px;
+      transition: all var(--transition-fast);
+    }
+
+    .fallback-input-bar:focus-within {
+      border-color: var(--border-accent);
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.12);
+    }
+
+    #manual-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      padding: 6px 0;
+    }
+
+    #manual-input::placeholder {
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+
+    #manual-input:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border-radius: 20px;
+      padding: 6px 14px;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      border: 1px solid transparent;
+    }
+
+    .btn-ghost:hover:not(:disabled) {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--accent-gold);
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    .input-hint {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-align: center;
+      user-select: none;
+    }
+
+    /* ─── Secondary Qualification Drawer (Slide-Over Panel) ─────────────── */
+    .qual-drawer {
+      width: 320px;
+      height: 100%;
+      background: var(--bg-surface-1);
+      border-left: 1px solid var(--border-subtle);
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      flex-shrink: 0;
+      transition: transform var(--transition-slow), width var(--transition-slow), opacity var(--transition-norm);
+      z-index: 15;
     }
 
-    .sidebar-header {
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--border);
+    .qual-drawer.collapsed {
+      width: 0;
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+      border-left: none;
+    }
+
+    .drawer-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-shrink: 0;
     }
 
-    .sidebar-header h2 {
+    .drawer-title {
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-secondary);
-    }
-
-    .turn-count {
-      background: rgba(79,156,249,0.12);
-      color: var(--accent-blue);
-      border-radius: 20px;
-      padding: 2px 8px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .transcript-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 12px;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .transcript-list::-webkit-scrollbar { width: 4px; }
-    .transcript-list::-webkit-scrollbar-track { background: transparent; }
-    .transcript-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-    .turn {
-      display: flex;
+      align-items: center;
       gap: 8px;
-      animation: turn-in 0.3s ease-out;
     }
 
-    @keyframes turn-in {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .turn.agent { flex-direction: row; }
-    .turn.customer { flex-direction: row-reverse; }
-
-    .turn-avatar {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
+    .btn-close-drawer {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 16px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
-      flex-shrink: 0;
-      margin-top: 2px;
+      transition: color var(--transition-fast);
     }
 
-    .turn.agent .turn-avatar { background: rgba(79,156,249,0.15); }
-    .turn.customer .turn-avatar { background: rgba(56,217,169,0.15); }
+    .btn-close-drawer:hover {
+      color: var(--text-main);
+    }
 
-    .turn-content { max-width: 220px; }
+    .drawer-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-    .turn-speaker {
-      font-size: 10px;
+    .drawer-content::-webkit-scrollbar {
+      width: 4px;
+    }
+    .drawer-content::-webkit-scrollbar-thumb {
+      background: var(--border-subtle);
+      border-radius: 2px;
+    }
+
+    /* Status card inside drawer */
+    .qual-hero-card {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .qual-hero-label {
+      font-size: 10.5px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      margin-bottom: 3px;
+      color: var(--text-dim);
     }
 
-    .turn.agent .turn-speaker { color: var(--accent-blue); }
-    .turn.customer .turn-speaker { color: var(--accent-teal); text-align: right; }
-
-    .turn-text {
-      background: var(--bg-glass);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 8px 10px;
-      font-size: 12.5px;
-      line-height: 1.55;
-      color: var(--text-secondary);
+    .qual-hero-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .turn.agent .turn-text { border-color: rgba(79,156,249,0.15); }
-    .turn.customer .turn-text {
-      background: rgba(56,217,169,0.05);
-      border-color: rgba(56,217,169,0.15);
-      color: var(--text-primary);
-      text-align: right;
+    .qual-hero-badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
     }
 
-    /* ─── Qualification panel ───────────────────────────────────────────── */
+    /* Key-Value Fields Grid */
     .qual-panel {
-      padding: 14px 18px;
-      border-top: 1px solid var(--border);
-      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .qual-title {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       color: var(--text-muted);
-      margin-bottom: 10px;
     }
 
     .qual-fields {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px;
     }
 
     .qual-field {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .qual-field:last-child {
+      border-bottom: none;
+    }
+
+    .qual-field .key {
+      color: var(--text-muted);
       font-size: 12px;
     }
 
-    .qual-field .key { color: var(--text-muted); }
-    .qual-field .val { color: var(--text-primary); font-weight: 500; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
-    .qual-field .val.yes { color: var(--accent-green); }
-    .qual-field .val.no  { color: var(--accent-red); }
-    .qual-field .val.flag { color: var(--accent-amber); }
+    .qual-field .val {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
 
-    /* ─── Footer bar ────────────────────────────────────────────────────── */
-    footer {
-      grid-area: footer;
-      padding: 14px 24px;
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
+    .qual-field .val.yes {
+      color: var(--accent-success);
+    }
+    .qual-field .val.no {
+      color: var(--accent-danger);
+    }
+    .qual-field .val.flag {
+      color: var(--accent-amber);
+    }
+
+    /* Grounded Knowledge Base Callout in Drawer */
+    .kb-grounding-card {
+      background: rgba(245, 158, 11, 0.04);
+      border: 1px solid rgba(245, 158, 11, 0.15);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+    }
+
+    .kb-grounding-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 6px;
     }
 
-    /* Language selector */
-    #lang-select {
-      background: var(--bg-glass);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-secondary);
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      padding: 6px 10px;
-      cursor: pointer;
-      outline: none;
+    .kb-grounding-text {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
     }
 
-    /* Manual text input fallback */
-    #manual-input {
-      flex: 1;
-      background: var(--bg-glass);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      padding: 8px 14px;
-      outline: none;
-      transition: border-color var(--transition);
-    }
-
-    #manual-input:focus { border-color: var(--border-active); }
-    #manual-input::placeholder { color: var(--text-muted); }
-
-    #manual-input:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
-    /* ─── Toast notifications ───────────────────────────────────────────── */
+    /* ─── Toast Notifications ───────────────────────────────────────────── */
     #toast-container {
       position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 28px;
+      right: 28px;
       z-index: 9999;
       display: flex;
       flex-direction: column;
@@ -596,32 +1039,59 @@
     }
 
     .toast {
-      padding: 10px 18px;
+      padding: 10px 16px;
       border-radius: var(--radius-md);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 500;
-      backdrop-filter: blur(12px);
-      animation: toast-in 0.3s ease-out, toast-out 0.3s ease-in 2.7s forwards;
-      border: 1px solid;
+      backdrop-filter: blur(16px);
+      background: rgba(23, 23, 29, 0.9);
+      border: 1px solid var(--border-medium);
+      color: var(--text-main);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      animation: toast-in 0.25s ease-out, toast-out 0.25s ease-in 2.75s forwards;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .toast.info  { background: rgba(79,156,249,0.15); border-color: rgba(79,156,249,0.3); color: var(--accent-blue); }
-    .toast.success{ background: rgba(56,217,169,0.15); border-color: rgba(56,217,169,0.3); color: var(--accent-teal); }
-    .toast.error { background: rgba(248,113,113,0.15); border-color: rgba(248,113,113,0.3); color: var(--accent-red); }
+    .toast.info {
+      border-color: rgba(245, 158, 11, 0.3);
+      color: var(--accent-gold);
+    }
+    .toast.success {
+      border-color: rgba(16, 185, 129, 0.3);
+      color: var(--accent-success);
+    }
+    .toast.error {
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--accent-danger);
+    }
 
-    @keyframes toast-in  { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes toast-out { from { opacity:1; } to { opacity:0; } }
+    @keyframes toast-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes toast-out {
+      from { opacity: 1; }
+      to   { opacity: 0; }
+    }
 
-    /* ─── Responsive ────────────────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      #app {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr auto 220px;
-        grid-template-areas: "header" "main" "footer" "sidebar";
-        overflow: auto;
+    /* ─── Responsive adjustments ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .qual-drawer {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: var(--bg-surface-1);
+        box-shadow: -8px 0 24px rgba(0,0,0,0.6);
       }
-      html, body { overflow: auto; }
-      aside { border-left: none; border-top: 1px solid var(--border); }
+      .transcript-container {
+        padding: 16px;
+      }
+      .voice-hero-card {
+        padding: 16px;
+      }
     }
   </style>
 </head>
@@ -629,128 +1099,233 @@
 <body>
   <div id="app">
 
-    <!-- ─── Header ─────────────────────────────────────────────────────── -->
+    <!-- ─── Minimal Header ─────────────────────────────────────────────── -->
     <header>
-      <div class="brand">
-        <div class="brand-logo">🛡️</div>
-        <div class="brand-text">
+      <!-- Brand -->
+      <div class="brand-section">
+        <div class="brand-badge" aria-label="HealthShield Logo">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L3 6V11.5C3 16.5 6.8 21.2 12 22.5C17.2 21.2 21 16.5 21 11.5V6L12 2ZM11 16L7 12L8.4 10.6L11 13.2L15.6 8.6L17 10L11 16Z"/>
+          </svg>
+        </div>
+        <div class="brand-info">
           <h1>HealthShield AI</h1>
-          <p>Knowledge-Grounded Voice Agent · Q1 Demo</p>
+          <div class="tagline">Voice Lead Assistant</div>
         </div>
       </div>
 
-      <div id="status-badge" class="status-badge idle">
-        <div class="status-dot"></div>
-        <span id="status-text">Ready</span>
+      <!-- Center Status Badge & Call Duration -->
+      <div class="header-center">
+        <div id="status-badge" class="status-badge idle">
+          <div class="status-dot"></div>
+          <span id="status-text">Standby</span>
+        </div>
+        <div class="call-timer" id="call-timer" style="display:none;">00:00</div>
+        <div id="state-pill" class="state-pill" style="display:none;">IDLE</div>
+      </div>
+
+      <!-- Right Header Actions -->
+      <div class="header-actions">
+        <!-- Language Switcher -->
+        <div class="lang-wrapper">
+          <select id="lang-select" onchange="setLanguage(this.value)" title="Call Language">
+            <option value="en">English (US)</option>
+            <option value="tl">Filipino (Taglish)</option>
+            <option value="id">Indonesian (Bahasa)</option>
+          </select>
+        </div>
+
+        <!-- Secondary Qualification Drawer Toggle Button -->
+        <button class="btn-qual-toggle" id="btn-toggle-qual" onclick="toggleQualDrawer()" title="Toggle Qualification Details">
+          <span class="qual-indicator" id="header-qual-dot"></span>
+          <span>Qualification</span>
+          <span id="header-qual-summary" style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);">—</span>
+        </button>
       </div>
     </header>
 
-    <!-- ─── Main call area ─────────────────────────────────────────────── -->
-    <main>
+    <!-- ─── Main Workspace Area ────────────────────────────────────────── -->
+    <div class="workspace">
 
-      <!-- Avatar + waveform -->
-      <div class="avatar-container" id="avatar-container">
-        <div class="avatar-rings">
-          <div class="ring ring-1"></div>
-          <div class="ring ring-2"></div>
-          <div class="ring ring-3"></div>
+      <!-- Center: Call Area & Large Conversation (Primary Focus) -->
+      <main class="call-container">
+
+        <!-- Prominent Voice Audio Waveform & Visualizer -->
+        <section class="voice-hero-card">
+          <div class="visualizer-wrapper">
+            <canvas id="voice-canvas"></canvas>
+          </div>
+
+          <!-- Current Utterance / Active Speech Banner -->
+          <div class="speech-bubble" id="speech-bubble">
+            <div class="bubble-icon">AI</div>
+            <div class="bubble-body">
+              <div class="label">HealthShield Voice Agent</div>
+              <div class="text" id="agent-text">
+                Welcome to HealthShield AI. Press "Start Call" to begin your consultation with our health insurance specialist.
+              </div>
+            </div>
+          </div>
+
+          <!-- Compatibility nodes (Required for DOM reference & agent tests) -->
+          <div class="avatar-container" id="avatar-container" style="display:none;">
+            <div class="avatar" id="avatar"></div>
+          </div>
+          <div class="waveform" id="waveform" style="display:none;"></div>
+        </section>
+
+        <!-- Large Conversation Stream (Dominant Focal Viewport) -->
+        <section class="transcript-container" id="transcript-scroll-area">
+          <div class="transcript-inner">
+
+            <div class="transcript-header-meta">
+              <div class="transcript-title">
+                <span>Live Voice Dialogue</span>
+              </div>
+              <span class="turn-count" id="turn-count">0 turns</span>
+            </div>
+
+            <!-- Turns List -->
+            <div class="transcript-list" id="transcript-list">
+              <div class="empty-transcript-state" id="empty-state">
+                <div class="empty-state-icon">🎙️</div>
+                <div class="empty-state-title">Ready for Conversation</div>
+                <div class="empty-state-desc">
+                  Press <strong>Start Call</strong> or tap <strong>Spacebar</strong> to begin. You can speak naturally or use the text box below.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Bottom Call Controls Dock & Text Input Fallback -->
+        <section class="call-controls-wrapper">
+          <div class="controls-dock">
+            <!-- Start Call -->
+            <button class="btn btn-primary" id="btn-call" onclick="startCall()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              <span>Start Call</span>
+            </button>
+
+            <!-- Microphone Button -->
+            <button class="btn btn-mic" id="btn-mic" onclick="toggleMic()" disabled title="Speak into microphone (Space)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+              </svg>
+            </button>
+
+            <!-- End Call Button -->
+            <button class="btn btn-danger" id="btn-hangup" onclick="hangUp()" disabled title="End voice call">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08a.996.996 0 010-1.41C3.42 8.54 7.48 7 12 7c4.52 0 8.58 1.54 11.71 4.67.39.39.39 1.02 0 1.41l-2.48 2.48c-.18.18-.43.29-.71.29s-.52-.11-.7-.28c-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Text Input Fallback Bar -->
+          <div class="fallback-input-bar">
+            <input
+              type="text"
+              id="manual-input"
+              placeholder="Type your message to the agent (or use the microphone)…"
+              disabled
+              onkeydown="handleManualInput(event)"
+              aria-label="Text input for voice agent"
+            />
+            <button class="btn btn-ghost" id="btn-send" onclick="sendManualText()" disabled title="Send message">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+              <span>Send</span>
+            </button>
+          </div>
+
+          <div class="input-hint">
+            Tip: Press <strong>Space</strong> to toggle mic · <strong>Enter</strong> to send text
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ─── Secondary Qualification Slide-Over Panel / Drawer ──────────── -->
+      <aside class="qual-drawer" id="qual-drawer">
+        <div class="drawer-header">
+          <div class="drawer-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+            </svg>
+            <span>Lead Qualification</span>
+          </div>
+          <button class="btn-close-drawer" onclick="toggleQualDrawer()" title="Close Drawer">✕</button>
         </div>
-        <div class="avatar" id="avatar">🤖</div>
-      </div>
 
-      <div class="waveform" id="waveform" aria-label="Audio waveform">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
+        <div class="drawer-content">
 
-      <!-- State pill -->
-      <div id="state-pill" class="state-pill" style="background:rgba(148,163,184,0.1);color:#94a3b8;">
-        IDLE
-      </div>
+          <!-- Overall Status Highlight -->
+          <div class="qual-hero-card">
+            <div class="qual-hero-label">Qualification Status</div>
+            <div class="qual-hero-status">
+              <span style="font-size:15px;font-weight:700;" id="q-hero-text">Under Evaluation</span>
+              <span class="qual-hero-badge" id="q-hero-badge">PENDING</span>
+            </div>
+          </div>
 
-      <!-- Agent speech bubble -->
-      <div class="speech-bubble" id="speech-bubble">
-        <div class="label">🤖 HealthShield AI</div>
-        <div class="text" id="agent-text">
-          Start a call to connect with the health insurance voice agent. 
-          The agent will guide you through plan selection and qualification.
+          <!-- Structured Qualification Fields (Preserving all required IDs) -->
+          <div class="qual-panel">
+            <div class="qual-title">Candidate Profile</div>
+            <div class="qual-fields" id="qual-fields">
+              <div class="qual-field">
+                <span class="key">Name</span>
+                <span class="val" id="q-name">—</span>
+              </div>
+              <div class="qual-field">
+                <span class="key">Age</span>
+                <span class="val" id="q-age">—</span>
+              </div>
+              <div class="qual-field">
+                <span class="key">Pre-existing</span>
+                <span class="val" id="q-pre">—</span>
+              </div>
+              <div class="qual-field">
+                <span class="key">Plan Interest</span>
+                <span class="val" id="q-interest">—</span>
+              </div>
+              <div class="qual-field">
+                <span class="key">Eligibility</span>
+                <span class="val" id="q-eligible">—</span>
+              </div>
+              <div class="qual-field">
+                <span class="key">Dialogue State</span>
+                <span class="val" id="q-state">idle</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grounded Knowledge Base Information -->
+          <div class="kb-grounding-card">
+            <div class="kb-grounding-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+              </svg>
+              <span>Grounded Knowledge Base</span>
+            </div>
+            <div class="kb-grounding-text">
+              Responses are dynamically grounded in underwriting policies, plan tier benefits, and objection guidelines via hybrid search (Dense + BM25).
+            </div>
+          </div>
+
         </div>
-      </div>
+      </aside>
 
-      <!-- Call controls -->
-      <div class="controls">
-        <button class="btn btn-primary" id="btn-call" onclick="startCall()">
-          📞 Start Call
-        </button>
-        <button class="btn btn-mic" id="btn-mic" onclick="toggleMic()" disabled title="Press to speak">
-          🎙️
-        </button>
-        <button class="btn btn-danger" id="btn-hangup" onclick="hangUp()" disabled>
-          📵 End Call
-        </button>
-      </div>
-
-    </main>
-
-    <!-- ─── Footer ─────────────────────────────────────────────────────── -->
-    <footer>
-      <select id="lang-select" onchange="setLanguage(this.value)" title="Language">
-        <option value="en">🌐 English</option>
-        <option value="tl">🇵🇭 Filipino</option>
-        <option value="id">🇮🇩 Indonesian</option>
-      </select>
-
-      <input
-        type="text"
-        id="manual-input"
-        placeholder="Type your message (or use the mic)…"
-        disabled
-        onkeydown="handleManualInput(event)"
-        aria-label="Text input for voice agent"
-      />
-
-      <button class="btn btn-ghost" id="btn-send" onclick="sendManualText()" disabled style="padding:8px 14px;font-size:13px;">
-        ➤ Send
-      </button>
-    </footer>
-
-    <!-- ─── Sidebar: transcript + qualification ────────────────────────── -->
-    <aside>
-      <div class="sidebar-header">
-        <h2>📋 Live Transcript</h2>
-        <span class="turn-count" id="turn-count">0 turns</span>
-      </div>
-
-      <div class="transcript-list" id="transcript-list">
-        <div style="text-align:center;color:var(--text-muted);font-size:12px;padding:24px 0;">
-          Conversation will appear here
-        </div>
-      </div>
-
-      <div class="qual-panel">
-        <div class="qual-title">📊 Qualification Profile</div>
-        <div class="qual-fields" id="qual-fields">
-          <div class="qual-field"><span class="key">Name</span><span class="val" id="q-name">—</span></div>
-          <div class="qual-field"><span class="key">Age</span><span class="val" id="q-age">—</span></div>
-          <div class="qual-field"><span class="key">Pre-existing</span><span class="val" id="q-pre">—</span></div>
-          <div class="qual-field"><span class="key">Interest</span><span class="val" id="q-interest">—</span></div>
-          <div class="qual-field"><span class="key">Eligible</span><span class="val" id="q-eligible">—</span></div>
-          <div class="qual-field"><span class="key">State</span><span class="val" id="q-state">idle</span></div>
-        </div>
-      </div>
-    </aside>
+    </div>
 
   </div>
 
-  <!-- Toast container -->
+  <!-- Toast notifications -->
   <div id="toast-container"></div>
 
   <!-- ─── Application Script ─────────────────────────────────────────── -->
@@ -758,17 +1333,110 @@
     // ─── State ───────────────────────────────────────────────────────────
     const WS_URL = `ws://${location.host}/ws/voice`;
 
-    let ws          = null;
-    let recognition = null;
-    let isMicActive = false;
-    let isSessionActive = false;
-    let currentLang = 'en';
-    let turnCount   = 0;
-    let audioQueue  = [];
+    let ws             = null;
+    let recognition    = null;
+    let isMicActive    = false;
+    let isSessionActive= false;
+    let currentLang    = 'en';
+    let turnCount      = 0;
+    let audioQueue     = [];
     let isPlayingAudio = false;
-    let currentAudio = null;
+    let currentAudio   = null;
 
-    // ─── UI helpers ──────────────────────────────────────────────────────
+    // Call duration timer
+    let callStartTime  = null;
+    let callTimerInterval = null;
+
+    // Visualizer state
+    let visualizerMode = 'idle'; // 'idle' | 'speaking' | 'listening'
+    let animFrameId    = null;
+    let wavePhase      = 0;
+
+    // ─── Visualizer Setup ────────────────────────────────────────────────
+    const canvas = document.getElementById('voice-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    setTimeout(resizeCanvas, 50);
+
+    function renderVisualizer() {
+      const rect = canvas.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      if (!width || !height) {
+        animFrameId = requestAnimationFrame(renderVisualizer);
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      wavePhase += (visualizerMode === 'speaking' ? 0.08 : (visualizerMode === 'listening' ? 0.05 : 0.02));
+
+      const centerY = height / 2;
+      const barCount = 48;
+      const barWidth = Math.max(3, (width / barCount) - 3);
+      const step = width / barCount;
+
+      for (let i = 0; i < barCount; i++) {
+        const x = i * step + step / 2;
+        const normalizedDist = Math.sin((i / barCount) * Math.PI); // Peak in center
+
+        let amplitude = 6;
+        if (visualizerMode === 'speaking') {
+          // Dynamic lively amber waves with harmonic oscillation
+          const h1 = Math.sin(i * 0.35 + wavePhase * 1.5);
+          const h2 = Math.cos(i * 0.18 - wavePhase * 1.2);
+          amplitude = 8 + (Math.abs(h1 * 0.7 + h2 * 0.5) * 28 * normalizedDist);
+        } else if (visualizerMode === 'listening') {
+          // Warm golden listening ripple
+          const h = Math.sin(i * 0.45 + wavePhase * 2.0);
+          amplitude = 8 + (Math.abs(h) * 22 * normalizedDist);
+        } else {
+          // Ambient breathing wave
+          const h = Math.sin(i * 0.2 + wavePhase);
+          amplitude = 4 + (Math.abs(h) * 8 * normalizedDist);
+        }
+
+        const topY = centerY - amplitude;
+        const barHeight = amplitude * 2;
+
+        // Gradient for bars
+        const grad = ctx.createLinearGradient(0, topY, 0, topY + barHeight);
+        if (visualizerMode === 'speaking') {
+          grad.addColorStop(0, '#fbbf24');
+          grad.addColorStop(0.5, '#f59e0b');
+          grad.addColorStop(1, '#ea580c');
+        } else if (visualizerMode === 'listening') {
+          grad.addColorStop(0, '#fef08a');
+          grad.addColorStop(0.6, '#f59e0b');
+          grad.addColorStop(1, '#b45309');
+        } else {
+          grad.addColorStop(0, 'rgba(245, 158, 11, 0.45)');
+          grad.addColorStop(1, 'rgba(113, 113, 122, 0.25)');
+        }
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        if (ctx.roundRect) {
+          ctx.roundRect(x - barWidth / 2, topY, barWidth, barHeight, 3);
+        } else {
+          ctx.rect(x - barWidth / 2, topY, barWidth, barHeight);
+        }
+        ctx.fill();
+      }
+
+      animFrameId = requestAnimationFrame(renderVisualizer);
+    }
+    renderVisualizer();
+
+    // ─── UI Helpers ──────────────────────────────────────────────────────
 
     const $ = id => document.getElementById(id);
 
@@ -778,78 +1446,140 @@
       $('status-text').textContent = text;
     }
 
-    function setAvatarMode(mode) {  // 'idle' | 'speaking' | 'listening'
+    function setAvatarMode(mode) { // 'idle' | 'speaking' | 'listening'
+      visualizerMode = mode;
+
+      // Update legacy nodes to preserve DOM contract
       const avatarContainer = $('avatar-container');
       const waveform = $('waveform');
-      avatarContainer.className = `avatar-container ${mode !== 'idle' ? mode : ''}`;
-      waveform.className = `waveform ${mode !== 'idle' ? 'active ' + mode : ''}`;
+      if (avatarContainer) avatarContainer.className = `avatar-container ${mode !== 'idle' ? mode : ''}`;
+      if (waveform) waveform.className = `waveform ${mode !== 'idle' ? 'active ' + mode : ''}`;
+
+      const bubble = $('speech-bubble');
+      if (bubble) {
+        if (mode === 'speaking') {
+          bubble.classList.add('active');
+        } else {
+          bubble.classList.remove('active');
+        }
+      }
     }
 
     function setStatePill(state) {
       const pill = $('state-pill');
+      if (!pill) return;
+      pill.style.display = 'inline-flex';
+      pill.textContent = state.replace(/_/g, ' ').toUpperCase();
+
       const styles = {
-        greeting:           ['rgba(79,156,249,0.12)', '#4f9cf9'],
-        lead_qualification: ['rgba(251,191,36,0.12)', '#fbbf24'],
-        product_info:       ['rgba(56,217,169,0.12)', '#38d9a9'],
-        objection_handling: ['rgba(167,139,250,0.12)', '#a78bfa'],
-        qualification_done: ['rgba(74,222,128,0.12)', '#4ade80'],
-        escalation:         ['rgba(248,113,113,0.12)', '#f87171'],
-        ended:              ['rgba(148,163,184,0.1)', '#94a3b8'],
+        greeting:           ['rgba(245, 158, 11, 0.12)', '#f59e0b', 'rgba(245, 158, 11, 0.3)'],
+        lead_qualification: ['rgba(251, 191, 36, 0.12)', '#fbbf24', 'rgba(251, 191, 36, 0.3)'],
+        product_info:       ['rgba(56, 189, 248, 0.12)', '#38bdf8', 'rgba(56, 189, 248, 0.3)'],
+        objection_handling: ['rgba(167, 139, 250, 0.12)', '#a78bfa', 'rgba(167, 139, 250, 0.3)'],
+        qualification_done: ['rgba(16, 185, 129, 0.12)', '#10b981', 'rgba(16, 185, 129, 0.3)'],
+        escalation:         ['rgba(239, 68, 68, 0.12)', '#ef4444', 'rgba(239, 68, 68, 0.3)'],
+        ended:              ['rgba(113, 113, 122, 0.1)', '#a1a1aa', 'rgba(113, 113, 122, 0.2)'],
       };
-      const [bg, color] = styles[state] || styles.ended;
+      const [bg, color, border] = styles[state] || styles.ended;
       pill.style.background = bg;
       pill.style.color = color;
-      pill.textContent = state.replace(/_/g, ' ').toUpperCase();
+      pill.style.borderColor = border;
+
+      // Update hero status in drawer too
+      const heroBadge = $('q-hero-badge');
+      if (heroBadge) {
+        heroBadge.textContent = state.replace(/_/g, ' ').toUpperCase();
+        heroBadge.style.color = color;
+      }
     }
 
     function updateSpeechBubble(text) {
-      $('agent-text').textContent = text;
-      $('speech-bubble').classList.add('active');
-      setTimeout(() => $('speech-bubble').classList.remove('active'), 3000);
+      const el = $('agent-text');
+      if (el) el.textContent = text;
+      const bubble = $('speech-bubble');
+      if (bubble) {
+        bubble.classList.add('active');
+        setTimeout(() => bubble.classList.remove('active'), 3500);
+      }
     }
 
     function addTranscriptTurn(speaker, text) {
       const list = $('transcript-list');
-      if (list.querySelector('div[style*="center"]')) list.innerHTML = '';
+      const empty = $('empty-state');
+      if (empty) empty.style.display = 'none';
 
       turnCount++;
       $('turn-count').textContent = `${turnCount} turn${turnCount !== 1 ? 's' : ''}`;
 
-      const emoji = speaker === 'agent' ? '🤖' : '🧑';
-      const label = speaker === 'agent' ? 'Aria (AI)' : 'Customer';
+      const isAgent = speaker === 'agent';
+      const label = isAgent ? 'HealthShield Agent' : 'You (Voice / Input)';
+      const avatarText = isAgent ? '🛡️' : '👤';
 
       const div = document.createElement('div');
       div.className = `turn ${speaker}`;
       div.innerHTML = `
-        <div class="turn-avatar">${emoji}</div>
+        <div class="turn-avatar">${avatarText}</div>
         <div class="turn-content">
-          <div class="turn-speaker">${label}</div>
+          <div class="turn-speaker">
+            <span>${label}</span>
+          </div>
           <div class="turn-text">${escapeHtml(text)}</div>
         </div>`;
       list.appendChild(div);
-      list.scrollTop = list.scrollHeight;
+
+      const scrollArea = $('transcript-scroll-area');
+      if (scrollArea) {
+        scrollArea.scrollTop = scrollArea.scrollHeight;
+      }
     }
 
     function updateQualificationPanel(qual) {
       if (!qual) return;
-      const fmt = v => v === null || v === undefined ? '—' : String(v);
+      const fmt = v => (v === null || v === undefined ? '—' : String(v));
 
       $('q-name').textContent = fmt(qual.name);
       $('q-age').textContent  = qual.age ? `${qual.age} yrs` : '—';
 
       const pre = $('q-pre');
-      if (qual.has_pre_existing === true)       { pre.textContent = 'Yes'; pre.className = 'val flag'; }
-      else if (qual.has_pre_existing === false) { pre.textContent = 'No';  pre.className = 'val yes'; }
-      else                                       { pre.textContent = '—';   pre.className = 'val'; }
+      if (qual.has_pre_existing === true) {
+        pre.textContent = 'Yes';
+        pre.className = 'val flag';
+      } else if (qual.has_pre_existing === false) {
+        pre.textContent = 'No';
+        pre.className = 'val yes';
+      } else {
+        pre.textContent = '—';
+        pre.className = 'val';
+      }
 
       $('q-interest').textContent = qual.coverage_interest
-        ? qual.coverage_interest.substring(0, 22) + (qual.coverage_interest.length > 22 ? '…' : '')
+        ? qual.coverage_interest.substring(0, 24) + (qual.coverage_interest.length > 24 ? '…' : '')
         : '—';
 
       const elig = $('q-eligible');
-      if (qual.eligible === true)       { elig.textContent = '✓ Eligible';   elig.className = 'val yes'; }
-      else if (qual.eligible === false) { elig.textContent = '✗ Ineligible'; elig.className = 'val no'; }
-      else                               { elig.textContent = 'Pending';       elig.className = 'val'; }
+      const heroText = $('q-hero-text');
+      const headerSummary = $('header-qual-summary');
+      const headerDot = $('header-qual-dot');
+
+      if (qual.eligible === true) {
+        elig.textContent = '✓ Eligible';
+        elig.className = 'val yes';
+        if (heroText) heroText.textContent = 'Pre-Approved / Eligible';
+        if (headerSummary) headerSummary.textContent = 'Eligible';
+        if (headerDot) headerDot.className = 'qual-indicator eligible';
+      } else if (qual.eligible === false) {
+        elig.textContent = '✗ Ineligible';
+        elig.className = 'val no';
+        if (heroText) heroText.textContent = 'Not Eligible';
+        if (headerSummary) headerSummary.textContent = 'Ineligible';
+        if (headerDot) headerDot.className = 'qual-indicator';
+      } else {
+        elig.textContent = 'Pending';
+        elig.className = 'val';
+        if (heroText) heroText.textContent = 'Evaluating Lead...';
+        if (headerSummary) headerSummary.textContent = 'Pending';
+        if (headerDot) headerDot.className = 'qual-indicator';
+      }
     }
 
     function showToast(msg, type = 'info') {
@@ -871,9 +1601,42 @@
       $('btn-mic').disabled = !enabled;
       $('btn-hangup').disabled = !enabled;
       $('btn-call').disabled = enabled;
+
+      if (enabled) {
+        $('btn-call').style.display = 'none';
+        $('manual-input').focus();
+      } else {
+        $('btn-call').style.display = 'inline-flex';
+      }
     }
 
-    // ─── Audio playback queue ─────────────────────────────────────────────
+    function toggleQualDrawer() {
+      const drawer = $('qual-drawer');
+      const btn = $('btn-toggle-qual');
+      drawer.classList.toggle('collapsed');
+      btn.classList.toggle('active', !drawer.classList.contains('collapsed'));
+    }
+
+    // Call duration timer
+    function startCallTimer() {
+      callStartTime = Date.now();
+      const timerEl = $('call-timer');
+      timerEl.style.display = 'inline-block';
+      clearInterval(callTimerInterval);
+      callTimerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - callStartTime) / 1000);
+        const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+        const secs = String(elapsed % 60).padStart(2, '0');
+        timerEl.textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+
+    function stopCallTimer() {
+      clearInterval(callTimerInterval);
+      callTimerInterval = null;
+    }
+
+    // ─── Audio Playback Queue ─────────────────────────────────────────────
 
     function enqueueAudio(b64mp3) {
       audioQueue.push(b64mp3);
@@ -888,6 +1651,7 @@
       }
       isPlayingAudio = true;
       setAvatarMode('speaking');
+
       const b64 = audioQueue.shift();
       const binary = atob(b64);
       const bytes  = Uint8Array.from(binary, c => c.charCodeAt(0));
@@ -910,7 +1674,7 @@
       });
     }
 
-    // ─── WebSocket ────────────────────────────────────────────────────────
+    // ─── WebSocket Connection ────────────────────────────────────────────
 
     function connectWS() {
       return new Promise((resolve, reject) => {
@@ -932,6 +1696,7 @@
             setStatus('idle', 'Disconnected');
             setAvatarMode('idle');
             setInputsEnabled(false);
+            stopCallTimer();
             isSessionActive = false;
           }
         };
@@ -948,12 +1713,13 @@
 
       switch (msg.type) {
         case 'session_started':
-          setStatus('active', 'Call Active');
+          setStatus('active', 'Live Call');
+          startCallTimer();
           addTranscriptTurn('agent', msg.opening);
           updateSpeechBubble(msg.opening);
           setStatePill('greeting');
           $('q-state').textContent = 'greeting';
-          showToast(`Session ${msg.session_id} started`, 'success');
+          showToast(`Session ${msg.session_id} connected`, 'success');
           break;
 
         case 'agent_text':
@@ -972,9 +1738,10 @@
           setStatus('idle', 'Call Ended');
           setAvatarMode('idle');
           setInputsEnabled(false);
+          stopCallTimer();
           isSessionActive = false;
           stopMic();
-          showToast('Call ended. Transcript saved.', 'success');
+          showToast('Call completed. Transcript saved.', 'success');
           break;
 
         case 'error':
@@ -990,7 +1757,7 @@
       ws.send(JSON.stringify({ type: 'transcript', text, language: currentLang }));
     }
 
-    // ─── Call lifecycle ───────────────────────────────────────────────────
+    // ─── Call Lifecycle ───────────────────────────────────────────────────
 
     async function startCall() {
       try {
@@ -1003,10 +1770,10 @@
         $('turn-count').textContent = '0 turns';
         setInputsEnabled(true);
         setupSpeechRecognition();
-        showToast('Connecting to HealthShield AI…', 'info');
+        showToast('Connecting to HealthShield Agent…', 'info');
       } catch (err) {
         setStatus('error', 'Connection Failed');
-        showToast('Could not connect to agent server. Is the server running?', 'error');
+        showToast('Could not connect to voice server.', 'error');
         console.error('[Call] Failed to start:', err);
       }
     }
@@ -1019,6 +1786,7 @@
       setStatus('idle', 'Call Ended');
       setAvatarMode('idle');
       setInputsEnabled(false);
+      stopCallTimer();
       isSessionActive = false;
 
       if (currentAudio) {
@@ -1029,12 +1797,12 @@
       isPlayingAudio = false;
     }
 
-    // ─── Speech recognition (Web Speech API) ────────────────────────────
+    // ─── Speech Recognition (Web Speech API) ─────────────────────────────
 
     function setupSpeechRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        showToast('Web Speech API not available. Use text input instead.', 'info');
+        showToast('Web Speech API not available. Type text below.', 'info');
         return;
       }
 
@@ -1053,15 +1821,13 @@
         isMicActive = true;
         setAvatarMode('listening');
         $('btn-mic').classList.add('recording');
-        $('btn-mic').textContent = '🔴';
         setStatus('active', 'Listening…');
       };
 
       recognition.onend = () => {
         isMicActive = false;
         $('btn-mic').classList.remove('recording');
-        $('btn-mic').textContent = '🎙️';
-        if (isSessionActive) setStatus('active', 'Call Active');
+        if (isSessionActive) setStatus('active', 'Live Call');
         setAvatarMode('idle');
       };
 
@@ -1069,17 +1835,16 @@
         console.warn('[ASR] Error:', e.error);
         isMicActive = false;
         $('btn-mic').classList.remove('recording');
-        $('btn-mic').textContent = '🎙️';
         setAvatarMode('idle');
         if (e.error === 'not-allowed') {
-          showToast('Microphone access denied. Use text input.', 'error');
+          showToast('Microphone access denied. You can type responses below.', 'error');
         }
       };
     }
 
     function toggleMic() {
       if (!recognition) {
-        showToast('Speech recognition not initialized. Start a call first.', 'info');
+        showToast('Speech recognition not ready. Start a call first.', 'info');
         return;
       }
       if (isMicActive) {
@@ -1114,7 +1879,7 @@
       }
     }
 
-    // ─── Manual text input ────────────────────────────────────────────────
+    // ─── Manual Text Input Fallback ───────────────────────────────────────
 
     function handleManualInput(event) {
       if (event.key === 'Enter') sendManualText();
@@ -1128,7 +1893,7 @@
       sendToAgent(text);
     }
 
-    // ─── Keyboard shortcut: Space to toggle mic ──────────────────────────
+    // ─── Keyboard Shortcuts ──────────────────────────────────────────────
     document.addEventListener('keydown', e => {
       if (e.code === 'Space' && e.target.tagName !== 'INPUT' && isSessionActive) {
         e.preventDefault();
