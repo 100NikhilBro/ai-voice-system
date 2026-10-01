@@ -1,0 +1,31 @@
+[TEST DATA - SYNTHETIC UNDERWRITING POLICY GUIDELINES v1.0]
+Document Title: HealthShield Underwriting and Policy Terms Document
+Category: policy_underwriting
+Version: 1.0
+
+1. GENERAL INCEPTION WAITING PERIODS
+- Day 1 Coverage: Emergency accidental bodily injuries occurring post-policy inception are covered immediately from Day 1 without waiting periods.
+- 30-Day General Illness Waiting Period: A mandatory 30-day waiting period from the initial policy effective date applies to all medical treatments, hospital admissions, and illness claims, excluding accidental injuries.
+
+2. PRE-EXISTING MEDICAL CONDITIONS (PED) WAITING PERIODS
+A pre-existing condition is defined as any diagnosed medical illness, ailment, injury, or symptom for which medical advice, diagnosis, care, or treatment was recommended or received within 48 months prior to the effective date of the policy.
+- Platinum Plan Waiting Period: Pre-existing medical conditions (including Type-2 diabetes mellitus, essential hypertension, asthma, and hyperlipidemia) are covered after a continuous coverage waiting period of 24 months.
+- Gold Plan Waiting Period: Pre-existing conditions are covered after a continuous coverage waiting period of 36 months.
+- Silver Plan Waiting Period: Pre-existing conditions are covered after a continuous coverage waiting period of 48 months.
+- Strict Disclosure Rule: All pre-existing conditions must be formally declared during the lead qualification application. Non-disclosure of pre-existing conditions constitutes material misrepresentation and results in claim repudiation and policy termination.
+
+3. SPECIFIC SURGICAL WAITING PERIODS (24-MONTH SCHEDULE)
+Regardless of whether a condition is pre-existing or newly diagnosed, a mandatory 24-month waiting period applies to the following scheduled procedures:
+- Cataract surgery (sub-limit of $1,200 per eye under Silver and Gold plans).
+- Benign prostatic hypertrophy (BPH) surgery.
+- Joint replacement surgeries (knee, hip, and shoulder arthroplasty), unless necessitated by direct accidental trauma.
+- Hernia repair, hydrocele, and hemorrhoidectomies.
+- Gallbladder calculus removal (cholecystectomy).
+
+4. PERMANENT STATUTORY POLICY EXCLUSIONS
+HealthShield does not cover any expenses incurred directly or indirectly for:
+- Elective Cosmetic and Aesthetic Surgery: Any cosmetic, plastic, or aesthetic procedures performed for beautification or personal enhancement, unless required for reconstructive treatment directly resulting from an accidental trauma event occurring during active coverage.
+- Veterinary and Non-Human Medical Expenses: All animal care, pet treatments, and veterinary services are strictly excluded. HealthShield policies cover human policyholders only.
+- Experimental and Unproven Treatments: Participation in non-FDA approved clinical trials, experimental cellular therapies, and unproven alternative remedies.
+- Self-Inflicted Harm: Injuries or hospitalization arising from intentional self-harm or unlawful civil unrest.
+- Overseas Non-Emergency Procedures: Treatment sought outside the registered territory of coverage without prior written underwriter pre-authorization.

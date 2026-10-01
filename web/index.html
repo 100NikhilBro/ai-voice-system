@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HealthShield AI Voice Agent — Knowledge-grounded health insurance lead qualification powered by local AI." />
+  <title>HealthShield AI — Voice Agent</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Reset & Variables ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-deep:       #0a0d14;
+      --bg-card:       #111827;
+      --bg-glass:      rgba(255,255,255,0.04);
+      --bg-glass-hover:rgba(255,255,255,0.08);
+      --border:        rgba(255,255,255,0.08);
+      --border-active: rgba(99,179,237,0.5);
+
+      --accent-blue:   #4f9cf9;
+      --accent-teal:   #38d9a9;
+      --accent-purple: #a78bfa;
+      --accent-red:    #f87171;
+      --accent-amber:  #fbbf24;
+      --accent-green:  #4ade80;
+
+      --text-primary:  #f0f4ff;
+      --text-secondary:#94a3b8;
+      --text-muted:    #475569;
+
+      --glow-blue:     0 0 20px rgba(79,156,249,0.3);
+      --glow-teal:     0 0 20px rgba(56,217,169,0.3);
+      --glow-red:      0 0 20px rgba(248,113,113,0.3);
+
+      --radius-lg:     16px;
+      --radius-md:     10px;
+      --radius-sm:     6px;
+
+      --transition:    0.2s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      overflow: hidden;
+    }
+
+    /* ─── Layout ────────────────────────────────────────────────────────── */
+    #app {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      grid-template-columns: 1fr 340px;
+      grid-template-areas:
+        "header  header"
+        "main    sidebar"
+        "footer  sidebar";
+      height: 100vh;
+      gap: 0;
+    }
+
+    /* ─── Header ────────────────────────────────────────────────────────── */
+    header {
+      grid-area: header;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-teal) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: var(--glow-blue);
+      flex-shrink: 0;
+    }
+
+    .brand-text h1 {
+      font-size: 16px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all var(--transition);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      transition: background var(--transition);
+    }
+
+    .status-badge.idle   { border-color: var(--border); color: var(--text-muted); }
+    .status-badge.active { border-color: var(--accent-teal); color: var(--accent-teal); background: rgba(56,217,169,0.08); }
+    .status-badge.active .status-dot { background: var(--accent-teal); box-shadow: 0 0 8px var(--accent-teal); animation: pulse 1.4s infinite; }
+    .status-badge.error  { border-color: var(--accent-red); color: var(--accent-red); }
+    .status-badge.error  .status-dot { background: var(--accent-red); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.6; transform: scale(0.8); }
+    }
+
+    /* ─── Main call area ────────────────────────────────────────────────── */
+    main {
+      grid-area: main;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      gap: 28px;
+      overflow: hidden;
+    }
+
+    /* ─── Avatar waveform ───────────────────────────────────────────────── */
+    .avatar-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-rings {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+
+    .ring-1 { width: 100%; height: 100%; border-color: rgba(79,156,249,0.2); }
+    .ring-2 { width: 130%; height: 130%; border-color: rgba(79,156,249,0.12); }
+    .ring-3 { width: 160%; height: 160%; border-color: rgba(79,156,249,0.06); }
+
+    .speaking .ring-1 { animation: ring-pulse 1.8s 0.0s infinite; }
+    .speaking .ring-2 { animation: ring-pulse 1.8s 0.3s infinite; }
+    .speaking .ring-3 { animation: ring-pulse 1.8s 0.6s infinite; }
+
+    @keyframes ring-pulse {
+      0%   { opacity: 0; transform: translate(-50%,-50%) scale(1); }
+      50%  { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%,-50%) scale(1.15); }
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a2744 0%, #1e3a5f 100%);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      position: relative;
+      z-index: 1;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .avatar-container.speaking .avatar {
+      border-color: var(--accent-blue);
+      box-shadow: var(--glow-blue), 0 0 40px rgba(79,156,249,0.2);
+    }
+
+    .avatar-container.listening .avatar {
+      border-color: var(--accent-red);
+      box-shadow: var(--glow-red), 0 0 40px rgba(248,113,113,0.2);
+    }
+
+    /* ─── Waveform bars ─────────────────────────────────────────────────── */
+    .waveform {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 36px;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .waveform.active { opacity: 1; }
+
+    .waveform .bar {
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent-blue), var(--accent-teal));
+      border-radius: 2px;
+      height: 4px;
+      transition: height 0.1s ease;
+    }
+
+    .waveform.speaking .bar { animation: bar-wave 0.8s ease-in-out infinite alternate; }
+    .waveform.listening .bar { background: linear-gradient(180deg, var(--accent-red), var(--accent-amber)); animation: bar-wave 0.5s ease-in-out infinite alternate; }
+
+    @keyframes bar-wave {
+      from { height: 4px; }
+      to   { height: 28px; }
+    }
+
+    .waveform .bar:nth-child(1)  { animation-delay: 0.0s; }
+    .waveform .bar:nth-child(2)  { animation-delay: 0.1s; }
+    .waveform .bar:nth-child(3)  { animation-delay: 0.2s; }
+    .waveform .bar:nth-child(4)  { animation-delay: 0.3s; }
+    .waveform .bar:nth-child(5)  { animation-delay: 0.15s; }
+    .waveform .bar:nth-child(6)  { animation-delay: 0.25s; }
+    .waveform .bar:nth-child(7)  { animation-delay: 0.35s; }
+    .waveform .bar:nth-child(8)  { animation-delay: 0.05s; }
+    .waveform .bar:nth-child(9)  { animation-delay: 0.2s; }
+    .waveform .bar:nth-child(10) { animation-delay: 0.1s; }
+
+    /* ─── Agent speech bubble ───────────────────────────────────────────── */
+    .speech-bubble {
+      max-width: 580px;
+      width: 100%;
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 22px;
+      font-size: 14.5px;
+      color: var(--text-primary);
+      min-height: 60px;
+      position: relative;
+      transition: border-color var(--transition);
+      backdrop-filter: blur(8px);
+    }
+
+    .speech-bubble.active {
+      border-color: rgba(79,156,249,0.3);
+      background: rgba(79,156,249,0.05);
+    }
+
+    .speech-bubble .label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      margin-bottom: 6px;
+    }
+
+    .speech-bubble .text {
+      color: var(--text-primary);
+      line-height: 1.65;
+    }
+
+    /* ─── State indicator ───────────────────────────────────────────────── */
+    .state-pill {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all var(--transition);
+    }
+
+    /* ─── Control bar ───────────────────────────────────────────────────── */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), #3a7bd5);
+      color: white;
+      box-shadow: 0 4px 14px rgba(79,156,249,0.35);
+    }
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(79,156,249,0.5);
+    }
+
+    .btn-danger {
+      background: rgba(248,113,113,0.12);
+      border-color: rgba(248,113,113,0.3);
+      color: var(--accent-red);
+    }
+    .btn-danger:hover:not(:disabled) {
+      background: rgba(248,113,113,0.2);
+      box-shadow: var(--glow-red);
+    }
+
+    .btn-ghost {
+      background: var(--bg-glass);
+      border-color: var(--border);
+      color: var(--text-secondary);
+    }
+    .btn-ghost:hover:not(:disabled) {
+      background: var(--bg-glass-hover);
+      color: var(--text-primary);
+    }
+
+    /* Mic button */
+    .btn-mic {
+      width: 52px;
+      height: 52px;
+      padding: 0;
+      border-radius: 50%;
+      font-size: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-mic.recording {
+      background: rgba(248,113,113,0.15);
+      border-color: var(--accent-red);
+      color: var(--accent-red);
+      box-shadow: var(--glow-red);
+    }
+
+    .btn-mic.recording::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-red);
+      animation: mic-pulse 1s infinite;
+    }
+
+    @keyframes mic-pulse {
+      0%   { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    /* ─── Transcript sidebar ────────────────────────────────────────────── */
+    aside {
+      grid-area: sidebar;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sidebar-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header h2 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+    }
+
+    .turn-count {
+      background: rgba(79,156,249,0.12);
+      color: var(--accent-blue);
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .transcript-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .transcript-list::-webkit-scrollbar { width: 4px; }
+    .transcript-list::-webkit-scrollbar-track { background: transparent; }
+    .transcript-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .turn {
+      display: flex;
+      gap: 8px;
+      animation: turn-in 0.3s ease-out;
+    }
+
+    @keyframes turn-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .turn.agent { flex-direction: row; }
+    .turn.customer { flex-direction: row-reverse; }
+
+    .turn-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .turn.agent .turn-avatar { background: rgba(79,156,249,0.15); }
+    .turn.customer .turn-avatar { background: rgba(56,217,169,0.15); }
+
+    .turn-content { max-width: 220px; }
+
+    .turn-speaker {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+    }
+
+    .turn.agent .turn-speaker { color: var(--accent-blue); }
+    .turn.customer .turn-speaker { color: var(--accent-teal); text-align: right; }
+
+    .turn-text {
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    .turn.agent .turn-text { border-color: rgba(79,156,249,0.15); }
+    .turn.customer .turn-text {
+      background: rgba(56,217,169,0.05);
+      border-color: rgba(56,217,169,0.15);
+      color: var(--text-primary);
+      text-align: right;
+    }
+
+    /* ─── Qualification panel ───────────────────────────────────────────── */
+    .qual-panel {
+      padding: 14px 18px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .qual-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .qual-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .qual-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .qual-field .key { color: var(--text-muted); }
+    .qual-field .val { color: var(--text-primary); font-weight: 500; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+    .qual-field .val.yes { color: var(--accent-green); }
+    .qual-field .val.no  { color: var(--accent-red); }
+    .qual-field .val.flag { color: var(--accent-amber); }
+
+    /* ─── Footer bar ────────────────────────────────────────────────────── */
+    footer {
+      grid-area: footer;
+      padding: 14px 24px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Language selector */
+    #lang-select {
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      padding: 6px 10px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* Manual text input fallback */
+    #manual-input {
+      flex: 1;
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      padding: 8px 14px;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    #manual-input:focus { border-color: var(--border-active); }
+    #manual-input::placeholder { color: var(--text-muted); }
+
+    #manual-input:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ─── Toast notifications ───────────────────────────────────────────── */
+    #toast-container {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .toast {
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 500;
+      backdrop-filter: blur(12px);
+      animation: toast-in 0.3s ease-out, toast-out 0.3s ease-in 2.7s forwards;
+      border: 1px solid;
+    }
+
+    .toast.info  { background: rgba(79,156,249,0.15); border-color: rgba(79,156,249,0.3); color: var(--accent-blue); }
+    .toast.success{ background: rgba(56,217,169,0.15); border-color: rgba(56,217,169,0.3); color: var(--accent-teal); }
+    .toast.error { background: rgba(248,113,113,0.15); border-color: rgba(248,113,113,0.3); color: var(--accent-red); }
+
+    @keyframes toast-in  { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes toast-out { from { opacity:1; } to { opacity:0; } }
+
+    /* ─── Responsive ────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      #app {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto 220px;
+        grid-template-areas: "header" "main" "footer" "sidebar";
+        overflow: auto;
+      }
+      html, body { overflow: auto; }
+      aside { border-left: none; border-top: 1px solid var(--border); }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- ─── Header ─────────────────────────────────────────────────────── -->
+    <header>
+      <div class="brand">
+        <div class="brand-logo">🛡️</div>
+        <div class="brand-text">
+          <h1>HealthShield AI</h1>
+          <p>Knowledge-Grounded Voice Agent · Q1 Demo</p>
+        </div>
+      </div>
+
+      <div id="status-badge" class="status-badge idle">
+        <div class="status-dot"></div>
+        <span id="status-text">Ready</span>
+      </div>
+    </header>
+
+    <!-- ─── Main call area ─────────────────────────────────────────────── -->
+    <main>
+
+      <!-- Avatar + waveform -->
+      <div class="avatar-container" id="avatar-container">
+        <div class="avatar-rings">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+        </div>
+        <div class="avatar" id="avatar">🤖</div>
+      </div>
+
+      <div class="waveform" id="waveform" aria-label="Audio waveform">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+
+      <!-- State pill -->
+      <div id="state-pill" class="state-pill" style="background:rgba(148,163,184,0.1);color:#94a3b8;">
+        IDLE
+      </div>
+
+      <!-- Agent speech bubble -->
+      <div class="speech-bubble" id="speech-bubble">
+        <div class="label">🤖 HealthShield AI</div>
+        <div class="text" id="agent-text">
+          Start a call to connect with the health insurance voice agent. 
+          The agent will guide you through plan selection and qualification.
+        </div>
+      </div>
+
+      <!-- Call controls -->
+      <div class="controls">
+        <button class="btn btn-primary" id="btn-call" onclick="startCall()">
+          📞 Start Call
+        </button>
+        <button class="btn btn-mic" id="btn-mic" onclick="toggleMic()" disabled title="Press to speak">
+          🎙️
+        </button>
+        <button class="btn btn-danger" id="btn-hangup" onclick="hangUp()" disabled>
+          📵 End Call
+        </button>
+      </div>
+
+    </main>
+
+    <!-- ─── Footer ─────────────────────────────────────────────────────── -->
+    <footer>
+      <select id="lang-select" onchange="setLanguage(this.value)" title="Language">
+        <option value="en">🌐 English</option>
+        <option value="tl">🇵🇭 Filipino</option>
+        <option value="id">🇮🇩 Indonesian</option>
+      </select>
+
+      <input
+        type="text"
+        id="manual-input"
+        placeholder="Type your message (or use the mic)…"
+        disabled
+        onkeydown="handleManualInput(event)"
+        aria-label="Text input for voice agent"
+      />
+
+      <button class="btn btn-ghost" id="btn-send" onclick="sendManualText()" disabled style="padding:8px 14px;font-size:13px;">
+        ➤ Send
+      </button>
+    </footer>
+
+    <!-- ─── Sidebar: transcript + qualification ────────────────────────── -->
+    <aside>
+      <div class="sidebar-header">
+        <h2>📋 Live Transcript</h2>
+        <span class="turn-count" id="turn-count">0 turns</span>
+      </div>
+
+      <div class="transcript-list" id="transcript-list">
+        <div style="text-align:center;color:var(--text-muted);font-size:12px;padding:24px 0;">
+          Conversation will appear here
+        </div>
+      </div>
+
+      <div class="qual-panel">
+        <div class="qual-title">📊 Qualification Profile</div>
+        <div class="qual-fields" id="qual-fields">
+          <div class="qual-field"><span class="key">Name</span><span class="val" id="q-name">—</span></div>
+          <div class="qual-field"><span class="key">Age</span><span class="val" id="q-age">—</span></div>
+          <div class="qual-field"><span class="key">Pre-existing</span><span class="val" id="q-pre">—</span></div>
+          <div class="qual-field"><span class="key">Interest</span><span class="val" id="q-interest">—</span></div>
+          <div class="qual-field"><span class="key">Eligible</span><span class="val" id="q-eligible">—</span></div>
+          <div class="qual-field"><span class="key">State</span><span class="val" id="q-state">idle</span></div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <!-- ─── Application Script ─────────────────────────────────────────── -->
+  <script>
+    // ─── State ───────────────────────────────────────────────────────────
+    const WS_URL = `ws://${location.host}/ws/voice`;
+
+    let ws          = null;
+    let recognition = null;
+    let isMicActive = false;
+    let isSessionActive = false;
+    let currentLang = 'en';
+    let turnCount   = 0;
+    let audioQueue  = [];
+    let isPlayingAudio = false;
+    let currentAudio = null;
+
+    // ─── UI helpers ──────────────────────────────────────────────────────
+
+    const $ = id => document.getElementById(id);
+
+    function setStatus(state, text) {
+      const badge = $('status-badge');
+      badge.className = `status-badge ${state}`;
+      $('status-text').textContent = text;
+    }
+
+    function setAvatarMode(mode) {  // 'idle' | 'speaking' | 'listening'
+      const avatarContainer = $('avatar-container');
+      const waveform = $('waveform');
+      avatarContainer.className = `avatar-container ${mode !== 'idle' ? mode : ''}`;
+      waveform.className = `waveform ${mode !== 'idle' ? 'active ' + mode : ''}`;
+    }
+
+    function setStatePill(state) {
+      const pill = $('state-pill');
+      const styles = {
+        greeting:           ['rgba(79,156,249,0.12)', '#4f9cf9'],
+        lead_qualification: ['rgba(251,191,36,0.12)', '#fbbf24'],
+        product_info:       ['rgba(56,217,169,0.12)', '#38d9a9'],
+        objection_handling: ['rgba(167,139,250,0.12)', '#a78bfa'],
+        qualification_done: ['rgba(74,222,128,0.12)', '#4ade80'],
+        escalation:         ['rgba(248,113,113,0.12)', '#f87171'],
+        ended:              ['rgba(148,163,184,0.1)', '#94a3b8'],
+      };
+      const [bg, color] = styles[state] || styles.ended;
+      pill.style.background = bg;
+      pill.style.color = color;
+      pill.textContent = state.replace(/_/g, ' ').toUpperCase();
+    }
+
+    function updateSpeechBubble(text) {
+      $('agent-text').textContent = text;
+      $('speech-bubble').classList.add('active');
+      setTimeout(() => $('speech-bubble').classList.remove('active'), 3000);
+    }
+
+    function addTranscriptTurn(speaker, text) {
+      const list = $('transcript-list');
+      if (list.querySelector('div[style*="center"]')) list.innerHTML = '';
+
+      turnCount++;
+      $('turn-count').textContent = `${turnCount} turn${turnCount !== 1 ? 's' : ''}`;
+
+      const emoji = speaker === 'agent' ? '🤖' : '🧑';
+      const label = speaker === 'agent' ? 'Aria (AI)' : 'Customer';
+
+      const div = document.createElement('div');
+      div.className = `turn ${speaker}`;
+      div.innerHTML = `
+        <div class="turn-avatar">${emoji}</div>
+        <div class="turn-content">
+          <div class="turn-speaker">${label}</div>
+          <div class="turn-text">${escapeHtml(text)}</div>
+        </div>`;
+      list.appendChild(div);
+      list.scrollTop = list.scrollHeight;
+    }
+
+    function updateQualificationPanel(qual) {
+      if (!qual) return;
+      const fmt = v => v === null || v === undefined ? '—' : String(v);
+
+      $('q-name').textContent = fmt(qual.name);
+      $('q-age').textContent  = qual.age ? `${qual.age} yrs` : '—';
+
+      const pre = $('q-pre');
+      if (qual.has_pre_existing === true)       { pre.textContent = 'Yes'; pre.className = 'val flag'; }
+      else if (qual.has_pre_existing === false) { pre.textContent = 'No';  pre.className = 'val yes'; }
+      else                                       { pre.textContent = '—';   pre.className = 'val'; }
+
+      $('q-interest').textContent = qual.coverage_interest
+        ? qual.coverage_interest.substring(0, 22) + (qual.coverage_interest.length > 22 ? '…' : '')
+        : '—';
+
+      const elig = $('q-eligible');
+      if (qual.eligible === true)       { elig.textContent = '✓ Eligible';   elig.className = 'val yes'; }
+      else if (qual.eligible === false) { elig.textContent = '✗ Ineligible'; elig.className = 'val no'; }
+      else                               { elig.textContent = 'Pending';       elig.className = 'val'; }
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = $('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = msg;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3100);
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function setInputsEnabled(enabled) {
+      $('manual-input').disabled = !enabled;
+      $('btn-send').disabled = !enabled;
+      $('btn-mic').disabled = !enabled;
+      $('btn-hangup').disabled = !enabled;
+      $('btn-call').disabled = enabled;
+    }
+
+    // ─── Audio playback queue ─────────────────────────────────────────────
+
+    function enqueueAudio(b64mp3) {
+      audioQueue.push(b64mp3);
+      if (!isPlayingAudio) playNextAudio();
+    }
+
+    function playNextAudio() {
+      if (audioQueue.length === 0) {
+        isPlayingAudio = false;
+        setAvatarMode('idle');
+        return;
+      }
+      isPlayingAudio = true;
+      setAvatarMode('speaking');
+      const b64 = audioQueue.shift();
+      const binary = atob(b64);
+      const bytes  = Uint8Array.from(binary, c => c.charCodeAt(0));
+      const blob   = new Blob([bytes], { type: 'audio/mpeg' });
+      const url    = URL.createObjectURL(blob);
+
+      currentAudio = new Audio(url);
+      currentAudio.onended = () => {
+        URL.revokeObjectURL(url);
+        playNextAudio();
+      };
+      currentAudio.onerror = () => {
+        console.warn('[Audio] Playback error');
+        URL.revokeObjectURL(url);
+        playNextAudio();
+      };
+      currentAudio.play().catch(e => {
+        console.warn('[Audio] play() rejected:', e);
+        playNextAudio();
+      });
+    }
+
+    // ─── WebSocket ────────────────────────────────────────────────────────
+
+    function connectWS() {
+      return new Promise((resolve, reject) => {
+        ws = new WebSocket(WS_URL);
+
+        ws.onopen = () => {
+          console.log('[WS] Connected');
+          resolve();
+        };
+
+        ws.onerror = e => {
+          console.error('[WS] Error:', e);
+          reject(e);
+        };
+
+        ws.onclose = () => {
+          console.log('[WS] Closed');
+          if (isSessionActive) {
+            setStatus('idle', 'Disconnected');
+            setAvatarMode('idle');
+            setInputsEnabled(false);
+            isSessionActive = false;
+          }
+        };
+
+        ws.onmessage = e => {
+          const msg = JSON.parse(e.data);
+          handleServerMessage(msg);
+        };
+      });
+    }
+
+    function handleServerMessage(msg) {
+      console.debug('[WS←]', msg.type, msg);
+
+      switch (msg.type) {
+        case 'session_started':
+          setStatus('active', 'Call Active');
+          addTranscriptTurn('agent', msg.opening);
+          updateSpeechBubble(msg.opening);
+          setStatePill('greeting');
+          $('q-state').textContent = 'greeting';
+          showToast(`Session ${msg.session_id} started`, 'success');
+          break;
+
+        case 'agent_text':
+          updateSpeechBubble(msg.text);
+          addTranscriptTurn('agent', msg.text);
+          setStatePill(msg.state || 'greeting');
+          $('q-state').textContent = msg.state || '—';
+          if (msg.meta) updateQualificationPanel(msg.meta.qualification_profile);
+          break;
+
+        case 'agent_audio':
+          enqueueAudio(msg.data);
+          break;
+
+        case 'session_ended':
+          setStatus('idle', 'Call Ended');
+          setAvatarMode('idle');
+          setInputsEnabled(false);
+          isSessionActive = false;
+          stopMic();
+          showToast('Call ended. Transcript saved.', 'success');
+          break;
+
+        case 'error':
+          console.error('[Agent Error]', msg.message);
+          showToast(`Error: ${msg.message}`, 'error');
+          break;
+      }
+    }
+
+    function sendToAgent(text) {
+      if (!ws || ws.readyState !== WebSocket.OPEN) return;
+      addTranscriptTurn('customer', text);
+      ws.send(JSON.stringify({ type: 'transcript', text, language: currentLang }));
+    }
+
+    // ─── Call lifecycle ───────────────────────────────────────────────────
+
+    async function startCall() {
+      try {
+        setStatus('active', 'Connecting…');
+        await connectWS();
+        ws.send(JSON.stringify({ type: 'start', language: currentLang }));
+        isSessionActive = true;
+        turnCount = 0;
+        $('transcript-list').innerHTML = '';
+        $('turn-count').textContent = '0 turns';
+        setInputsEnabled(true);
+        setupSpeechRecognition();
+        showToast('Connecting to HealthShield AI…', 'info');
+      } catch (err) {
+        setStatus('error', 'Connection Failed');
+        showToast('Could not connect to agent server. Is the server running?', 'error');
+        console.error('[Call] Failed to start:', err);
+      }
+    }
+
+    function hangUp() {
+      stopMic();
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ type: 'end' }));
+      }
+      setStatus('idle', 'Call Ended');
+      setAvatarMode('idle');
+      setInputsEnabled(false);
+      isSessionActive = false;
+
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+      }
+      audioQueue = [];
+      isPlayingAudio = false;
+    }
+
+    // ─── Speech recognition (Web Speech API) ────────────────────────────
+
+    function setupSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast('Web Speech API not available. Use text input instead.', 'info');
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = currentLang === 'tl' ? 'fil-PH' : (currentLang === 'id' ? 'id-ID' : 'en-US');
+
+      recognition.onresult = event => {
+        const text = event.results[0][0].transcript.trim();
+        console.log('[ASR] Transcript:', text);
+        if (text) sendToAgent(text);
+      };
+
+      recognition.onstart = () => {
+        isMicActive = true;
+        setAvatarMode('listening');
+        $('btn-mic').classList.add('recording');
+        $('btn-mic').textContent = '🔴';
+        setStatus('active', 'Listening…');
+      };
+
+      recognition.onend = () => {
+        isMicActive = false;
+        $('btn-mic').classList.remove('recording');
+        $('btn-mic').textContent = '🎙️';
+        if (isSessionActive) setStatus('active', 'Call Active');
+        setAvatarMode('idle');
+      };
+
+      recognition.onerror = e => {
+        console.warn('[ASR] Error:', e.error);
+        isMicActive = false;
+        $('btn-mic').classList.remove('recording');
+        $('btn-mic').textContent = '🎙️';
+        setAvatarMode('idle');
+        if (e.error === 'not-allowed') {
+          showToast('Microphone access denied. Use text input.', 'error');
+        }
+      };
+    }
+
+    function toggleMic() {
+      if (!recognition) {
+        showToast('Speech recognition not initialized. Start a call first.', 'info');
+        return;
+      }
+      if (isMicActive) {
+        recognition.stop();
+      } else {
+        if (currentAudio) {
+          currentAudio.pause();
+          audioQueue = [];
+          isPlayingAudio = false;
+          setAvatarMode('idle');
+        }
+        try {
+          recognition.start();
+        } catch (e) {
+          console.warn('[ASR] Could not start:', e);
+        }
+      }
+    }
+
+    function stopMic() {
+      if (recognition && isMicActive) {
+        try { recognition.stop(); } catch(e) {}
+      }
+    }
+
+    // ─── Language ─────────────────────────────────────────────────────────
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      if (recognition) {
+        recognition.lang = lang === 'tl' ? 'fil-PH' : (lang === 'id' ? 'id-ID' : 'en-US');
+      }
+    }
+
+    // ─── Manual text input ────────────────────────────────────────────────
+
+    function handleManualInput(event) {
+      if (event.key === 'Enter') sendManualText();
+    }
+
+    function sendManualText() {
+      const input = $('manual-input');
+      const text = input.value.trim();
+      if (!text || !isSessionActive) return;
+      input.value = '';
+      sendToAgent(text);
+    }
+
+    // ─── Keyboard shortcut: Space to toggle mic ──────────────────────────
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space' && e.target.tagName !== 'INPUT' && isSessionActive) {
+        e.preventDefault();
+        toggleMic();
+      }
+    });
+  </script>
+</body>
+</html>

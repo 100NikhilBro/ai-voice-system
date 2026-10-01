@@ -1,0 +1,22 @@
+[TEST DATA - UNSTRUCTURED CUSTOMER INQUIRY CONTAINING SENSITIVE PII]
+Source: support_ticket_inbox_extract_78912.txt
+Category: customer_inquiry_samples
+Version: 1.0
+
+From: marcus.vance.test@example.com
+Date: 2026-09-15 14:22:10 UTC
+Subject: Inquiry regarding Platinum Coverage for Diabetic Applicant
+
+Dear HealthShield Underwriting Team,
+
+My name is Marcus Aurelius Vance, residing at 742 Evergreen Terrace, Springfield, OR 97477.
+My contact telephone number is +1 (555) 839-2041, and my tax identification number is SSN-902-48-1192.
+
+I am writing to inquire about purchasing the Platinum Comprehensive Health Plan for myself and my wife, Eleanor Vance (DOB: 1984-11-03).
+I was diagnosed with Type-2 Diabetes Mellitus approximately 3 years ago, and I take metformin daily. My current HbA1c is 6.8%.
+Could you please clarify whether my diabetic maintenance medications and annual endocrinology consultations will be covered under the Outpatient Consultation (OPD) benefit, and what exact waiting period will apply before any inpatient diabetic complications are covered?
+
+Please reach out to me via phone at +1 (555) 839-2041 or by email at marcus.vance.test@example.com.
+
+Sincerely,
+Marcus Aurelius Vance

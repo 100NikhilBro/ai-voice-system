@@ -1,0 +1,55 @@
+{
+  "_notice": "[TEST DATA] Synthetic Health Insurance Lead Qualification Rules for AI Assessment Evaluation",
+  "document_id": "rules_qual_2026_01",
+  "title": "HealthShield Lead Qualification & Underwriting Eligibility Guidelines",
+  "category": "qualification_rules",
+  "version": "1.0",
+  "rules": [
+    {
+      "rule_id": "QUAL-AGE-001",
+      "name": "Applicant Age Eligibility Boundaries",
+      "min_entry_age": 18,
+      "max_entry_age": 65,
+      "child_min_age_days": 91,
+      "child_max_age_years": 25,
+      "guideline": "Primary applicants must be between 18 and 65 years of age at the time of initial policy issuance. Dependent children are covered from 91 days up to 25 years (if unmarried and financially dependent). Policies are guaranteed renewable for life subject to timely premium payment."
+    },
+    {
+      "rule_id": "QUAL-SENIOR-002",
+      "name": "Senior Applicant (Ages 60-65) Medical Clearance",
+      "target_age_group": "60-65",
+      "requirement": "Tele-medical health consultation and mandatory fasting blood sugar + lipid profile tests prior to policy bind.",
+      "guideline": "Applicants aged 60 through 65 are eligible for Gold and Platinum tiers, subject to satisfactory completion of an underwriter-supervised tele-medical health screening and medical record review."
+    },
+    {
+      "rule_id": "QUAL-FAMILY-003",
+      "name": "Family Floater Policy Composition",
+      "allowed_structures": [
+        "1 Adult + 1 Child",
+        "1 Adult + 2 Children",
+        "1 Adult + 3 Children",
+        "2 Adults (Spouses)",
+        "2 Adults + up to 3 Children"
+      ],
+      "family_floater_discount": "10% multi-life family discount applied when spouse and children are enrolled under a unified family floater sum insured."
+    },
+    {
+      "rule_id": "QUAL-TOBACCO-004",
+      "name": "Actuarial Tobacco and Nicotine Premium Loading",
+      "surcharge_percentage": 15,
+      "criteria": "Active consumption of combustible cigarettes, cigars, electronic vaporizers, or chewing tobacco within the past 12 months.",
+      "actuarial_rationale": "Tobacco usage increases statistical incidence of chronic obstructive pulmonary disease (COPD), cardiovascular emergencies, and oncological treatments. A statutory 15% actuarial risk loading is applied to the base premium rate."
+    },
+    {
+      "rule_id": "QUAL-UNDERWRITING-005",
+      "name": "Severe Chronic Illness Manual Referral Rules",
+      "decline_or_refer_conditions": [
+        "Active oncological malignancy undergoing chemotherapy or radiation",
+        "Stage 3 or Stage 4 chronic kidney disease",
+        "Congestive heart failure (NYHA Class III or IV)",
+        "Organ transplant recipients"
+      ],
+      "guideline": "Applicants declaring active malignant cancer, organ transplant history, or severe heart failure cannot be automatically bound via voice qualification and must be referred to the Senior Underwriting Committee for manual risk evaluation."
+    }
+  ]
+}

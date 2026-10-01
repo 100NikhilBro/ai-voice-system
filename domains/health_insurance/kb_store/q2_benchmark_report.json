@@ -1,0 +1,68 @@
+[
+  {
+    "query_id": "Q2-BENCH-01",
+    "category": "product_info",
+    "user_question": "What are the coverage benefits and room rent limits under the HealthShield Gold Plan?",
+    "retrieved_record_id": "kb_product_001",
+    "retrieved_title": "HealthShield Comprehensive Protection - Product Overview - HealthShield Plan Tiers & Coverage Benefits",
+    "source_reference": "Source: sample_product_brochure.html#chunk_1 (ID: kb_product_001)",
+    "similarity_score": 0.0328,
+    "relevance_explanation": "Successfully retrieved exact verified chunk (ID: kb_product_001) from sample_product_brochure.html#chunk_1. Matched key domain concepts: ['Gold', 'Single Private Room', '350,000'].",
+    "verdict": "CORRECT"
+  },
+  {
+    "query_id": "Q2-BENCH-02",
+    "category": "policy_underwriting",
+    "user_question": "What is the waiting period for pre-existing medical conditions under the Platinum plan?",
+    "retrieved_record_id": "kb_policy_002",
+    "retrieved_title": "TEST DATA - SYNTHETIC UNDERWRITING POLICY GUIDELINES v1.0 - 1. GENERAL INCEPTION WAITING PERIODS",
+    "source_reference": "Source: sample_underwriting_policy.txt#chunk_2 (ID: kb_policy_002)",
+    "similarity_score": 0.0328,
+    "relevance_explanation": "Successfully retrieved exact verified chunk (ID: kb_policy_002) from sample_underwriting_policy.txt#chunk_2. Matched key domain concepts: ['24 months', 'Platinum'].",
+    "verdict": "CORRECT"
+  },
+  {
+    "query_id": "Q2-BENCH-03",
+    "category": "qualification_rules",
+    "user_question": "What is the maximum entry age for applicants and what screening is required for seniors aged 60 to 65?",
+    "retrieved_record_id": "kb_qual_002",
+    "retrieved_title": "HealthShield Lead Qualification & Underwriting Eligibility Guidelines - Rule QUAL-SENIOR-002: Senior Applicant (Ages 60-65) Medical ",
+    "source_reference": "Source: sample_qualification_rules.json#chunk_2 (ID: kb_qual_002)",
+    "similarity_score": 0.0164,
+    "relevance_explanation": "Successfully retrieved exact verified chunk (ID: kb_qual_002) from sample_qualification_rules.json#chunk_2. Matched key domain concepts: ['65', 'tele-medical'].",
+    "verdict": "CORRECT"
+  },
+  {
+    "query_id": "Q2-BENCH-04",
+    "category": "faq_and_objections",
+    "user_question": "How many hours prior to planned hospital admission must I present my card for cashless pre-authorization?",
+    "retrieved_record_id": "kb_faq_003",
+    "retrieved_title": "HealthShield FAQs & Grounded Objection Handling Guide - FAQ 1: How does the cashless hospitalization admission proce",
+    "source_reference": "Source: sample_faqs_and_objections.md#chunk_3 (ID: kb_faq_003)",
+    "similarity_score": 0.0164,
+    "relevance_explanation": "Successfully retrieved exact verified chunk (ID: kb_faq_003) from sample_faqs_and_objections.md#chunk_3. Matched key domain concepts: ['48 hours', 'cashless', 'TPA'].",
+    "verdict": "CORRECT"
+  },
+  {
+    "query_id": "Q2-BENCH-05",
+    "category": "faq_and_objections",
+    "user_question": "Customer objection: other policies advertise immediate coverage, why is the waiting period for pre-existing conditions so long?",
+    "retrieved_record_id": "kb_faq_005",
+    "retrieved_title": "HealthShield FAQs & Grounded Objection Handling Guide - Objection 1: \"Why is the waiting period for pre-existing con",
+    "source_reference": "Source: sample_faqs_and_objections.md#chunk_5 (ID: kb_faq_005)",
+    "similarity_score": 0.0164,
+    "relevance_explanation": "Successfully retrieved exact verified chunk (ID: kb_faq_005) from sample_faqs_and_objections.md#chunk_5. Matched key domain concepts: ['adverse selection', 'risk pool', 'Day 1'].",
+    "verdict": "CORRECT"
+  },
+  {
+    "query_id": "Q2-BENCH-06-FALLBACK",
+    "category": "safe_fallback",
+    "user_question": "What is the flight cancellation reimbursement policy for delayed international flights?",
+    "retrieved_record_id": null,
+    "retrieved_title": null,
+    "source_reference": null,
+    "similarity_score": 0.0,
+    "relevance_explanation": "Correctly identified out-of-scope query and returned explicit safe fallback without hallucination.",
+    "verdict": "SAFE_FALLBACK"
+  }
+]
