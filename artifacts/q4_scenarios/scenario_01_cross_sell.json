@@ -1,0 +1,85 @@
+{
+  "call_id": "q4_scenario_01_cross_sell",
+  "title": "Q4 Scenario 1: Missed Cross-Sell Opportunity",
+  "scenario_type": "missed_cross_sell",
+  "description": "Customer mentions spouse and children during health insurance inquiry — cross-sell opportunity for family/group plan. Agent doesn't follow up on the family mention.",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Hello! Thank you for calling HealthShield. I'm Aria, your HealthShield AI assistant. How can I help you today?",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:00.000Z"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "Hi, I'm looking for health insurance for myself. My name is Robert Chen.",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:03.000Z"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "Lovely to meet you, Robert! To help find the right plan, could I ask how old you are?",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-02T00:00:06.000Z"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "I am 38 years old. My wife and two kids are also uninsured, but let's start with me.",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-02T00:00:10.000Z"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "Perfect, thank you! At 38, you're eligible for all our main plan tiers. Do you have any pre-existing medical conditions?",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-02T00:00:14.000Z"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "No pre-existing conditions. What comprehensive plans do you offer?",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-02T00:00:18.000Z"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "We offer Silver, Gold, and Platinum plans with hospitalization, outpatient and surgical coverage. The Gold plan is our most popular option.",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:22.000Z"
+    },
+    {
+      "turn": 8,
+      "speaker": "customer",
+      "text": "Sounds good. I also have a car and my house — do you offer any other products I should know about?",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:27.000Z"
+    },
+    {
+      "turn": 9,
+      "speaker": "agent",
+      "text": "The Gold plan provides comprehensive hospitalization and outpatient coverage. Would you like more details on the benefits?",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:31.000Z"
+    },
+    {
+      "turn": 10,
+      "speaker": "customer",
+      "text": "Sure, sounds interesting. How do I apply?",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:35.000Z"
+    },
+    {
+      "turn": 11,
+      "speaker": "agent",
+      "text": "You can apply online at our website or I can connect you with a licensed advisor. A qualified representative will guide you through the process.",
+      "state": "qualification_done",
+      "timestamp": "2026-10-02T00:00:39.000Z"
+    }
+  ]
+}

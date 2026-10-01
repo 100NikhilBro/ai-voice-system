@@ -1,0 +1,78 @@
+{
+  "call_id": "q4_scenario_04_noisy_no_nudge",
+  "title": "Q4 Scenario 4: Noisy / Ambiguous Call — Nudges Should Be Suppressed",
+  "scenario_type": "noisy_no_nudge",
+  "description": "Call with ambiguous, fragmented, and noisy customer utterances that should NOT trigger nudges. Tests false-positive suppression. Customer gives one-word answers, static, and filler words but no clear signals.",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Hello! Thank you for calling HealthShield. I'm Aria. How can I help?",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:00.000Z"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "Uh... hello? Hello? Can you hear me?",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:05.000Z"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "Yes, I can hear you. How can I help you today?",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:08.000Z"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "Um. I was just... actually, I forget now. Let me think.",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:14.000Z"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "Take your time. I'm here to help when you're ready.",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:18.000Z"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "Yeah, yeah. Just... you know. The thing. About insurance.",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:23.000Z"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "Of course! Are you interested in a health insurance plan or do you have an existing policy question?",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:27.000Z"
+    },
+    {
+      "turn": 8,
+      "speaker": "customer",
+      "text": "Maybe. I'm not sure. Could be either actually.",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:32.000Z"
+    },
+    {
+      "turn": 9,
+      "speaker": "agent",
+      "text": "That's okay. I can help with both. Could I ask your name to get started?",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:36.000Z"
+    },
+    {
+      "turn": 10,
+      "speaker": "customer",
+      "text": "It's... hmm. Actually you know what, never mind. I'll call back later. Goodbye.",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:42.000Z"
+    }
+  ]
+}

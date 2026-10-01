@@ -5,6 +5,7 @@ from pathlib import Path
 
 from src.api.routes import router as kb_router
 from src.api.voice_routes import voice_router
+from src.api.insights_routes import insights_router
 from src.retrieval.service import retrieval_service
 
 app = FastAPI(
@@ -12,9 +13,11 @@ app = FastAPI(
     description=(
         "Q1: Real-time voice agent with grounded KB retrieval, "
         "lead qualification, and conversation logging. "
-        "Q2: Production-ready hybrid knowledge base API."
+        "Q2: Production-ready hybrid knowledge base API. "
+        "Q3: Native-language voice bots for Philippines and Indonesia. "
+        "Q4: Live call insights and nudge generation pipeline."
     ),
-    version="1.0.0"
+    version="4.0.0"
 )
 
 # Enable CORS for web calling UI
@@ -31,6 +34,9 @@ app.include_router(kb_router)
 
 # Q1 Voice Agent routes (WebSocket + REST + Web UI)
 app.include_router(voice_router)
+
+# Q4 Live Insights routes (WebSocket + REST)
+app.include_router(insights_router)
 
 # Serve static web assets (JS, CSS) from web/ directory
 _web_dir = Path(__file__).parent.parent.parent / "web"
@@ -51,5 +57,7 @@ async def health_check():
         "components": {
             "q1_voice_agent": "active",
             "q2_knowledge_base": "active",
+            "q3_localized_bots": "active",
+            "q4_live_insights": "active",
         }
     }

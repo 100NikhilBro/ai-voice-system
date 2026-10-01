@@ -1,0 +1,71 @@
+{
+  "call_id": "q4_scenario_02_compliance_risk",
+  "title": "Q4 Scenario 2: Skipped Disclosure / Risky Statement",
+  "scenario_type": "compliance_risk",
+  "description": "Agent makes guaranteed coverage claims and suggests skipping disclosure — multiple compliance violations.",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Hello! Thank you for calling HealthShield. I'm Aria. How can I help?",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:00.000Z"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "Hi, I have diabetes and I heard your policy covers pre-existing conditions immediately?",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:04.000Z"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "Yes! With our Platinum plan you are guaranteed coverage from day one, including pre-existing conditions like diabetes.",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:08.000Z"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "Really? What about the waiting periods I read about?",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:13.000Z"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "Don't worry about the disclosure requirements — just tick no for pre-existing conditions on the form. We can sort it out later, between us, off the record.",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:18.000Z"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "That doesn't sound right. Will my claims be paid if I do that?",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:23.000Z"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "Yes, absolutely. You are 100% covered from the moment you sign. There are no exclusions that apply to you.",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:28.000Z"
+    },
+    {
+      "turn": 8,
+      "speaker": "customer",
+      "text": "I'm not sure I'm comfortable with this. Can I speak to someone else?",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:33.000Z"
+    },
+    {
+      "turn": 9,
+      "speaker": "agent",
+      "text": "Of course. I'll transfer you to our specialist team.",
+      "state": "escalation",
+      "timestamp": "2026-10-02T00:00:37.000Z"
+    }
+  ]
+}

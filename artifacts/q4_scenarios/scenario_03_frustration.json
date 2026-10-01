@@ -1,0 +1,71 @@
+{
+  "call_id": "q4_scenario_03_frustration",
+  "title": "Q4 Scenario 3: Rising Customer Frustration",
+  "scenario_type": "sentiment_negative",
+  "description": "Customer escalates frustration about waiting periods and cancellation policy. Sentiment rises from mild dissatisfaction to explicit anger.",
+  "dialogue": [
+    {
+      "turn": 1,
+      "speaker": "agent",
+      "text": "Hello! Thank you for calling HealthShield. I'm Aria, how can I help you today?",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:00.000Z"
+    },
+    {
+      "turn": 2,
+      "speaker": "customer",
+      "text": "I've been a customer for two years and I want to know why my claim was rejected.",
+      "state": "greeting",
+      "timestamp": "2026-10-02T00:00:05.000Z"
+    },
+    {
+      "turn": 3,
+      "speaker": "agent",
+      "text": "I understand your concern. Could you share your policy number so I can look into it?",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-02T00:00:09.000Z"
+    },
+    {
+      "turn": 4,
+      "speaker": "customer",
+      "text": "It's HS-445521. This is ridiculous — I paid premiums for two years and now you're rejecting my claim. I'm not happy with this at all.",
+      "state": "lead_qualification",
+      "timestamp": "2026-10-02T00:00:14.000Z"
+    },
+    {
+      "turn": 5,
+      "speaker": "agent",
+      "text": "I can see your policy. The claim was rejected due to the 24-month waiting period for the procedure type.",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:19.000Z"
+    },
+    {
+      "turn": 6,
+      "speaker": "customer",
+      "text": "How long do I have to wait before you actually cover me? This is a complete waste of money. I'm thinking about cancelling my policy right now.",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:25.000Z"
+    },
+    {
+      "turn": 7,
+      "speaker": "agent",
+      "text": "The waiting period is 24 months from policy inception for surgical procedures. Your policy commenced on January 2024.",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:30.000Z"
+    },
+    {
+      "turn": 8,
+      "speaker": "customer",
+      "text": "I am absolutely furious. I paid for two full years and you're telling me I'm still not covered? This is a scam!",
+      "state": "product_info",
+      "timestamp": "2026-10-02T00:00:36.000Z"
+    },
+    {
+      "turn": 9,
+      "speaker": "agent",
+      "text": "I completely understand your frustration and I apologise for the distress this has caused. Let me escalate this to our Senior Claims team immediately.",
+      "state": "escalation",
+      "timestamp": "2026-10-02T00:00:42.000Z"
+    }
+  ]
+}

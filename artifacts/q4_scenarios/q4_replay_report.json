@@ -1,0 +1,1164 @@
+[
+  {
+    "transcript": "scenario_01_cross_sell.json",
+    "total_turns": 11,
+    "nudge_stats": {
+      "total_nudges_generated": 2,
+      "fire_counts": {
+        "missed_opportunity": 1,
+        "buying_signal": 1
+      },
+      "active_nudges": 2
+    },
+    "latency_stats": {
+      "session_turns": 11,
+      "turns_with_nudges": 2,
+      "asr_latency": {
+        "label": "ASR (T1-T0)",
+        "count": 11,
+        "p50_ms": 185.64,
+        "p95_ms": 224.88,
+        "mean_ms": 190.64,
+        "max_ms": 233.63
+      },
+      "signal_detection": {
+        "label": "Signal Detection (T2-T1)",
+        "count": 11,
+        "p50_ms": 0.32,
+        "p95_ms": 0.48,
+        "mean_ms": 0.29,
+        "max_ms": 0.53
+      },
+      "nudge_generation": {
+        "label": "Nudge Generation (T3-T2)",
+        "count": 2,
+        "p50_ms": 0.27,
+        "p95_ms": 0.34,
+        "mean_ms": 0.27,
+        "max_ms": 0.35
+      },
+      "delivery_latency": {
+        "label": "Delivery (T4-T3)",
+        "count": 2,
+        "p50_ms": 0.25,
+        "p95_ms": 0.31,
+        "mean_ms": 0.25,
+        "max_ms": 0.32
+      },
+      "end_to_end_all_turns": {
+        "label": "End-to-End All Turns (T4-T0)",
+        "count": 11,
+        "p50_ms": 185.98,
+        "p95_ms": 225.57,
+        "mean_ms": 191.05,
+        "max_ms": 234.62
+      },
+      "end_to_end_nudge_turns": {
+        "label": "End-to-End Nudge Turns (T4-T0)",
+        "count": 2,
+        "p50_ms": 209.56,
+        "p95_ms": 232.11,
+        "mean_ms": 209.56,
+        "max_ms": 234.62
+      }
+    },
+    "nudges": [
+      {
+        "nudge_id": "a020a9b6",
+        "signal_type": "buying_signal",
+        "priority": "HIGH",
+        "title": "\ud83d\udfe2 Buying Signal Detected",
+        "action": "Move to close: offer next steps \u2014 application form, advisor callback, or plan summary.",
+        "confidence": 0.7,
+        "topic_group": "sales",
+        "utterance_index": 8,
+        "created_at_ms": 1790884126493.3794,
+        "expires_at_ms": 1790884246493.3794,
+        "evidence": "positive interest"
+      },
+      {
+        "nudge_id": "aad16134",
+        "signal_type": "missed_opportunity",
+        "priority": "MEDIUM",
+        "title": "\ud83d\udca1 Cross-Sell Opportunity",
+        "action": "Customer mentioned family/assets \u2014 ask about group/family plan or additional coverage.",
+        "confidence": 0.75,
+        "topic_group": "sales",
+        "utterance_index": 4,
+        "created_at_ms": 1790884122342.2832,
+        "expires_at_ms": 1790884242342.2832,
+        "evidence": "family mention \u2013 group plan opportunity"
+      }
+    ],
+    "all_nudges": [
+      {
+        "nudge_id": "aad16134",
+        "signal_type": "missed_opportunity",
+        "priority": "MEDIUM",
+        "title": "\ud83d\udca1 Cross-Sell Opportunity",
+        "action": "Customer mentioned family/assets \u2014 ask about group/family plan or additional coverage.",
+        "confidence": 0.75,
+        "topic_group": "sales",
+        "utterance_index": 4,
+        "created_at_ms": 1790884122342.2832,
+        "expires_at_ms": 1790884242342.2832,
+        "evidence": "family mention \u2013 group plan opportunity"
+      },
+      {
+        "nudge_id": "a020a9b6",
+        "signal_type": "buying_signal",
+        "priority": "HIGH",
+        "title": "\ud83d\udfe2 Buying Signal Detected",
+        "action": "Move to close: offer next steps \u2014 application form, advisor callback, or plan summary.",
+        "confidence": 0.7,
+        "topic_group": "sales",
+        "utterance_index": 8,
+        "created_at_ms": 1790884126493.3794,
+        "expires_at_ms": 1790884246493.3794,
+        "evidence": "positive interest"
+      }
+    ],
+    "latency_records": [
+      {
+        "utterance_index": 1,
+        "speaker": "agent",
+        "utterance_preview": "Hello! Thank you for calling HealthShield. I'm Aria, your He",
+        "t0_audio_received_ms": 1790884119458.0,
+        "t1_transcription_ms": 1790884119672.83,
+        "t2_signal_detected_ms": 1790884119672.91,
+        "t3_nudge_generated_ms": 1790884119672.92,
+        "t4_nudge_delivered_ms": 1790884119672.92,
+        "asr_latency_ms": 214.82,
+        "signal_detection_latency_ms": 0.08,
+        "nudge_generation_latency_ms": 0.01,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 214.92,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 2,
+        "speaker": "customer",
+        "utterance_preview": "Hi, I'm looking for health insurance for myself. My name is ",
+        "t0_audio_received_ms": 1790884120275.8,
+        "t1_transcription_ms": 1790884120491.93,
+        "t2_signal_detected_ms": 1790884120492.3,
+        "t3_nudge_generated_ms": 1790884120492.33,
+        "t4_nudge_delivered_ms": 1790884120492.33,
+        "asr_latency_ms": 216.13,
+        "signal_detection_latency_ms": 0.37,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 216.53,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 3,
+        "speaker": "agent",
+        "utterance_preview": "Lovely to meet you, Robert! To help find the right plan, cou",
+        "t0_audio_received_ms": 1790884121093.67,
+        "t1_transcription_ms": 1790884121292.87,
+        "t2_signal_detected_ms": 1790884121293.29,
+        "t3_nudge_generated_ms": 1790884121293.35,
+        "t4_nudge_delivered_ms": 1790884121293.36,
+        "asr_latency_ms": 199.2,
+        "signal_detection_latency_ms": 0.42,
+        "nudge_generation_latency_ms": 0.06,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 199.69,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 4,
+        "speaker": "customer",
+        "utterance_preview": "I am 38 years old. My wife and two kids are also uninsured, ",
+        "t0_audio_received_ms": 1790884122108.32,
+        "t1_transcription_ms": 1790884122341.95,
+        "t2_signal_detected_ms": 1790884122342.28,
+        "t3_nudge_generated_ms": 1790884122342.63,
+        "t4_nudge_delivered_ms": 1790884122342.94,
+        "asr_latency_ms": 233.63,
+        "signal_detection_latency_ms": 0.33,
+        "nudge_generation_latency_ms": 0.35,
+        "delivery_latency_ms": 0.32,
+        "end_to_end_latency_ms": 234.62,
+        "nudge_count": 1
+      },
+      {
+        "utterance_index": 5,
+        "speaker": "agent",
+        "utterance_preview": "Perfect, thank you! At 38, you're eligible for all our main ",
+        "t0_audio_received_ms": 1790884123157.65,
+        "t1_transcription_ms": 1790884123343.29,
+        "t2_signal_detected_ms": 1790884123343.6,
+        "t3_nudge_generated_ms": 1790884123343.63,
+        "t4_nudge_delivered_ms": 1790884123343.63,
+        "asr_latency_ms": 185.64,
+        "signal_detection_latency_ms": 0.32,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 185.98,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 6,
+        "speaker": "customer",
+        "utterance_preview": "No pre-existing conditions. What comprehensive plans do you ",
+        "t0_audio_received_ms": 1790884124158.43,
+        "t1_transcription_ms": 1790884124308.69,
+        "t2_signal_detected_ms": 1790884124309.01,
+        "t3_nudge_generated_ms": 1790884124309.04,
+        "t4_nudge_delivered_ms": 1790884124309.04,
+        "asr_latency_ms": 150.26,
+        "signal_detection_latency_ms": 0.32,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 150.61,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 7,
+        "speaker": "agent",
+        "utterance_preview": "We offer Silver, Gold, and Platinum plans with hospitalizati",
+        "t0_audio_received_ms": 1790884125109.43,
+        "t1_transcription_ms": 1790884125294.07,
+        "t2_signal_detected_ms": 1790884125294.13,
+        "t3_nudge_generated_ms": 1790884125294.14,
+        "t4_nudge_delivered_ms": 1790884125294.14,
+        "asr_latency_ms": 184.64,
+        "signal_detection_latency_ms": 0.06,
+        "nudge_generation_latency_ms": 0.01,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 184.71,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 8,
+        "speaker": "customer",
+        "utterance_preview": "Sounds good. I also have a car and my house \u2014 do you offer a",
+        "t0_audio_received_ms": 1790884126309.25,
+        "t1_transcription_ms": 1790884126492.84,
+        "t2_signal_detected_ms": 1790884126493.37,
+        "t3_nudge_generated_ms": 1790884126493.57,
+        "t4_nudge_delivered_ms": 1790884126493.75,
+        "asr_latency_ms": 183.58,
+        "signal_detection_latency_ms": 0.53,
+        "nudge_generation_latency_ms": 0.2,
+        "delivery_latency_ms": 0.18,
+        "end_to_end_latency_ms": 184.5,
+        "nudge_count": 1
+      },
+      {
+        "utterance_index": 9,
+        "speaker": "agent",
+        "utterance_preview": "The Gold plan provides comprehensive hospitalization and out",
+        "t0_audio_received_ms": 1790884127309.7,
+        "t1_transcription_ms": 1790884127509.91,
+        "t2_signal_detected_ms": 1790884127510.28,
+        "t3_nudge_generated_ms": 1790884127510.31,
+        "t4_nudge_delivered_ms": 1790884127510.31,
+        "asr_latency_ms": 200.21,
+        "signal_detection_latency_ms": 0.37,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 200.62,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 10,
+        "speaker": "customer",
+        "utterance_preview": "Sure, sounds interesting. How do I apply?",
+        "t0_audio_received_ms": 1790884128326.59,
+        "t1_transcription_ms": 1790884128475.12,
+        "t2_signal_detected_ms": 1790884128475.44,
+        "t3_nudge_generated_ms": 1790884128475.45,
+        "t4_nudge_delivered_ms": 1790884128475.46,
+        "asr_latency_ms": 148.53,
+        "signal_detection_latency_ms": 0.32,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 148.87,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 11,
+        "speaker": "agent",
+        "utterance_preview": "You can apply online at our website or I can connect you wit",
+        "t0_audio_received_ms": 1790884129276.9,
+        "t1_transcription_ms": 1790884129457.3,
+        "t2_signal_detected_ms": 1790884129457.39,
+        "t3_nudge_generated_ms": 1790884129457.4,
+        "t4_nudge_delivered_ms": 1790884129457.41,
+        "asr_latency_ms": 180.4,
+        "signal_detection_latency_ms": 0.09,
+        "nudge_generation_latency_ms": 0.01,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 180.5,
+        "nudge_count": 0
+      }
+    ],
+    "nudge_events": [
+      {
+        "nudge": {
+          "nudge_id": "aad16134",
+          "signal_type": "missed_opportunity",
+          "priority": "MEDIUM",
+          "title": "\ud83d\udca1 Cross-Sell Opportunity",
+          "action": "Customer mentioned family/assets \u2014 ask about group/family plan or additional coverage.",
+          "confidence": 0.75,
+          "topic_group": "sales",
+          "utterance_index": 4,
+          "created_at_ms": 1790884122342.2832,
+          "expires_at_ms": 1790884242342.2832,
+          "evidence": "family mention \u2013 group plan opportunity"
+        },
+        "e2e_ms": 0.0
+      },
+      {
+        "nudge": {
+          "nudge_id": "a020a9b6",
+          "signal_type": "buying_signal",
+          "priority": "HIGH",
+          "title": "\ud83d\udfe2 Buying Signal Detected",
+          "action": "Move to close: offer next steps \u2014 application form, advisor callback, or plan summary.",
+          "confidence": 0.7,
+          "topic_group": "sales",
+          "utterance_index": 8,
+          "created_at_ms": 1790884126493.3794,
+          "expires_at_ms": 1790884246493.3794,
+          "evidence": "positive interest"
+        },
+        "e2e_ms": 0.0
+      }
+    ]
+  },
+  {
+    "transcript": "scenario_02_compliance_risk.json",
+    "total_turns": 9,
+    "nudge_stats": {
+      "total_nudges_generated": 1,
+      "fire_counts": {
+        "compliance_risk": 1
+      },
+      "active_nudges": 1
+    },
+    "latency_stats": {
+      "session_turns": 9,
+      "turns_with_nudges": 1,
+      "asr_latency": {
+        "label": "ASR (T1-T0)",
+        "count": 9,
+        "p50_ms": 199.88,
+        "p95_ms": 223.9,
+        "mean_ms": 194.23,
+        "max_ms": 232.51
+      },
+      "signal_detection": {
+        "label": "Signal Detection (T2-T1)",
+        "count": 9,
+        "p50_ms": 0.2,
+        "p95_ms": 0.63,
+        "mean_ms": 0.27,
+        "max_ms": 0.79
+      },
+      "nudge_generation": {
+        "label": "Nudge Generation (T3-T2)",
+        "count": 1,
+        "p50_ms": 0.6,
+        "p95_ms": 0.6,
+        "mean_ms": 0.6,
+        "max_ms": 0.6
+      },
+      "delivery_latency": {
+        "label": "Delivery (T4-T3)",
+        "count": 1,
+        "p50_ms": 0.36,
+        "p95_ms": 0.36,
+        "mean_ms": 0.36,
+        "max_ms": 0.36
+      },
+      "end_to_end_all_turns": {
+        "label": "End-to-End All Turns (T4-T0)",
+        "count": 9,
+        "p50_ms": 199.97,
+        "p95_ms": 224.62,
+        "mean_ms": 194.65,
+        "max_ms": 233.57
+      },
+      "end_to_end_nudge_turns": {
+        "label": "End-to-End Nudge Turns (T4-T0)",
+        "count": 1,
+        "p50_ms": 233.57,
+        "p95_ms": 233.57,
+        "mean_ms": 233.57,
+        "max_ms": 233.57
+      }
+    },
+    "nudges": [
+      {
+        "nudge_id": "500b5716",
+        "signal_type": "compliance_risk",
+        "priority": "HIGH",
+        "title": "\u26a0\ufe0f Compliance Risk Detected",
+        "action": "Correct agent: avoid guarantees/non-compliant claims. Use verified KB language only.",
+        "confidence": 0.9,
+        "topic_group": "compliance",
+        "utterance_index": 3,
+        "created_at_ms": 1790884131692.007,
+        "expires_at_ms": 1790884251692.007,
+        "evidence": "guarantee claim"
+      }
+    ],
+    "all_nudges": [
+      {
+        "nudge_id": "500b5716",
+        "signal_type": "compliance_risk",
+        "priority": "HIGH",
+        "title": "\u26a0\ufe0f Compliance Risk Detected",
+        "action": "Correct agent: avoid guarantees/non-compliant claims. Use verified KB language only.",
+        "confidence": 0.9,
+        "topic_group": "compliance",
+        "utterance_index": 3,
+        "created_at_ms": 1790884131692.007,
+        "expires_at_ms": 1790884251692.007,
+        "evidence": "guarantee claim"
+      }
+    ],
+    "latency_records": [
+      {
+        "utterance_index": 1,
+        "speaker": "agent",
+        "utterance_preview": "Hello! Thank you for calling HealthShield. I'm Aria. How can",
+        "t0_audio_received_ms": 1790884129463.19,
+        "t1_transcription_ms": 1790884129625.49,
+        "t2_signal_detected_ms": 1790884129625.69,
+        "t3_nudge_generated_ms": 1790884129625.73,
+        "t4_nudge_delivered_ms": 1790884129625.9,
+        "asr_latency_ms": 162.3,
+        "signal_detection_latency_ms": 0.2,
+        "nudge_generation_latency_ms": 0.04,
+        "delivery_latency_ms": 0.17,
+        "end_to_end_latency_ms": 162.71,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 2,
+        "speaker": "customer",
+        "utterance_preview": "Hi, I have diabetes and I heard your policy covers pre-exist",
+        "t0_audio_received_ms": 1790884130442.45,
+        "t1_transcription_ms": 1790884130650.43,
+        "t2_signal_detected_ms": 1790884130651.22,
+        "t3_nudge_generated_ms": 1790884130651.25,
+        "t4_nudge_delivered_ms": 1790884130651.25,
+        "asr_latency_ms": 207.98,
+        "signal_detection_latency_ms": 0.79,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 208.8,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 3,
+        "speaker": "agent",
+        "utterance_preview": "Yes! With our Platinum plan you are guaranteed coverage from",
+        "t0_audio_received_ms": 1790884131459.4,
+        "t1_transcription_ms": 1790884131691.91,
+        "t2_signal_detected_ms": 1790884131692.0,
+        "t3_nudge_generated_ms": 1790884131692.61,
+        "t4_nudge_delivered_ms": 1790884131692.97,
+        "asr_latency_ms": 232.51,
+        "signal_detection_latency_ms": 0.1,
+        "nudge_generation_latency_ms": 0.6,
+        "delivery_latency_ms": 0.36,
+        "end_to_end_latency_ms": 233.57,
+        "nudge_count": 1
+      },
+      {
+        "utterance_index": 4,
+        "speaker": "customer",
+        "utterance_preview": "Really? What about the waiting periods I read about?",
+        "t0_audio_received_ms": 1790884132709.11,
+        "t1_transcription_ms": 1790884132886.34,
+        "t2_signal_detected_ms": 1790884132886.54,
+        "t3_nudge_generated_ms": 1790884132886.55,
+        "t4_nudge_delivered_ms": 1790884132886.55,
+        "asr_latency_ms": 177.23,
+        "signal_detection_latency_ms": 0.2,
+        "nudge_generation_latency_ms": 0.01,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 177.44,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 5,
+        "speaker": "agent",
+        "utterance_preview": "Don't worry about the disclosure requirements \u2014 just tick no",
+        "t0_audio_received_ms": 1790884133887.73,
+        "t1_transcription_ms": 1790884134087.91,
+        "t2_signal_detected_ms": 1790884134088.12,
+        "t3_nudge_generated_ms": 1790884134088.15,
+        "t4_nudge_delivered_ms": 1790884134088.15,
+        "asr_latency_ms": 200.18,
+        "signal_detection_latency_ms": 0.21,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 200.42,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 6,
+        "speaker": "customer",
+        "utterance_preview": "That doesn't sound right. Will my claims be paid if I do tha",
+        "t0_audio_received_ms": 1790884135099.23,
+        "t1_transcription_ms": 1790884135275.77,
+        "t2_signal_detected_ms": 1790884135276.17,
+        "t3_nudge_generated_ms": 1790884135276.21,
+        "t4_nudge_delivered_ms": 1790884135276.21,
+        "asr_latency_ms": 176.54,
+        "signal_detection_latency_ms": 0.4,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 176.98,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 7,
+        "speaker": "agent",
+        "utterance_preview": "Yes, absolutely. You are 100% covered from the moment you si",
+        "t0_audio_received_ms": 1790884136281.11,
+        "t1_transcription_ms": 1790884136492.1,
+        "t2_signal_detected_ms": 1790884136492.26,
+        "t3_nudge_generated_ms": 1790884136492.29,
+        "t4_nudge_delivered_ms": 1790884136492.29,
+        "asr_latency_ms": 211.0,
+        "signal_detection_latency_ms": 0.16,
+        "nudge_generation_latency_ms": 0.04,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 211.19,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 8,
+        "speaker": "customer",
+        "utterance_preview": "I'm not sure I'm comfortable with this. Can I speak to someo",
+        "t0_audio_received_ms": 1790884137495.29,
+        "t1_transcription_ms": 1790884137675.77,
+        "t2_signal_detected_ms": 1790884137676.06,
+        "t3_nudge_generated_ms": 1790884137676.08,
+        "t4_nudge_delivered_ms": 1790884137676.08,
+        "asr_latency_ms": 180.48,
+        "signal_detection_latency_ms": 0.29,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 180.79,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 9,
+        "speaker": "agent",
+        "utterance_preview": "Of course. I'll transfer you to our specialist team.",
+        "t0_audio_received_ms": 1790884138477.27,
+        "t1_transcription_ms": 1790884138677.15,
+        "t2_signal_detected_ms": 1790884138677.22,
+        "t3_nudge_generated_ms": 1790884138677.24,
+        "t4_nudge_delivered_ms": 1790884138677.24,
+        "asr_latency_ms": 199.88,
+        "signal_detection_latency_ms": 0.07,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 199.97,
+        "nudge_count": 0
+      }
+    ],
+    "nudge_events": [
+      {
+        "nudge": {
+          "nudge_id": "500b5716",
+          "signal_type": "compliance_risk",
+          "priority": "HIGH",
+          "title": "\u26a0\ufe0f Compliance Risk Detected",
+          "action": "Correct agent: avoid guarantees/non-compliant claims. Use verified KB language only.",
+          "confidence": 0.9,
+          "topic_group": "compliance",
+          "utterance_index": 3,
+          "created_at_ms": 1790884131692.007,
+          "expires_at_ms": 1790884251692.007,
+          "evidence": "guarantee claim"
+        },
+        "e2e_ms": 0.0
+      }
+    ]
+  },
+  {
+    "transcript": "scenario_03_frustration.json",
+    "total_turns": 9,
+    "nudge_stats": {
+      "total_nudges_generated": 1,
+      "fire_counts": {
+        "sentiment_negative": 1
+      },
+      "active_nudges": 1
+    },
+    "latency_stats": {
+      "session_turns": 9,
+      "turns_with_nudges": 1,
+      "asr_latency": {
+        "label": "ASR (T1-T0)",
+        "count": 9,
+        "p50_ms": 201.58,
+        "p95_ms": 218.63,
+        "mean_ms": 195.64,
+        "max_ms": 219.01
+      },
+      "signal_detection": {
+        "label": "Signal Detection (T2-T1)",
+        "count": 9,
+        "p50_ms": 0.17,
+        "p95_ms": 1.45,
+        "mean_ms": 0.48,
+        "max_ms": 1.83
+      },
+      "nudge_generation": {
+        "label": "Nudge Generation (T3-T2)",
+        "count": 1,
+        "p50_ms": 0.13,
+        "p95_ms": 0.13,
+        "mean_ms": 0.13,
+        "max_ms": 0.13
+      },
+      "delivery_latency": {
+        "label": "Delivery (T4-T3)",
+        "count": 1,
+        "p50_ms": 0.14,
+        "p95_ms": 0.14,
+        "mean_ms": 0.14,
+        "max_ms": 0.14
+      },
+      "end_to_end_all_turns": {
+        "label": "End-to-End All Turns (T4-T0)",
+        "count": 9,
+        "p50_ms": 201.77,
+        "p95_ms": 219.67,
+        "mean_ms": 196.17,
+        "max_ms": 219.99
+      },
+      "end_to_end_nudge_turns": {
+        "label": "End-to-End Nudge Turns (T4-T0)",
+        "count": 1,
+        "p50_ms": 215.79,
+        "p95_ms": 215.79,
+        "mean_ms": 215.79,
+        "max_ms": 215.79
+      }
+    },
+    "nudges": [
+      {
+        "nudge_id": "e8ba7c23",
+        "signal_type": "sentiment_negative",
+        "priority": "HIGH",
+        "title": "\ud83d\ude24 Customer Frustration Rising",
+        "action": "Acknowledge concern empathetically. Offer concrete resolution or supervisor escalation.",
+        "confidence": 0.9,
+        "topic_group": "sentiment",
+        "utterance_index": 4,
+        "created_at_ms": 1790884142291.688,
+        "expires_at_ms": 1790884262291.688,
+        "evidence": "strong negative adjective"
+      }
+    ],
+    "all_nudges": [
+      {
+        "nudge_id": "e8ba7c23",
+        "signal_type": "sentiment_negative",
+        "priority": "HIGH",
+        "title": "\ud83d\ude24 Customer Frustration Rising",
+        "action": "Acknowledge concern empathetically. Offer concrete resolution or supervisor escalation.",
+        "confidence": 0.9,
+        "topic_group": "sentiment",
+        "utterance_index": 4,
+        "created_at_ms": 1790884142291.688,
+        "expires_at_ms": 1790884262291.688,
+        "evidence": "strong negative adjective"
+      }
+    ],
+    "latency_records": [
+      {
+        "utterance_index": 1,
+        "speaker": "agent",
+        "utterance_preview": "Hello! Thank you for calling HealthShield. I'm Aria, how can",
+        "t0_audio_received_ms": 1790884138682.86,
+        "t1_transcription_ms": 1790884138862.88,
+        "t2_signal_detected_ms": 1790884138862.97,
+        "t3_nudge_generated_ms": 1790884138862.99,
+        "t4_nudge_delivered_ms": 1790884138862.99,
+        "asr_latency_ms": 180.02,
+        "signal_detection_latency_ms": 0.09,
+        "nudge_generation_latency_ms": 0.01,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 180.13,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 2,
+        "speaker": "customer",
+        "utterance_preview": "I've been a customer for two years and I want to know why my",
+        "t0_audio_received_ms": 1790884139864.04,
+        "t1_transcription_ms": 1790884140041.72,
+        "t2_signal_detected_ms": 1790884140042.44,
+        "t3_nudge_generated_ms": 1790884140042.47,
+        "t4_nudge_delivered_ms": 1790884140042.47,
+        "asr_latency_ms": 177.69,
+        "signal_detection_latency_ms": 0.72,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 178.43,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 3,
+        "speaker": "agent",
+        "utterance_preview": "I understand your concern. Could you share your policy numbe",
+        "t0_audio_received_ms": 1790884140857.26,
+        "t1_transcription_ms": 1790884141058.85,
+        "t2_signal_detected_ms": 1790884141059.0,
+        "t3_nudge_generated_ms": 1790884141059.03,
+        "t4_nudge_delivered_ms": 1790884141059.03,
+        "asr_latency_ms": 201.58,
+        "signal_detection_latency_ms": 0.16,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 201.77,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 4,
+        "speaker": "customer",
+        "utterance_preview": "It's HS-445521. This is ridiculous \u2014 I paid premiums for two",
+        "t0_audio_received_ms": 1790884142076.16,
+        "t1_transcription_ms": 1790884142290.81,
+        "t2_signal_detected_ms": 1790884142291.68,
+        "t3_nudge_generated_ms": 1790884142291.81,
+        "t4_nudge_delivered_ms": 1790884142291.95,
+        "asr_latency_ms": 214.65,
+        "signal_detection_latency_ms": 0.87,
+        "nudge_generation_latency_ms": 0.13,
+        "delivery_latency_ms": 0.14,
+        "end_to_end_latency_ms": 215.79,
+        "nudge_count": 1
+      },
+      {
+        "utterance_index": 5,
+        "speaker": "agent",
+        "utterance_preview": "I can see your policy. The claim was rejected due to the 24-",
+        "t0_audio_received_ms": 1790884143307.6,
+        "t1_transcription_ms": 1790884143526.61,
+        "t2_signal_detected_ms": 1790884143526.77,
+        "t3_nudge_generated_ms": 1790884143526.8,
+        "t4_nudge_delivered_ms": 1790884143526.8,
+        "asr_latency_ms": 219.01,
+        "signal_detection_latency_ms": 0.16,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 219.2,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 6,
+        "speaker": "customer",
+        "utterance_preview": "How long do I have to wait before you actually cover me? Thi",
+        "t0_audio_received_ms": 1790884144541.19,
+        "t1_transcription_ms": 1790884144759.26,
+        "t2_signal_detected_ms": 1790884144761.09,
+        "t3_nudge_generated_ms": 1790884144761.18,
+        "t4_nudge_delivered_ms": 1790884144761.18,
+        "asr_latency_ms": 218.07,
+        "signal_detection_latency_ms": 1.83,
+        "nudge_generation_latency_ms": 0.09,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 219.99,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 7,
+        "speaker": "agent",
+        "utterance_preview": "The waiting period is 24 months from policy inception for su",
+        "t0_audio_received_ms": 1790884145775.56,
+        "t1_transcription_ms": 1790884145941.49,
+        "t2_signal_detected_ms": 1790884145941.57,
+        "t3_nudge_generated_ms": 1790884145941.58,
+        "t4_nudge_delivered_ms": 1790884145941.59,
+        "asr_latency_ms": 165.93,
+        "signal_detection_latency_ms": 0.08,
+        "nudge_generation_latency_ms": 0.01,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 166.02,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 8,
+        "speaker": "customer",
+        "utterance_preview": "I am absolutely furious. I paid for two full years and you'r",
+        "t0_audio_received_ms": 1790884146942.42,
+        "t1_transcription_ms": 1790884147124.23,
+        "t2_signal_detected_ms": 1790884147124.43,
+        "t3_nudge_generated_ms": 1790884147124.45,
+        "t4_nudge_delivered_ms": 1790884147124.45,
+        "asr_latency_ms": 181.81,
+        "signal_detection_latency_ms": 0.21,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 182.03,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 9,
+        "speaker": "agent",
+        "utterance_preview": "I completely understand your frustration and I apologise for",
+        "t0_audio_received_ms": 1790884148140.24,
+        "t1_transcription_ms": 1790884148342.21,
+        "t2_signal_detected_ms": 1790884148342.37,
+        "t3_nudge_generated_ms": 1790884148342.39,
+        "t4_nudge_delivered_ms": 1790884148342.4,
+        "asr_latency_ms": 201.97,
+        "signal_detection_latency_ms": 0.17,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 202.15,
+        "nudge_count": 0
+      }
+    ],
+    "nudge_events": [
+      {
+        "nudge": {
+          "nudge_id": "e8ba7c23",
+          "signal_type": "sentiment_negative",
+          "priority": "HIGH",
+          "title": "\ud83d\ude24 Customer Frustration Rising",
+          "action": "Acknowledge concern empathetically. Offer concrete resolution or supervisor escalation.",
+          "confidence": 0.9,
+          "topic_group": "sentiment",
+          "utterance_index": 4,
+          "created_at_ms": 1790884142291.688,
+          "expires_at_ms": 1790884262291.688,
+          "evidence": "strong negative adjective"
+        },
+        "e2e_ms": 0.0
+      }
+    ]
+  },
+  {
+    "transcript": "scenario_04_noisy_no_nudge.json",
+    "total_turns": 10,
+    "nudge_stats": {
+      "total_nudges_generated": 2,
+      "fire_counts": {
+        "callback_needed": 1,
+        "intent_shift": 1
+      },
+      "active_nudges": 2
+    },
+    "latency_stats": {
+      "session_turns": 10,
+      "turns_with_nudges": 1,
+      "asr_latency": {
+        "label": "ASR (T1-T0)",
+        "count": 10,
+        "p50_ms": 182.45,
+        "p95_ms": 215.1,
+        "mean_ms": 184.58,
+        "max_ms": 225.46
+      },
+      "signal_detection": {
+        "label": "Signal Detection (T2-T1)",
+        "count": 10,
+        "p50_ms": 0.22,
+        "p95_ms": 0.4,
+        "mean_ms": 0.24,
+        "max_ms": 0.42
+      },
+      "nudge_generation": {
+        "label": "Nudge Generation (T3-T2)",
+        "count": 1,
+        "p50_ms": 0.14,
+        "p95_ms": 0.14,
+        "mean_ms": 0.14,
+        "max_ms": 0.14
+      },
+      "delivery_latency": {
+        "label": "Delivery (T4-T3)",
+        "count": 1,
+        "p50_ms": 0.16,
+        "p95_ms": 0.16,
+        "mean_ms": 0.16,
+        "max_ms": 0.16
+      },
+      "end_to_end_all_turns": {
+        "label": "End-to-End All Turns (T4-T0)",
+        "count": 10,
+        "p50_ms": 182.61,
+        "p95_ms": 215.39,
+        "mean_ms": 184.87,
+        "max_ms": 225.77
+      },
+      "end_to_end_nudge_turns": {
+        "label": "End-to-End Nudge Turns (T4-T0)",
+        "count": 1,
+        "p50_ms": 168.27,
+        "p95_ms": 168.27,
+        "mean_ms": 168.27,
+        "max_ms": 168.27
+      }
+    },
+    "nudges": [
+      {
+        "nudge_id": "1d7b408a",
+        "signal_type": "callback_needed",
+        "priority": "MEDIUM",
+        "title": "\ud83d\udcc5 Schedule Follow-Up",
+        "action": "Customer is deferring. Offer specific callback time slot and send summary email.",
+        "confidence": 0.9,
+        "topic_group": "follow_up",
+        "utterance_index": 10,
+        "created_at_ms": 1790884158256.5796,
+        "expires_at_ms": 1790884278256.5796,
+        "evidence": "explicit callback request"
+      },
+      {
+        "nudge_id": "6570710e",
+        "signal_type": "intent_shift",
+        "priority": "LOW",
+        "title": "\ud83d\udd04 Topic Shift Detected",
+        "action": "Acknowledge new topic, address it, then guide back to qualification if appropriate.",
+        "confidence": 0.65,
+        "topic_group": "navigation",
+        "utterance_index": 10,
+        "created_at_ms": 1790884158256.5796,
+        "expires_at_ms": 1790884278256.5796,
+        "evidence": "keyword: 'never mind'"
+      }
+    ],
+    "all_nudges": [
+      {
+        "nudge_id": "1d7b408a",
+        "signal_type": "callback_needed",
+        "priority": "MEDIUM",
+        "title": "\ud83d\udcc5 Schedule Follow-Up",
+        "action": "Customer is deferring. Offer specific callback time slot and send summary email.",
+        "confidence": 0.9,
+        "topic_group": "follow_up",
+        "utterance_index": 10,
+        "created_at_ms": 1790884158256.5796,
+        "expires_at_ms": 1790884278256.5796,
+        "evidence": "explicit callback request"
+      },
+      {
+        "nudge_id": "6570710e",
+        "signal_type": "intent_shift",
+        "priority": "LOW",
+        "title": "\ud83d\udd04 Topic Shift Detected",
+        "action": "Acknowledge new topic, address it, then guide back to qualification if appropriate.",
+        "confidence": 0.65,
+        "topic_group": "navigation",
+        "utterance_index": 10,
+        "created_at_ms": 1790884158256.5796,
+        "expires_at_ms": 1790884278256.5796,
+        "evidence": "keyword: 'never mind'"
+      }
+    ],
+    "latency_records": [
+      {
+        "utterance_index": 1,
+        "speaker": "agent",
+        "utterance_preview": "Hello! Thank you for calling HealthShield. I'm Aria. How can",
+        "t0_audio_received_ms": 1790884148349.93,
+        "t1_transcription_ms": 1790884148507.68,
+        "t2_signal_detected_ms": 1790884148508.1,
+        "t3_nudge_generated_ms": 1790884148508.15,
+        "t4_nudge_delivered_ms": 1790884148508.15,
+        "asr_latency_ms": 157.76,
+        "signal_detection_latency_ms": 0.42,
+        "nudge_generation_latency_ms": 0.05,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 158.23,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 2,
+        "speaker": "customer",
+        "utterance_preview": "Uh... hello? Hello? Can you hear me?",
+        "t0_audio_received_ms": 1790884149510.49,
+        "t1_transcription_ms": 1790884149693.81,
+        "t2_signal_detected_ms": 1790884149694.01,
+        "t3_nudge_generated_ms": 1790884149694.04,
+        "t4_nudge_delivered_ms": 1790884149694.04,
+        "asr_latency_ms": 183.32,
+        "signal_detection_latency_ms": 0.2,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 183.55,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 3,
+        "speaker": "agent",
+        "utterance_preview": "Yes, I can hear you. How can I help you today?",
+        "t0_audio_received_ms": 1790884150299.51,
+        "t1_transcription_ms": 1790884150481.09,
+        "t2_signal_detected_ms": 1790884150481.17,
+        "t3_nudge_generated_ms": 1790884150481.19,
+        "t4_nudge_delivered_ms": 1790884150481.19,
+        "asr_latency_ms": 181.58,
+        "signal_detection_latency_ms": 0.08,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 181.68,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 4,
+        "speaker": "customer",
+        "utterance_preview": "Um. I was just... actually, I forget now. Let me think.",
+        "t0_audio_received_ms": 1790884151482.28,
+        "t1_transcription_ms": 1790884151684.72,
+        "t2_signal_detected_ms": 1790884151684.96,
+        "t3_nudge_generated_ms": 1790884151684.98,
+        "t4_nudge_delivered_ms": 1790884151684.99,
+        "asr_latency_ms": 202.44,
+        "signal_detection_latency_ms": 0.24,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 202.71,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 5,
+        "speaker": "agent",
+        "utterance_preview": "Take your time. I'm here to help when you're ready.",
+        "t0_audio_received_ms": 1790884152490.0,
+        "t1_transcription_ms": 1790884152676.48,
+        "t2_signal_detected_ms": 1790884152676.57,
+        "t3_nudge_generated_ms": 1790884152676.6,
+        "t4_nudge_delivered_ms": 1790884152676.6,
+        "asr_latency_ms": 186.48,
+        "signal_detection_latency_ms": 0.1,
+        "nudge_generation_latency_ms": 0.02,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 186.6,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 6,
+        "speaker": "customer",
+        "utterance_preview": "Yeah, yeah. Just... you know. The thing. About insurance.",
+        "t0_audio_received_ms": 1790884153678.5,
+        "t1_transcription_ms": 1790884153878.46,
+        "t2_signal_detected_ms": 1790884153878.84,
+        "t3_nudge_generated_ms": 1790884153878.87,
+        "t4_nudge_delivered_ms": 1790884153878.87,
+        "asr_latency_ms": 199.96,
+        "signal_detection_latency_ms": 0.38,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 200.37,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 7,
+        "speaker": "agent",
+        "utterance_preview": "Of course! Are you interested in a health insurance plan or ",
+        "t0_audio_received_ms": 1790884154694.8,
+        "t1_transcription_ms": 1790884154865.5,
+        "t2_signal_detected_ms": 1790884154865.71,
+        "t3_nudge_generated_ms": 1790884154865.75,
+        "t4_nudge_delivered_ms": 1790884154865.75,
+        "asr_latency_ms": 170.7,
+        "signal_detection_latency_ms": 0.21,
+        "nudge_generation_latency_ms": 0.04,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 170.95,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 8,
+        "speaker": "customer",
+        "utterance_preview": "Maybe. I'm not sure. Could be either actually.",
+        "t0_audio_received_ms": 1790884155876.27,
+        "t1_transcription_ms": 1790884156101.73,
+        "t2_signal_detected_ms": 1790884156102.01,
+        "t3_nudge_generated_ms": 1790884156102.04,
+        "t4_nudge_delivered_ms": 1790884156102.04,
+        "asr_latency_ms": 225.46,
+        "signal_detection_latency_ms": 0.28,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 225.77,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 9,
+        "speaker": "agent",
+        "utterance_preview": "That's okay. I can help with both. Could I ask your name to ",
+        "t0_audio_received_ms": 1790884156906.96,
+        "t1_transcription_ms": 1790884157077.36,
+        "t2_signal_detected_ms": 1790884157077.49,
+        "t3_nudge_generated_ms": 1790884157077.52,
+        "t4_nudge_delivered_ms": 1790884157077.52,
+        "asr_latency_ms": 170.41,
+        "signal_detection_latency_ms": 0.13,
+        "nudge_generation_latency_ms": 0.03,
+        "delivery_latency_ms": 0.0,
+        "end_to_end_latency_ms": 170.56,
+        "nudge_count": 0
+      },
+      {
+        "utterance_index": 10,
+        "speaker": "customer",
+        "utterance_preview": "It's... hmm. Actually you know what, never mind. I'll call b",
+        "t0_audio_received_ms": 1790884158088.61,
+        "t1_transcription_ms": 1790884158256.26,
+        "t2_signal_detected_ms": 1790884158256.57,
+        "t3_nudge_generated_ms": 1790884158256.71,
+        "t4_nudge_delivered_ms": 1790884158256.87,
+        "asr_latency_ms": 167.65,
+        "signal_detection_latency_ms": 0.32,
+        "nudge_generation_latency_ms": 0.14,
+        "delivery_latency_ms": 0.16,
+        "end_to_end_latency_ms": 168.27,
+        "nudge_count": 2
+      }
+    ],
+    "nudge_events": [
+      {
+        "nudge": {
+          "nudge_id": "1d7b408a",
+          "signal_type": "callback_needed",
+          "priority": "MEDIUM",
+          "title": "\ud83d\udcc5 Schedule Follow-Up",
+          "action": "Customer is deferring. Offer specific callback time slot and send summary email.",
+          "confidence": 0.9,
+          "topic_group": "follow_up",
+          "utterance_index": 10,
+          "created_at_ms": 1790884158256.5796,
+          "expires_at_ms": 1790884278256.5796,
+          "evidence": "explicit callback request"
+        },
+        "e2e_ms": 0.0
+      },
+      {
+        "nudge": {
+          "nudge_id": "6570710e",
+          "signal_type": "intent_shift",
+          "priority": "LOW",
+          "title": "\ud83d\udd04 Topic Shift Detected",
+          "action": "Acknowledge new topic, address it, then guide back to qualification if appropriate.",
+          "confidence": 0.65,
+          "topic_group": "navigation",
+          "utterance_index": 10,
+          "created_at_ms": 1790884158256.5796,
+          "expires_at_ms": 1790884278256.5796,
+          "evidence": "keyword: 'never mind'"
+        },
+        "e2e_ms": 0.0
+      }
+    ]
+  }
+]
